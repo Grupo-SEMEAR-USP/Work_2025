@@ -8,11 +8,11 @@ NavfnROS:
 
 DWAPlannerROS:
   # Robot configuration parameters  
-  acc_lim_x: 1.5
-  acc_lim_y: 1.5 #Omni-directional robot
-  acc_lim_th: 1.5
+  acc_lim_x: 2.5
+  acc_lim_y: 2.5 #Omni-directional robot
+  acc_lim_th: 2.5
 
-  max_vel_x: 0.5
+  max_vel_x: 0.6
   min_vel_x: 0
   max_vel_y: -0.4 #Omni-directional robot
   min_vel_y: 0 #Omni-directional robot
@@ -32,12 +32,9 @@ DWAPlannerROS:
   latch_xy_goal_tolerance: true
 
   # # Forward Simulation Parameters
-  # sim_time: 2.0
-  # sim_granularity: 0.02
   vx_samples: 10
   vy_samples: 3 #Omni-directional robot
   vtheta_samples: 10
-  # penalize_negative_x: true
 
   # # # Trajectory scoring parameters
   # path_distance_bias: 16.0 # The weighting for how much the controller should stay close to the path it was given

@@ -141,9 +141,6 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-add_executable(point_cloud_nav scripts/publish_PointClouds.cpp)
-target_link_libraries(point_cloud_nav ${catkin_LIBRARIES})
-
 
 
 ## Declare a C++ library

@@ -1,8 +1,5 @@
 <!-- navigation_real.launch -->
 <launch>
-
-  <!-- 0. Relógio real (NÃO use_sim_time) -->
-  <!-- Se seu driver publica /clock, mantenha use_sim_time="false" -->
   
   <!-- 1. Descrição + TF de juntas -->
   <param name="robot_description" textfile="$(find robot_description)/urdf/robot_description.urdf" />
@@ -15,31 +12,33 @@
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
 
   <!-- 3. Filtro Madgwick + EKF (reaproveita seu YAML já ajustado) -->
-  <include file="$(find robot_navigation)/launch/ekf_imu.launch"/>
-
-  <!-- <node pkg="tf" type="static_transform_publisher" name="static_tf_map_to_odom" args="0 0 0 0 0 0 map odom 100" /> -->
+  <include file="$(find robot_navigation)/launch/imu_filter.launch"/>
 
   <!-- 4. Servidor de mapa pré-construído -->
   <node pkg="map_server" type="map_server" name="map_server"
         args="$(find robot_navigation)/maps/map.yaml"/>
 
+  <node pkg="tf2_ros" type="static_transform_publisher"
+      name="static_tf_map_to_odom"
+      args="-0.1446667718887329 -0.607901829719543457 0
+            0 0 0.03539070758130582 0.9993735526903313
+            map odom"/>
+
   <!-- 5. Localização probabilística (AMCL)  -->
-  <node pkg="amcl" type="amcl" name="amcl">
+  <!-- <node pkg="amcl" type="amcl" name="amcl">
       <param name="odom_model_type" value="omni"/>
       <param name="odom_alpha5" value="0.1"/>
       
-<!--Lowering transform_tolerance value may lead to Expolration Error. Adjust this value according to the processor capacity -->
-      <param name="transform_tolerance" value="1.2" /> <!-- (maior relaxa precisão, acelera recuperação) -->
+      <param name="transform_tolerance" value="1.2" />
 
       <param name="gui_publish_rate" value="10.0"/> 
-      <param name="laser_max_beams" value="60"/> <!-- Reduce number of laser beams for performance and increase for precision in ACML -->
-      <param name="min_particles" value="500"/> <!-- (ajusta precisão; mais partículas = mais precisão, mais custo) -->
+      <param name="laser_max_beams" value="60"/>
+      <param name="min_particles" value="500"/> 
       <param name="max_particles" value="2000"/>
       <param name="kld_err" value="0.05"/>
       <param name="kld_z" value="0.99"/>
       <param name="odom_alpha1" value="0.2"/>
       <param name="odom_alpha2" value="0.2"/> 
-      <!-- translation std dev, m -->
       <param name="odom_alpha3" value="0.8"/>
       <param name="odom_alpha4" value="0.2"/>
       <param name="laser_z_hit" value="0.5"/>
@@ -57,7 +56,7 @@
       <param name="resample_interval" value="1"/>
       <param name="recovery_alpha_slow" value="0.0"/>
       <param name="recovery_alpha_fast" value="0.0"/> 
-  </node>
+  </node> -->
 
   <!-- 6. Navegação (move_base + costmaps) -->
   <include file="$(find robot_navigation)/launch/move_base_real.launch"/>

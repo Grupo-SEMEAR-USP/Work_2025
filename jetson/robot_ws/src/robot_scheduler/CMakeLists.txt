@@ -27,6 +27,6 @@ include_directories(
 )
 
 catkin_install_python(PROGRAMS
-  scripts/scheuler_communication.py
+  scripts/scheduler_communication.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )

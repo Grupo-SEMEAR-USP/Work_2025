@@ -169,7 +169,6 @@ include_directories(
 
 catkin_install_python(PROGRAMS
   scripts/i2c_master_arduino.py
-  scripts/uart_arduino.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

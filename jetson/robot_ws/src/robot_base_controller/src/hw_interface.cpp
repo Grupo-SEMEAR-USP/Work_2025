@@ -119,12 +119,8 @@ void RobotHWInterface::updateOdometry()
 {
     current_time = ros::Time::now();
 
-    double yaw = tf2::getYaw(imu_orientation) + M_PI;
+    double yaw = tf2::getYaw(imu_orientation);
     th = yaw; 
-
-    // Normaliza o yaw entre -pi e pi
-    if (yaw > M_PI)
-    yaw -= 2 * M_PI;
 
     double delta_x = (vel_linearx * cos(yaw) - vel_lineary * sin(yaw)) * HW_IF_TICK_PERIOD;
     double delta_y = (vel_linearx * sin(yaw) + vel_lineary * cos(yaw)) * HW_IF_TICK_PERIOD;
