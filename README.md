@@ -18,7 +18,7 @@ This repository contains the code developed by the Autonomous Robotics Nucleus (
 
 <p align="center">
   🌐 <a href="https://atenateam.squarespace.com/" target="_blank">Project Website</a> • 
-  🎥 <a href="https://www.youtube.com/watch?v=U3LXDnhjJSY" target="_blank">Watch the Presentation Video</a>
+  🎥 <a href="https://www.youtube.com/watch?v=U3LXDnhjJSY" target="_blank">Presentation Video</a>
 </p>
 
 ## <div id="project-overview"></div>Project Overview
