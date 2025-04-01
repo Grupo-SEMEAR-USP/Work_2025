@@ -2,10 +2,11 @@
 <p align="center"> Team project for the CBR@Work 2025 competition, focused on autonomous industrial tasks and smart robotics. </p>
 
 <p align="center">
-  <a href="#project-overview">Project Overview</a> • 
   <a href="#installation">Installation</a> • 
   <a href="#usage">Usage</a> • 
-  <a href="#navigation-and-object-manipulation">Navigation and Object Manipulation</a> • 
+  <a href="#navigation">Navigation</a> • 
+  <a href="#perception">Perception</a> • 
+  <a href="#object-manipulation">Object Manipulation</a> • 
   <a href="#task-sequencing">Task Sequencing</a> •
   <a href="#results">Results</a> •
   <a href="#license">License</a> •
@@ -14,6 +15,11 @@
 
 <p align="center">
 This repository contains the code developed by the Autonomous Robotics Nucleus (RMA) of the SEMEAR group at the University of São Paulo (USP) - São Carlos, for the CBR@Work 2024 competition. The competition challenges teams to build autonomous robots capable of performing complex industrial tasks, such as transporting parts, precisely manipulating objects, and navigating dynamic industrial environments with obstacles. The goal is to optimize task sequencing based on provided orders, integrating navigation, recognition, and manipulation capabilities to operate in a realistic industrial setting.
+</p>
+
+<p align="center">
+  🌐 <a href="https://atenateam.squarespace.com/" target="_blank">Project Website</a> • 
+  🎥 <a href="https://www.youtube.com/watch?v=U3LXDnhjJSY" target="_blank">Presentation Video</a>
 </p>
 
 ## <div id="project-overview"></div>Project Overview
@@ -52,13 +58,22 @@ catkin_make</code></pre>
 ## <div id="usage"></div>Usage
 Soon... 👀
 
-## <div id="navigation-and-object-manipulation"></div>Navigation and Object Manipulation
+## <div id="navigation"></div>Navigation
+Soon... 👀
+
+## <div id="perception"></div>Perception
+Soon... 👀
+
+## <div id="object-manipulation"></div>Object Manipulation
 Soon... 👀
 
 ## <div id="task-sequencing"></div>Task Sequencing
 Soon... 👀
 
 ## <div id="Results"></div>Results
+Soon... 👀
+
+## <div id="acknowledgements"></div>Acknowledgements
 Soon... 👀
 
 ## <div id="license"></div>License
