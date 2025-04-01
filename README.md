@@ -1,4 +1,4 @@
-<h1 align="center">Autonomous Robotic System for CBR@Work 2025 🤖🏭</h1>
+<h1 align="center">Autonomous Robotic System for RoboCup@Work 2025 🤖🏭</h1>
 <p align="center"> Team project for the CBR@Work 2025 competition, focused on autonomous industrial tasks and smart robotics. </p>
 
 <p align="center">
