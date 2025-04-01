@@ -16,6 +16,11 @@
 This repository contains the code developed by the Autonomous Robotics Nucleus (RMA) of the SEMEAR group at the University of São Paulo (USP) - São Carlos, for the CBR@Work 2024 competition. The competition challenges teams to build autonomous robots capable of performing complex industrial tasks, such as transporting parts, precisely manipulating objects, and navigating dynamic industrial environments with obstacles. The goal is to optimize task sequencing based on provided orders, integrating navigation, recognition, and manipulation capabilities to operate in a realistic industrial setting.
 </p>
 
+<p align="center">
+  🌐 <a href="https://atenateam.squarespace.com/" target="_blank">Project Website</a> • 
+  🎥 <a href="https://www.youtube.com/watch?v=U3LXDnhjJSY" target="_blank">Watch the Presentation Video</a>
+</p>
+
 ## <div id="project-overview"></div>Project Overview
 
 ## <div id="installation"></div>Installation
