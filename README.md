@@ -2,10 +2,11 @@
 <p align="center"> Team project for the CBR@Work 2025 competition, focused on autonomous industrial tasks and smart robotics. </p>
 
 <p align="center">
-  <a href="#project-overview">Project Overview</a> • 
   <a href="#installation">Installation</a> • 
   <a href="#usage">Usage</a> • 
-  <a href="#navigation-and-object-manipulation">Navigation and Object Manipulation</a> • 
+  <a href="#navigation">Navigation</a> • 
+  <a href="#perception">Perception</a> • 
+  <a href="#object-manipulation">Object Manipulation</a> • 
   <a href="#task-sequencing">Task Sequencing</a> •
   <a href="#results">Results</a> •
   <a href="#license">License</a> •
@@ -57,13 +58,22 @@ catkin_make</code></pre>
 ## <div id="usage"></div>Usage
 Soon... 👀
 
-## <div id="navigation-and-object-manipulation"></div>Navigation and Object Manipulation
+## <div id="navigation"></div>Navigation
+Soon... 👀
+
+## <div id="perception"></div>Perception
+Soon... 👀
+
+## <div id="object-manipulation"></div>Object Manipulation
 Soon... 👀
 
 ## <div id="task-sequencing"></div>Task Sequencing
 Soon... 👀
 
 ## <div id="Results"></div>Results
+Soon... 👀
+
+## <div id="acknowledgements"></div>Acknowledgements
 Soon... 👀
 
 ## <div id="license"></div>License
