@@ -1,8 +1,0 @@
-prefix=/home/math/Work_2025/jetson/robot_ws/devel
-
-Name: robot_bringup
-Description: Description of robot_bringup
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

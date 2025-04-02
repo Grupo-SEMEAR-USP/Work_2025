@@ -1,8 +1,0 @@
-prefix=/home/math/Work_2025/jetson/robot_ws/install
-
-Name: robot_navigation
-Description: Description of robot_navigation
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

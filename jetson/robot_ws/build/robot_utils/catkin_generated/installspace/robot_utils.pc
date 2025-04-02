@@ -1,8 +1,0 @@
-prefix=/home/math/Work_2025/jetson/robot_ws/install
-
-Name: robot_utils
-Description: Description of robot_utils
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

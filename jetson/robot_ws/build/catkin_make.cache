@@ -1,2 +1,0 @@
-robot_bringup:robot_maniopulation:robot_msgs:robot_navigation:robot_perception:robot_simulation:robot_utils
--DCATKIN_DEVEL_PREFIX=/home/math/Work_2025/jetson/robot_ws/devel -DCMAKE_INSTALL_PREFIX=/home/math/Work_2025/jetson/robot_ws/install -G Unix Makefiles
