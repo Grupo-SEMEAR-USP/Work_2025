@@ -46,6 +46,6 @@ void i2c_task_controle();
  *     - ESP_OK: Tasks created successfully.
  *     - Other error codes in case of failure.
  */
-esp_err_t create_tasks();
+esp_err_t init_tasks();
 
 #endif // __TASK_MANAGER_H__

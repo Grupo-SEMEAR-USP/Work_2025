@@ -22,6 +22,7 @@
 #include "encoder.h"
 #include "pid.h"
 #include "driver/gpio.h"
+#include "sincronization.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/queue.h"
 
@@ -34,7 +35,7 @@
 
 // Definition of values used in read and write
 #define WRITE_LEN_VALUE 8
-#define READ_LEN_VALUE 10
+#define READ_LEN_VALUE 12
 #define TIMEOUT_MS 10
 
 // Definition of values for packing and unpacking
@@ -45,6 +46,8 @@
 
 extern QueueHandle_t i2c_write_queue; 
 extern const char *TAG; // TAG used for console display
+
+static int fail_count = 0;
 
 // Function prototypes:
 
@@ -84,39 +87,11 @@ void i2c_read_task();
 void i2c_write_task(int value_r, int value_l) ;
 
 /**
- * @brief Task for communication and writing to the I2C bus
- *
- * This function is executed as a task and is responsible for coordinating communication
- * between reading and writing data on the I2C bus. It reads values, waits,
- * and then writes the read values to the bus.
+ * @brief Task for init communication and writing to the I2C bus
  *
  * @param params Task parameters (not used).
  */
-void i2c_task_com();
-
-/**
- * @brief Control task
- *
- * This function is executed as a task and handles motor control and other
- * related aspects. Values read from the I2C bus are used here for control.
- *
- * @param params Task parameters (not used).
- */
-void i2c_task_controle();
-
-/**
- * @brief Creates tasks for reading and writing data on the I2C bus
- *
- * This function creates tasks for reading and writing data on the I2C bus,
- * in addition to initializing the I2C bus driver.
- *
- * @param parametros Task parameters (not used).
- * @param display Flag for display control.
- * @return
- *     - ESP_OK: Tasks created successfully.
- *     - Other error codes in case of failure.
- */
-esp_err_t create_tasks();
+void i2c_init();
 
 /**
  * @brief Resets the I2C bus

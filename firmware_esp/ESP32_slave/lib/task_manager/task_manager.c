@@ -1,16 +1,13 @@
 #include "task_manager.h"
 
 void i2c_task_com() {
-    ESP_ERROR_CHECK(i2c_slave_init());  // I2C initial restart
-    
-    // i2c_write_queue = xQueueCreate(10, I2C_SLAVE_TX_BUF_LEN);
+    i2c_init();
 
-    // while(1) {
-    //     i2c_read_task();
-    //     // i2c_write_task(ENCODER_READ_L, ENCODER_READ_R);
-
-    //     vTaskDelay(FREQ_COMMUNICATION / portTICK_PERIOD_MS);
-    // }
+    while(1) {
+        i2c_read_task();
+        i2c_write_task(ENCODER_READ_L, ENCODER_READ_R);
+        vTaskDelay(FREQ_COMMUNICATION / portTICK_PERIOD_MS);
+    }
     
     ESP_ERROR_CHECK(i2c_driver_delete(I2C_SLAVE_NUM));
 }
@@ -33,7 +30,7 @@ void task_motor_control() {
    
 }
 
-esp_err_t create_tasks() {
+esp_err_t init_tasks() {
 
     // Task 1 (core 0): read + write data
     xTaskCreatePinnedToCore(i2c_task_com, "i2c_task_com", 4096, NULL, 1, NULL, 0);

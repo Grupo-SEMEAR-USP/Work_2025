@@ -9,8 +9,8 @@
 
 void app_main(void) {
 
-    // sync_init();
+    sync_init();
 
-    create_tasks();
+    init_tasks();
 
 }

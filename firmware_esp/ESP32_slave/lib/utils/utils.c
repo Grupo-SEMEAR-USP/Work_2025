@@ -14,4 +14,4 @@ float RIGHT_PWM_VALUE = 0;
 
 int PWM_RESOLUTION = 10;
 
-bool BREAK_FLAG = true;
+bool BREAK_FLAG = false;
