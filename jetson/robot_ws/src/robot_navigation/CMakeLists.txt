@@ -13,7 +13,27 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   tf
+  move_base
+  roscpp
+  costmap_2d
+  nav_core
+  pluginlib
+  base_local_planner
+  roscpp
+  std_msgs
+  message_generation
 )
+
+generate_messages(
+  DEPENDENCIES
+    std_msgs
+)
+
+catkin_package(
+  LIBRARIES rrt_planning
+  CATKIN_DEPENDS std_msgs costmap_2d message_runtime nav_core pluginlib base_local_planner
+)
+
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -72,7 +92,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate added messages and services with any dependencies listed here
 # generate_messages(
 #   DEPENDENCIES
-#   geometry_msgs#   nav_msgs
+#   std_msgs
 # )
 
 ################################################
@@ -106,8 +126,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES robot_navigation
-#  CATKIN_DEPENDS geometry_msgs nav_msgs roscpp rospy tf
+#  LIBRARIES turtlebot3_2dnav
+#  CATKIN_DEPENDS move_base my_odom_configuration_dep my_sensor_configuration_dep my_tf_configuration_dep roscpp std_msgs
 #  DEPENDS system_lib
 )
 
@@ -122,9 +142,20 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
+add_executable(point_cloud_nav scripts/publish_PointClouds.cpp)
+target_link_libraries(point_cloud_nav ${catkin_LIBRARIES})
+add_library(rrt_planning_nav src/rrt_planner.cpp src/vertex.cpp)
+target_link_libraries(rrt_planning_nav ${catkin_LIBRARIES})
+
+add_library(${PROJECT_NAME} 
+  src/rrt_planner.cpp
+  src/vertex.cpp
+)
+
+
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/robot_navigation.cpp
+#   src/${PROJECT_NAME}/turtlebot3_2dnav.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -135,7 +166,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/robot_navigation_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/turtlebot3_2dnav_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -199,7 +230,7 @@ include_directories(
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_robot_navigation.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_turtlebot3_2dnav.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
