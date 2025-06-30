@@ -126,7 +126,7 @@ catkin_package(
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES turtlebot3_2dnav
+#  LIBRARIES robot_navigation
 #  CATKIN_DEPENDS move_base my_odom_configuration_dep my_sensor_configuration_dep my_tf_configuration_dep roscpp std_msgs
 #  DEPENDS system_lib
 )
@@ -155,7 +155,7 @@ add_library(${PROJECT_NAME}
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/turtlebot3_2dnav.cpp
+#   src/${PROJECT_NAME}/robot_navigation.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -166,7 +166,7 @@ add_library(${PROJECT_NAME}
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/turtlebot3_2dnav_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/robot_navigation_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -230,7 +230,7 @@ add_library(${PROJECT_NAME}
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_turtlebot3_2dnav.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_robot_navigation.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

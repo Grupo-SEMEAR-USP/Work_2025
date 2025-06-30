@@ -5,7 +5,7 @@
   <arg name="z_pos" default="0.0"/>
 
   <!-- Carrega o URDF do seu modelo de teste -->
-  <param name="robot_description" textfile="$(find turtlebot3_2dnav)/urdf/base/summit_base.urdf" />
+  <param name="robot_description" textfile="$(find robot_navigation)/urdf/base/summit_base.urdf" />
 
   <!-- Load the Gazebo simulator with a specific world -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -28,10 +28,10 @@
 
   <!-- Outros nós, como map_server, rviz e move_base -->
   <node name="map_server" pkg="map_server" type="map_server"
-        args="$(find turtlebot3_2dnav)/maps/main_map.yaml"/>
+        args="$(find robot_navigation)/maps/main_map.yaml"/>
   
   <node name="rviz" pkg="rviz" type="rviz"
         args="-d $(find turtlebot3_gazebo)/rviz/turtlebot3_gazebo_model.rviz"/>
   
-  <include file="$(find turtlebot3_2dnav)/launch/move_base.launch"/>
+  <include file="$(find robot_navigation)/launch/move_base.launch"/>
 </launch>

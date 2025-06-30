@@ -204,6 +204,59 @@
     <child link="lidar"/>
   </joint>
 
+  <link name="imu_link">
+    <inertial><origin xyz="0 0 0"/><mass value="0.001"/>
+      <inertia ixx="1e-6" iyy="1e-6" izz="1e-6" ixy="0" ixz="0" iyz="0"/></inertial>
+    <visual><geometry><box size="0.01 0.01 0.01"/></geometry></visual>
+  </link>
+  <joint name="imu_joint" type="fixed">
+    <origin xyz="0 0 0.03" rpy="0 0 0"/>
+    <parent link="base_link"/><child link="imu_link"/>
+  </joint>
+  
+    <gazebo reference="imu_link">
+  <sensor type="imu" name="imu_sensor">
+    <pose>0 0 0 0 0 0</pose>
+    <update_rate>100</update_rate>
+
+    <imu>
+      <angular_velocity>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.00005</stddev>
+        </noise>
+        <bias>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.0001</stddev>
+        </bias>
+      </angular_velocity>
+      <linear_acceleration>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.0001</stddev>
+        </noise>
+        <bias>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.001</stddev>
+        </bias>
+      </linear_acceleration>
+    </imu>
+
+    <plugin name="imu_plugin"
+            filename="libgazebo_ros_imu_sensor.so">
+      <topicName>imu/data</topicName>
+      <frameName>imu_link</frameName>
+      <!-- você pode também ajustar gaussianNoise aqui -->
+      <gaussianNoise>0.0001</gaussianNoise>
+    </plugin>
+  </sensor>
+</gazebo>
+
+
   <!-- Plugin do Gazebo para controle planar -->
   <gazebo>
     <plugin name="object_controller" filename="libgazebo_ros_planar_move.so">

@@ -1,7 +1,7 @@
 <launch>
 
   <!--Publicar a transformação do /scan para pointcloud-->
-  <!-- <node name="point_cloud" pkg="turtlebot3_2dnav" type="point_cloud" output="screen"/> -->
+  <!-- <node name="point_cloud" pkg="robot_navigation" type="point_cloud" output="screen"/> -->
 
   <!-- Define o modelo do robô, o mundo do gazebo e a visualização no RViz -->
   <!-- Set the TurtleBot3 model -->
@@ -44,6 +44,6 @@
   </node>
 
   <!-- Caso queira manter a navegação com move_base, pode incluir também -->
-  <include file="$(find turtlebot3_2dnav)/launch/move_base.launch" />
+  <include file="$(find robot_navigation)/launch/move_base.launch" />
 
 </launch>

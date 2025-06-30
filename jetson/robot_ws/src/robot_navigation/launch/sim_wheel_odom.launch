@@ -1,0 +1,16 @@
+<launch>
+  <!-- Carrega o URDF que você mostrou (podem ser .urdf ou .xacro) -->
+  <param name="robot_description"
+         command="$(find xacro)/xacro '$(find robot_navigation)/urdf/base/summit_base.urdf'"/>
+
+  <node pkg="robot_state_publisher" type="robot_state_publisher"
+        name="rsp" />
+
+  <!-- Gazebo / planar_move sobem normalmente pelo seu launch original -->
+
+  <!-- Simulador de encoders + odometria -->
+  <node pkg="robot_navigation"
+        type="sim_encoder.py"
+        name="sim_encoder"
+        output="screen"/>
+</launch>

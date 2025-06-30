@@ -1,7 +1,7 @@
 <launch>
 
 <!--Publicar a transformação do /scan para poincloud-->
-<!-- <node name="point_cloud" pkg="turtlebot3_2dnav" type="point_cloud" output="screen"/> -->
+<!-- <node name="point_cloud" pkg="robot_navigation" type="point_cloud" output="screen"/> -->
 
 <!--Define the robot model, gazebo world and rviz vizualisation-->
    <!-- Set the TurtleBot3 model -->
@@ -34,12 +34,12 @@
    <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf"  args="-urdf -model turtlebot3_$(arg model) -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description" />
 
     <!-- Run the map server -> MAPA PRONTO para navegação --> 
-   <node name="map_server" pkg="map_server" type="map_server" args="$(find turtlebot3_2dnav)/maps/willow_garage_map.yaml"/>
+   <node name="map_server" pkg="map_server" type="map_server" args="$(find robot_navigation)/maps/willow_garage_map.yaml"/>
 
    <!-- Load the RViz configuration -->
    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot3_gazebo)/rviz/turtlebot3_gazebo_model.rviz"/>
 
-   <include file="$(find turtlebot3_2dnav)/launch/move_base.launch" />
+   <include file="$(find robot_navigation)/launch/move_base.launch" />
 
 </launch> 
    

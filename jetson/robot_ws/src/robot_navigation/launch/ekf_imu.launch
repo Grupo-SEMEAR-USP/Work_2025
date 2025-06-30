@@ -1,0 +1,38 @@
+<launch>
+  <!-- 1) Nodelet manager -->
+  <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager"/>
+
+  <!-- 2) Filtro Madgwick -->
+  <node pkg="nodelet"
+        type="nodelet"
+        name="imu_filter_nodelet"
+        args="standalone imu_filter_madgwick/ImuFilterNodelet"
+        output="screen">
+    <!-- Sem magnetômetro na D435i -->
+    <param name="use_mag"              value="false"/>
+    <!-- Não publicar TF para não conflitar com o EKF -->
+    <param name="publish_tf"           value="false"/>
+    <!-- Ganho do filtro (0.005–0.05 é um bom range para 100 Hz) -->
+    <param name="gain"                 value="0.01"/>
+    <!-- Intervalo constante de amostragem (s) -->
+    <param name="constant_dt"          value="0.01"/>
+    <!-- Desvio padrão inicial para orientação -->
+    <param name="orientation_stddev"   value="0.1"/>
+    <!-- Limiares para pulos de timestamp -->
+    <param name="time_jump_threshold"  value="10.0"/>
+
+    <!-- 3) Remapeando seu /imu/data (raw) para input do filtro -->
+    <remap from="imu/data_raw" to="/imu/data"/>
+    <!-- 4) Saída filtrada em /imu/data_filtered -->
+    <remap from="imu/data"     to="/imu/data_filtered"/>
+  </node>
+
+  <!-- Carrega parâmetros do EKF -->
+  <rosparam file="$(find robot_navigation)/config/ekf_odom_imu.yaml" command="load"/>
+
+  <!-- Roda o EKF -->
+  <node pkg="robot_localization"
+        type="ekf_localization_node"
+        name="ekf_localization"
+        output="screen"/>
+</launch>
