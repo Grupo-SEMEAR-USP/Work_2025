@@ -54,8 +54,9 @@ class I2CCommunication:
             # Lê 9 bytes do buffer da ESP32
             data = self.i2c.read_i2c_block_data(self.device_address, REG_ADDRESS, 9)
 
-            print("Raw data:", data)
-
+            if data[0] != 0x01:
+                return
+            
             # Ignora o header (data[0])
             value_right = struct.unpack('!i', bytes(data[1:5]))  # bytes 1-4
             value_left = struct.unpack('!i', bytes(data[5:9]))   # bytes 5-8
@@ -104,7 +105,7 @@ class I2CCommunication:
                 self.wheel_velocities[1] = int(msg.rear_right_wheel * 1000)
 
     def update(self):
-        rate = rospy.Rate(50)  # 10Hz
+        rate = rospy.Rate(30)  # 10Hz
 
         while not rospy.is_shutdown():
 
