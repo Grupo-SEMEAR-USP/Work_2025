@@ -31,7 +31,7 @@ extern bool BREAK_FLAG;
 #define K_RIGHT 0.1475;
 
 // I2C address
-#define I2C_SLAVE_ADDRESS 0x09 // 0x08 (Front) e 0x09 (Rear)
+#define I2C_SLAVE_ADDRESS 0x08 // 0x08 (Front) e 0x09 (Rear)
 
 // Communication values
 #define MAX_ACCEPTABLE_VALUE 6500

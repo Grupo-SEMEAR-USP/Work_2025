@@ -28,6 +28,7 @@
         ENC_LEFT = 0,
         ENC_RIGHT = 1
     } encoder_side_t;
+    
 
     /* Macros */
 
@@ -36,8 +37,8 @@
     #define PCNT_LOW_LIMIT  -1500
 
     /* Right encoder defines */
-    #define CHA_ENCODER_1R 14
-    #define CHA_ENCODER_2R 15
+    #define CHA_ENCODER_1R 15
+    #define CHA_ENCODER_2R 14
 
     /* Left encoder defines */
     #define CHA_ENCODER_1L 19

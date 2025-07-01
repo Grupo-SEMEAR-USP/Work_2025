@@ -1,0 +1,6 @@
+<launch>
+
+  <!-- Inicia a comunicação I2C com o baixo nível -->
+  <node name="i2c_master_arduino" pkg="robot_manipulation" type="i2c_master_arduino.py" /> 
+
+</launch>
