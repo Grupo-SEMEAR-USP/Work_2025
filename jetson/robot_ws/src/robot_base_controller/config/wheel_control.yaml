@@ -1,0 +1,7 @@
+wheel_control:
+  wheel_separation_width: 0.21265
+  wheel_separation_length: 0.1514
+  wheel_radius: 0.05
+  deceleration_rate: 5
+  max_speed: 6.5
+  min_speed: -6.5
