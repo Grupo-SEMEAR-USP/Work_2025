@@ -40,8 +40,8 @@ typedef enum{
 #define INPUT_LEFT_2    GPIO_NUM_4
 
 // GPIOs of h-bridge for motor B
-#define INPUT_RIGHT_1   GPIO_NUM_27
-#define INPUT_RIGHT_2   GPIO_NUM_32
+#define INPUT_RIGHT_1   GPIO_NUM_32
+#define INPUT_RIGHT_2   GPIO_NUM_27
 
 // PWM Config 
 #define LEDC_TIMER              LEDC_TIMER_0

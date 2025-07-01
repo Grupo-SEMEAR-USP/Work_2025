@@ -43,29 +43,47 @@ void disp_buf(uint8_t *buf, int len) {
 
 void i2c_read_task() {
 
-    int read_value_r = 0;
-    int read_value_l = 0;
-
     uint8_t rx_data[I2C_SLAVE_RX_BUF_LEN];
 
     if (sync_i2c_lock(pdMS_TO_TICKS(10))) {
 
-        int size = i2c_slave_read_buffer(I2C_SLAVE_NUM, rx_data, READ_LEN_VALUE, TIMEOUT_MS / portTICK_PERIOD_MS);
-
-        sync_i2c_unlock();
+        // Leia tudo que tiver no buffer de uma vez
+        int size = i2c_slave_read_buffer(
+            I2C_SLAVE_NUM,
+            rx_data,
+            I2C_SLAVE_RX_BUF_LEN,
+            TIMEOUT_MS / portTICK_PERIOD_MS
+        );
 
         if (size > 0) {
-
-            // disp_buf(rx_data, 12);
-
-            // Unpack left value
-            for (int i = 4; i < 8; i++) {
-                read_value_l |= (rx_data[i] << 8 * ((READ_LEN_VALUE - 1) - i));
+            if (size < 9) {
+                sync_i2c_unlock();
+                return;
             }
 
-            // Unpack right value
-            for (int i = 8; i < 12; i++) {
-                read_value_r |= (rx_data[i] << 8 * ((READ_LEN_VALUE - 1) - i));
+            uint8_t payload[9];
+            memcpy(payload, rx_data + 1, 9);
+
+            int32_t read_value_r = 0;
+            int32_t read_value_l = 0;
+
+            read_value_r = (payload[1] << 24) |
+                           (payload[2] << 16) |
+                           (payload[3] << 8) |
+                           (payload[4]);
+
+            read_value_l = (payload[5] << 24) |
+                           (payload[6] << 16) |
+                           (payload[7] << 8) |
+                           (payload[8]);
+
+            //ESP_LOGI(TAG, "Read values: R=%ld, L=%ld", (long)read_value_r, (long)read_value_l);
+
+            if (read_value_r > MAX_ACCEPTABLE_VALUE ||
+                read_value_l > MAX_ACCEPTABLE_VALUE) {
+                // ESP_LOGW(TAG, "Values out of range: L=%ld, R=%ld", (long)read_value_l, (long)read_value_r);
+                sync_i2c_unlock();
+                return;
             }
 
             TARGET_VALUE_R = read_value_r;
@@ -74,72 +92,69 @@ void i2c_read_task() {
             TARGET_VALUE_R = TARGET_VALUE_R / 1000;
             TARGET_VALUE_L = TARGET_VALUE_L / 1000;
     
-            if( read_value_r > MAX_ACCEPTABLE_VALUE || read_value_l > MAX_ACCEPTABLE_VALUE 
-                || (rx_data[2] != 0xAA || rx_data[3] != 0x55)) {
-                
-                ESP_LOGW(TAG, "Values out of range: L=%d, R=%d", read_value_l, read_value_r);
-                fail_count++;
-                reset_i2c(I2C_SLAVE_NUM);
-                if (fail_count >= 5) esp_restart();
-                return;
-            }
-
-            //printf("Read value (Dir, Esq): %d, %d\n", read_value_r, read_value_l);
-
             fail_count = 0;
 
         } else {
-            ESP_LOGI(TAG, "Read failed! Restarting I2C...");
+            // ESP_LOGI(TAG, "Read failed! Restarting I2C...");
             fail_count++;
             reset_i2c(I2C_SLAVE_NUM);
             if (fail_count >= 3) esp_restart();
         }
 
+        sync_i2c_unlock();
     } else {
-        ESP_LOGW(TAG, "I2C bus busy. Skipping read.");
+        // ESP_LOGW(TAG, "I2C busy, skip read.");
     }
 }
 
 
 void i2c_write_task(int value_r, int value_l) {
+    // Primeiro, escala os valores como no seu código original
+    value_r *= 1000;
+    value_l *= 1000;
 
-    value_r = value_r * 1000;
-    value_l = value_l * 1000;
+    // Payload: 9 bytes (1 byte header + 4 bytes R + 4 bytes L)
+    uint8_t tx_data[9];
+    tx_data[0] = 0x01; // Exemplo de header (você pode definir outro valor se quiser)
 
-    uint8_t tx_data[WRITE_LEN_VALUE];
+    // Empacota value_r (4 bytes)
+    tx_data[1] = (value_r >> 24) & 0xFF;
+    tx_data[2] = (value_r >> 16) & 0xFF;
+    tx_data[3] = (value_r >> 8) & 0xFF;
+    tx_data[4] = value_r & 0xFF;
 
-    // Packing value_r (right)
-    for (int i = 0; i < WRITE_LEN_VALUE / 2; i++) {
-        tx_data[i] = (value_r >> (8 * ((WRITE_LEN_VALUE - 1) - i))) & LAST_BYTE_MASK;
-    }
-
-    // Packing value_l (left)
-    for (int i = WRITE_LEN_VALUE / 2; i < WRITE_LEN_VALUE; i++) {
-        tx_data[i] = (value_l >> (8 * ((WRITE_LEN_VALUE - 1) - i))) & LAST_BYTE_MASK;
-    }
+    // Empacota value_l (4 bytes)
+    tx_data[5] = (value_l >> 24) & 0xFF;
+    tx_data[6] = (value_l >> 16) & 0xFF;
+    tx_data[7] = (value_l >> 8) & 0xFF;
+    tx_data[8] = value_l & 0xFF;
 
     if (sync_i2c_lock(pdMS_TO_TICKS(10))) {
 
         int size = i2c_slave_write_buffer(
             I2C_SLAVE_NUM,
             tx_data,
-            WRITE_LEN_VALUE,
+            9,
             TIMEOUT_MS / portTICK_PERIOD_MS
         );
 
         sync_i2c_unlock();
 
-        // Optional debug
-        // if (size > 0) {
-        //     printf("Write value: %d, %d\n", value_r / 1000, value_l / 1000);
-        // } else {
-        //     ESP_LOGI(TAG, "I2C write failed");
-        // }
+        // ESP_LOG_BUFFER_HEX("I2C TX", tx_data, 9);
 
+        // Log opcional
+        /*
+        if (size > 0) {
+            ESP_LOGI(TAG, "I2C Write OK: R=%d L=%d", value_r / 1000, value_l / 1000);
+        } else {
+            ESP_LOGW(TAG, "I2C write failed!");
+        }
+        */
     } else {
-        ESP_LOGW(TAG, "I2C bus busy. Write skipped.");
+        ESP_LOGW(TAG, "I2C busy, skipping write.");
     }
 }
+
 
 void i2c_init() {
     ESP_ERROR_CHECK(i2c_slave_init());  // I2C initial restart
