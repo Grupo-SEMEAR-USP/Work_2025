@@ -1,4 +1,0 @@
-robot_simulation
-/home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_simulation/share/robot_simulation/cmake/robot_simulationConfig-version.cmake /home/rmajetson/Work_2025/jetson/robot_ws/devel/share/robot_simulation/cmake/robot_simulationConfig-version.cmake
-/home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_simulation/share/robot_simulation/cmake/robot_simulationConfig.cmake /home/rmajetson/Work_2025/jetson/robot_ws/devel/share/robot_simulation/cmake/robot_simulationConfig.cmake
-/home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_simulation/lib/pkgconfig/robot_simulation.pc /home/rmajetson/Work_2025/jetson/robot_ws/devel/lib/pkgconfig/robot_simulation.pc

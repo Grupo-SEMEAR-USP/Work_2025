@@ -1,0 +1,4 @@
+Symlinking /home/rmajetson/Work_2025/jetson/robot_ws/devel/share/robot_manipulation/cmake/robot_manipulationConfig.cmake
+Symlinking /home/rmajetson/Work_2025/jetson/robot_ws/devel/share/robot_manipulation/cmake/robot_manipulationConfig-version.cmake
+Symlinking /home/rmajetson/Work_2025/jetson/robot_ws/devel/lib/pkgconfig/robot_manipulation.pc
+Symlinking /home/rmajetson/Work_2025/jetson/robot_ws/devel/lib/robot_manipulation/i2c_master_arduino.py
