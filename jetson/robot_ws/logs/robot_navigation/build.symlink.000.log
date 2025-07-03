@@ -1,0 +1,3 @@
+Symlinking /home/rmajetson/Work_2025/jetson/robot_ws/devel/share/robot_navigation/cmake/robot_navigationConfig-version.cmake
+Symlinking /home/rmajetson/Work_2025/jetson/robot_ws/devel/share/robot_navigation/cmake/robot_navigationConfig.cmake
+Symlinking /home/rmajetson/Work_2025/jetson/robot_ws/devel/lib/pkgconfig/robot_navigation.pc

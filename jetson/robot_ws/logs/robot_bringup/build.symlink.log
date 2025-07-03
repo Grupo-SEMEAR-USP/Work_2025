@@ -1,0 +1,3 @@
+Symlinking /home/rmajetson/Work_2025/jetson/robot_ws/devel/share/robot_bringup/cmake/robot_bringupConfig.cmake
+Symlinking /home/rmajetson/Work_2025/jetson/robot_ws/devel/share/robot_bringup/cmake/robot_bringupConfig-version.cmake
+Symlinking /home/rmajetson/Work_2025/jetson/robot_ws/devel/lib/pkgconfig/robot_bringup.pc

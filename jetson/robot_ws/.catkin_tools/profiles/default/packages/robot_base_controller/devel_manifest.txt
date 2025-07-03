@@ -1,4 +1,0 @@
-robot_base_controller
-/home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_base_controller/share/robot_base_controller/cmake/robot_base_controllerConfig.cmake /home/rmajetson/Work_2025/jetson/robot_ws/devel/share/robot_base_controller/cmake/robot_base_controllerConfig.cmake
-/home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_base_controller/share/robot_base_controller/cmake/robot_base_controllerConfig-version.cmake /home/rmajetson/Work_2025/jetson/robot_ws/devel/share/robot_base_controller/cmake/robot_base_controllerConfig-version.cmake
-/home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_base_controller/lib/pkgconfig/robot_base_controller.pc /home/rmajetson/Work_2025/jetson/robot_ws/devel/lib/pkgconfig/robot_base_controller.pc

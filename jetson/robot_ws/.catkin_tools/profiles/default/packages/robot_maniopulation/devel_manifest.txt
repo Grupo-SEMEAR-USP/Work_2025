@@ -1,4 +1,0 @@
-robot_manipulation
-/home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_maniopulation/share/robot_maniopulation/cmake/robot_maniopulationConfig.cmake /home/rmajetson/Work_2025/jetson/robot_ws/devel/share/robot_maniopulation/cmake/robot_maniopulationConfig.cmake
-/home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_maniopulation/share/robot_maniopulation/cmake/robot_maniopulationConfig-version.cmake /home/rmajetson/Work_2025/jetson/robot_ws/devel/share/robot_maniopulation/cmake/robot_maniopulationConfig-version.cmake
-/home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_maniopulation/lib/pkgconfig/robot_maniopulation.pc /home/rmajetson/Work_2025/jetson/robot_ws/devel/lib/pkgconfig/robot_maniopulation.pc
