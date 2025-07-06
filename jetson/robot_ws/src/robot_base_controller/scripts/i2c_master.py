@@ -13,22 +13,21 @@ import threading
 # Constantes
 ESP32_ADDRESS_FRONT = 0x08  # Endereço do dispositivo ESP32 esquerdo no barramento I2C
 ESP32_ADDRESS_REAR = 0x09  # Endereço do dispositivo ESP32 direito no barramento I2C
-I2C_BUS = 1  # Número do barramento I2C no Raspberry Pi
+I2C_BUS = 0  # Número do barramento I2C no Raspberry Pi
 REG_ADDRESS = 10  # Endereço de registro (offset) a ser usado pelo PID
 
-encoder_data_global = [0, 0, 0, 0]  # Variável global para armazenar os dados dos encoders
+encoder_data_global = [0, 0, 0, 0]
 
 # Classe para comunicação I2C
 class I2CCommunication:
-    # "Construtor" da classe, definindo seus atributos principais
     def __init__(self, device_address):
 
-        self.wheel_velocities = [0, 0]  # Inicializa as velocidades das duas rodas como zero
+        self.wheel_velocities = [0, 0]
 
         if device_address == ESP32_ADDRESS_FRONT:
-            self.wheel_indices = 0 # Indice front
+            self.wheel_indices = 0 # Index front
         elif device_address == ESP32_ADDRESS_REAR:
-            self.wheel_indices = 1  # Indice rears
+            self.wheel_indices = 1  # Index rears
 
         self.i2c = smbus.SMBus(I2C_BUS)  # Define o barramento que será usado na comunicação
         self.device_address = device_address  # Define o endereço da ESP32 ao qual queremos nos comunicar
@@ -79,13 +78,11 @@ class I2CCommunication:
             # rospy.logerr(f"Erro na leitura: {str(e)}")
             return None
 
-
     def write_data(self):
 
         try:
             data = struct.pack('!ii', self.wheel_velocities[0], self.wheel_velocities[1])  # Empacota os valores das velocidades das rodas
             self.i2c.write_i2c_block_data(self.device_address, 0, list(data)) # Escreve valores para a ESP32
-
             # rospy.loginfo(f'Valores enviados: {self.wheel_velocities}')
 
         except Exception as e:

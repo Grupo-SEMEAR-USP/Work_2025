@@ -3,7 +3,7 @@ import rospy, struct, time
 from smbus2 import SMBus, i2c_msg
 from std_msgs.msg import Float32MultiArray
 
-I2C_BUS = 1
+I2C_BUS = 0
 ARDUINO_ADDRESS = 0x0a
 REPEATS = 4
 INTERVAL = 0.5
@@ -16,7 +16,7 @@ class I2C_ROS_Bridge:
         self.ee  = [0.0, 0.0]
         self.repeats = 0
         self.last_tx = 0.0
-        rospy.Subscriber('/arm_control',          Float32MultiArray, self.cb_arm, queue_size=1)
+        rospy.Subscriber('/arm_control', Float32MultiArray, self.cb_arm, queue_size=1)
         rospy.Subscriber('/end_effector_control', Float32MultiArray, self.cb_ee,  queue_size=1)
 
     def cb_arm(self, msg):

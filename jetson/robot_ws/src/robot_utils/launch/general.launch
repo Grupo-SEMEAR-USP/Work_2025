@@ -13,6 +13,7 @@
   <arg name="hold_back_imu_for_frames" default="false"/>
   <arg name="unite_imu_method"         default="linear_interpolation"/>
 
+  <!-- Inicializa pacote da RealSense -->
   <include file="$(find realsense2_camera)/launch/rs_camera.launch">
     <arg name="enable_accel"   value="$(arg enable_accel)"/>
     <arg name="enable_gyro"    value="$(arg enable_gyro)"/>
@@ -30,10 +31,13 @@
   <param name="camera/color_format"              value="$(arg color_format)"/>
   <param name="camera/hold_back_imu_for_frames"  value="$(arg hold_back_imu_for_frames)"/>
 
+  <!-- Inicializa pacote do RPLidar -->
+  <include file="$(find rplidar_ros)/launch/rplidar_a2m12.launch"/>
+
   <!-- Inicializa o controle do robô (Hardware interface)-->
-  <!-- <include file="$(find robot_base_controller)/launch/hw_interface.launch"/> -->
+  <include file="$(find robot_base_controller)/launch/hw_interface.launch"/>
 
   <!-- Inicializa o braço do robô -->
-  <!-- <include file="$(find robot_manipulation)/launch/robot_manipulation.launch"/> -->
+  <include file="$(find robot_manipulation)/launch/robot_manipulation.launch"/>
 
 </launch>
