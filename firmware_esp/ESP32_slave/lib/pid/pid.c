@@ -53,8 +53,8 @@ esp_err_t pid_calculate(pcnt_unit_handle_t upcnt_unit_L, pid_ctrl_block_handle_t
     ENCODER_READ_L = pulse_count(upcnt_unit_L);
     ENCODER_READ_R = pulse_count(upcnt_unit_R);
 
-    ESP_LOGI(TAG_PID, "Encoder LEFT: %d", ENCODER_READ_L);
-    ESP_LOGI(TAG_PID, "Encoder RIGHT: %d", ENCODER_READ_R);
+    // ESP_LOGI(TAG_PID, "Encoder LEFT: %d", ENCODER_READ_L);
+    // ESP_LOGI(TAG_PID, "Encoder RIGHT: %d", ENCODER_READ_R);
 
     RADS_L = ENCODER_READ_L * PID_TICKS_TO_RADS(PID_LEFT);
     RADS_R = ENCODER_READ_R * PID_TICKS_TO_RADS(PID_RIGHT);
