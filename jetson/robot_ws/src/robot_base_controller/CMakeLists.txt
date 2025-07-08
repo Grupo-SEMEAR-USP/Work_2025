@@ -190,6 +190,7 @@ target_link_libraries(hw_interface
 
 catkin_install_python(PROGRAMS
   scripts/i2c_master.py
+  scripts/mqtt_server.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

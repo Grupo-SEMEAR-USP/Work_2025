@@ -22,6 +22,7 @@ robot_base_controller
 /home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_base_controller/lib/python3/dist-packages/robot_base_controller/msg/_encoder_data.py /home/rmajetson/Work_2025/jetson/robot_ws/devel/lib/python3/dist-packages/robot_base_controller/msg/_encoder_data.py
 /home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_base_controller/lib/pkgconfig/robot_base_controller.pc /home/rmajetson/Work_2025/jetson/robot_ws/devel/lib/pkgconfig/robot_base_controller.pc
 /home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_base_controller/lib/robot_base_controller/hw_interface /home/rmajetson/Work_2025/jetson/robot_ws/devel/lib/robot_base_controller/hw_interface
+/home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_base_controller/lib/robot_base_controller/mqtt_server.py /home/rmajetson/Work_2025/jetson/robot_ws/devel/lib/robot_base_controller/mqtt_server.py
 /home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_base_controller/lib/robot_base_controller/i2c_master.py /home/rmajetson/Work_2025/jetson/robot_ws/devel/lib/robot_base_controller/i2c_master.py
 /home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_base_controller/include/robot_base_controller/encoder_data.h /home/rmajetson/Work_2025/jetson/robot_ws/devel/include/robot_base_controller/encoder_data.h
 /home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_base_controller/include/robot_base_controller/velocity_data.h /home/rmajetson/Work_2025/jetson/robot_ws/devel/include/robot_base_controller/velocity_data.h

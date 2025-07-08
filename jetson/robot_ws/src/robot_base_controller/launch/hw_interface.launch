@@ -1,7 +1,8 @@
 <launch>
 
   <!-- Inicia a comunicação I2C com o baixo nível -->
-  <node name="i2c_master" pkg="robot_base_controller" type="i2c_master.py" /> 
+  <!-- <node name="i2c_master" pkg="robot_base_controller" type="i2c_master.py" />  -->
+  <node name="mqtt_bridge" pkg="robot_base_controller" type="mqtt_server.py" /> 
 
   <!-- Carregar parâmetros do arquivo config.yaml -->
   <rosparam file="$(find robot_base_controller)/config/wheel_control.yaml" command="load" />
