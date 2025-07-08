@@ -83,8 +83,8 @@ class SymEncoder:
         odom.pose.pose.position.y = self.y
         q = tf_conversions.transformations.quaternion_from_euler(0,0,self.yaw)
         odom.pose.pose.orientation = Quaternion(*q)
-        odom.twist.twist.linear.x  = vx
-        odom.twist.twist.linear.y  = vy
+        odom.twist.twist.linear.x  = vx + 4
+        odom.twist.twist.linear.y  = vy + 2
         odom.twist.twist.angular.z = wz
         self.pub_odom.publish(odom)
 

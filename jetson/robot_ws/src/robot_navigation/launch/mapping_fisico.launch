@@ -1,0 +1,48 @@
+<!-- mapping_real.launch -->
+<launch>
+
+  <!-- 1. Descrição e TF do robô -->
+  <param name="robot_description"
+         command="$(find xacro)/xacro --inorder \
+                 $(find robot_navigation)/urdf/base/summit_base.urdf"/>
+                 
+  <node pkg="robot_state_publisher" type="robot_state_publisher"
+        name="robot_state_publisher">
+    <param name="publish_frequency" value="50"/>
+  </node>
+
+  <!-- (opcional) joint_state_publisher caso o driver ainda não publique -->
+  <node pkg="joint_state_publisher" type="joint_state_publisher"/>
+
+  <!-- 2. Drivers de hardware (exemplos) -->
+  <!-- lidar_driver publica /scan -->
+  <!-- wheel_odometry_node publica /wheel_odom -->
+  <!-- imu_driver publica /imu/data_raw -->
+
+  <!-- 3. Filtro Madgwick + EKF (mesmo YAML ajustado anteriormente) -->
+  <include file="$(find robot_navigation)/launch/ekf_imu_odom.launch"/>
+
+  <!-- 4. Gmapping: constrói o mapa -->
+  <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping"
+        output="screen">
+    <remap from="scan"           to="/scan"/>
+    <param name="base_frame"     value="base_footprint"/>
+    <param name="odom_frame"     value="odom"/>
+    <param name="map_update_interval" value="3.0"/>
+    <!-- parâmetros recomendados para robô indoor pequeno -->
+    <param name="linearUpdate"   value="0.25"/>   <!-- [m] -->
+    <param name="angularUpdate"  value="0.17"/>   <!-- [rad] ~10° -->
+    <param name="particles"      value="50"/>
+    <param name="srr"            value="0.01"/>   <!-- noise lin → lin -->
+    <param name="srt"            value="0.02"/>   <!-- noise rot → lin -->
+    <param name="str"            value="0.02"/>   <!-- noise lin → rot -->
+    <param name="ttr"            value="0.04"/>   <!-- noise rot → rot -->
+    <param name="minimumScore"   value="200"/>
+    <!-- ajuste maxUrange ao alcance útil do seu LiDAR -->
+    <param name="maxUrange"      value="6.0"/>
+  </node>
+
+  <!-- 5. RViz em modo live -->
+  <node pkg="rviz" type="rviz" name="rviz"
+        args="-d $(find robot_navigation)/rviz/mapping.rviz"/>
+</launch>

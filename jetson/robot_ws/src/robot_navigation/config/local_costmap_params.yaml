@@ -1,5 +1,6 @@
 global_frame: odom
 rolling_window: true
+
 width: 1.5
 height: 1.5
 
