@@ -1,0 +1,45 @@
+<launch>
+
+<!--Publicar a transformação do /scan para poincloud-->
+<!-- <node name="point_cloud" pkg="robot_navigation" type="point_cloud" output="screen"/> -->
+
+<!--Define the robot model, gazebo world and rviz vizualisation-->
+   <!-- Set the TurtleBot3 model -->
+   <arg name="model" default="burger" doc="model type [burger, waffle, waffle_pi]"/>
+   <!--Define a posição de início-->
+   <arg name="x_pos" default="0.0"/>
+   <arg name="y_pos" default="0.0"/>
+   <arg name="z_pos" default="0.0"/>
+
+   <param name="robot_description" command="$(find xacro)/xacro --inorder $(find turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro" />
+
+   <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+      <param name="publish_frequency" type="double" value="50.0" />
+      <param name="tf_prefix" value=""/>
+   </node>
+
+      <!-- Load the Gazebo simulator with a specific world -->
+   <include file="$(find gazebo_ros)/launch/willowgarage_world.launch"/>
+
+   <!-- <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find turtlebot3_gazebo)/worlds/turtlebot3_stage_4.world"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+   </include>   -->
+
+   <!--Spawna the robots model-->
+   <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf"  args="-urdf -model turtlebot3_$(arg model) -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description" />
+
+    <!-- Run the map server -> MAPA PRONTO para navegação --> 
+   <node name="map_server" pkg="map_server" type="map_server" args="$(find robot_navigation)/maps/willow_garage_map.yaml"/>
+
+   <!-- Load the RViz configuration -->
+   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot_navigation)/rviz/rviz.rviz"/>
+
+   <include file="$(find robot_navigation)/launch/move_base.launch" />
+
+</launch> 
+   

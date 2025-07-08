@@ -1,0 +1,36 @@
+<launch>
+  <!-- 1) Nodelet manager para carregar nodelets -->
+  <node pkg="nodelet"
+        type="nodelet"
+        name="nodelet_manager"
+        args="manager"/>
+
+  <!-- 2) IMU Filter Madgwick (consome /imu/data_raw e publica /imu/data_filtered) -->
+  <node pkg="nodelet"
+        type="nodelet"
+        name="imu_filter_nodelet"
+        args="standalone imu_filter_madgwick/ImuFilterNodelet"
+        output="screen">
+    <param name="use_mag"             value="false"/>
+    <param name="publish_tf"          value="false"/>
+    <param name="gain"                value="0.01"/>
+    <param name="constant_dt"         value="0.01"/>
+    <param name="orientation_stddev"  value="0.1"/>
+    <param name="time_jump_threshold" value="10.0"/>
+    <remap from="imu/data_raw" to="camera/imu"/>
+    <!-- <remap from="imu/data_raw" to="imu/data"/> -->
+    <remap from="imu/data"     to="/imu/data_filtered"/>
+  </node>
+
+  <!-- 3) EKF Localization Node -->
+  <node pkg="robot_localization"
+        type="ekf_localization_node"
+        name="ekf_localization"
+        output="screen">
+    <!-- garante que odom0 escute em /wheel_odom -->
+    <param name="odom0" value="/wheel_odom"/>
+    <!-- carrega o restante dos parâmetros do seu YAML -->
+    <rosparam file="$(find robot_navigation)/config/ekf_odom_imu.yaml"
+              command="load"/>
+  </node>
+</launch>

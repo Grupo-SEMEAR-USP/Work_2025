@@ -1,0 +1,27 @@
+footprint: [[-0.24, -0.15], [-0.24, 0.15], [0.24, 0.15], [0.24, -0.15]]
+footprint_padding: 0.01
+
+robot_base_frame: base_link
+update_frequency: 10
+publish_frequency: 1
+transform_tolerance: 0.5
+
+resolution: 0.05 #Tamanho do lado de cada célula do grid em metros (neste caso, 5 cm). Quanto menor, mais pesado computacionalmente, mas mais preciso.
+
+obstacle_range: 5.5 #Distância máxima que o robô irá considerar um obstáculo (em metros). Obstáculos além dessa distância não serão considerados.
+raytrace_range: 6.0 #Distância máxima que o robô irá considerar ao traçar raios para verificar obstáculos (em metros).
+
+#layer definitions
+static:
+    map_topic: /map
+    subscribe_to_updates: true
+
+obstacles_laser:
+    observation_sources: laser
+    laser: {data_type: LaserScan, clearing: true, marking: true, topic: scan, inf_is_valid: true}
+
+inflation_g:
+    inflation_radius: 0.07
+    
+inflation_l:
+    inflation_radius: 0.07

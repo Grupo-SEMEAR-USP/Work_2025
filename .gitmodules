@@ -1,0 +1,6 @@
+[submodule "jetson/robot_ws/src/atwork-commander"]
+	path = jetson/robot_ws/src/atwork-commander
+	url = https://github.com/robocup-at-work/atwork-commander
+[submodule "jetson/robot_ws/src/multimaster_fkie"]
+	path = jetson/robot_ws/src/multimaster_fkie
+	url = https://github.com/fkie/multimaster_fkie.git

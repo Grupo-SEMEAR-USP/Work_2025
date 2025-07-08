@@ -13,7 +13,26 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   tf
+  move_base
+  roscpp
+  costmap_2d
+  nav_core
+  pluginlib
+  base_local_planner
+  roscpp
+  std_msgs
+  message_generation
 )
+
+generate_messages(
+  DEPENDENCIES
+    std_msgs
+)
+
+catkin_package(
+  CATKIN_DEPENDS std_msgs costmap_2d message_runtime nav_core pluginlib base_local_planner
+)
+
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -72,7 +91,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate added messages and services with any dependencies listed here
 # generate_messages(
 #   DEPENDENCIES
-#   geometry_msgs#   nav_msgs
+#   std_msgs
 # )
 
 ################################################
@@ -107,7 +126,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES robot_navigation
-#  CATKIN_DEPENDS geometry_msgs nav_msgs roscpp rospy tf
+#  CATKIN_DEPENDS move_base my_odom_configuration_dep my_sensor_configuration_dep my_tf_configuration_dep roscpp std_msgs
 #  DEPENDS system_lib
 )
 
@@ -121,6 +140,11 @@ include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
 )
+
+add_executable(point_cloud_nav scripts/publish_PointClouds.cpp)
+target_link_libraries(point_cloud_nav ${catkin_LIBRARIES})
+
+
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}

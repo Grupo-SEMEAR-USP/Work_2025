@@ -1,0 +1,42 @@
+<launch>
+  <!-- Define a posição de início -->
+  <arg name="x_pos" default="1.0"/>
+  <arg name="y_pos" default="0.0"/>
+  <arg name="z_pos" default="0.08"/>
+
+  <!-- Carrega o URDF do seu modelo de teste -->
+  <param name="robot_description" textfile="$(find robot_description)/urdf/robot_description.urdf" />
+
+  <!-- Load the Gazebo simulator with a specific world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find turtlebot3_gazebo)/worlds/turtlebot3_stage_4.world"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+   </include>  
+
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+    <param name="publish_frequency" type="double" value="50.0" />
+    <param name="tf_prefix" value=""/>
+  </node>
+
+  <node
+    name="joint_state_publisher_gui"
+    pkg="joint_state_publisher_gui"
+    type="joint_state_publisher_gui" />
+
+  <!-- Spawna o modelo no Gazebo -->
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf"
+        args="-urdf -model mecanum_robot1 -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description" />
+
+  <!-- Outros nós, como map_server, rviz e move_base -->
+  <node name="map_server" pkg="map_server" type="map_server"
+        args="$(find robot_navigation)/maps/main_map.yaml"/>
+  
+  <node name="rviz" pkg="rviz" type="rviz"
+        args="-d $(find robot_navigation)/rviz/rviz.rviz"/>
+  
+  <include file="$(find robot_navigation)/launch/move_base.launch"/>
+</launch>

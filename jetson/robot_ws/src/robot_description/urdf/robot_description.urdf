@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="robot_description">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-0.19682 -0.0081466 -0.074044"
+        rpy="0 0 0" />
+      <mass
+        value="3.6752" />
+      <inertia
+        ixx="0.007798"
+        ixy="2.3508E-05"
+        ixz="-0.00067159"
+        iyy="0.017951"
+        iyz="-2.0373E-06"
+        izz="0.023321" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.52549 0.52549 0.52549 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="plat_link">
+    <inertial>
+      <origin
+        xyz="0.00099086 -1.3909E-06 0.20885"
+        rpy="0 0 0" />
+      <mass
+        value="0.64412" />
+      <inertia
+        ixx="0.003989"
+        ixy="4.8134E-10"
+        ixz="8.3528E-06"
+        iyy="0.0039716"
+        iyz="1.7874E-10"
+        izz="0.00091739" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/meshes/plat_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/meshes/plat_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="plat_joint"
+    type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="plat_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.4034"
+      upper="3.4034"
+      effort="100"
+      velocity="0.7854" />
+  </joint>
+  <link name="base_footprint"/>
+  <joint name="base_link_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 3.1416"/>
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+  </joint>
+  <link
+    name="manip_link">
+    <inertial>
+      <origin
+        xyz="0.076517 -0.0013059 0.097761"
+        rpy="0 0 0" />
+      <mass
+        value="0.36819" />
+      <inertia
+        ixx="0.00035713"
+        ixy="1.0767E-06"
+        ixz="-2.4262E-06"
+        iyy="0.00049034"
+        iyz="-9.4946E-07"
+        izz="0.00074443" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/meshes/manip_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.78039 0.76078 0.74118 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/meshes/manip_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="manip_joint"
+    type="prismatic">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="plat_link" />
+    <child
+      link="manip_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0.075"
+      upper="0.51"
+      effort="100"
+      velocity="0.0435" />
+  </joint>
+  <link
+    name="pulso_link">
+    <inertial>
+      <origin
+        xyz="0.0086943 -0.0041036 0.058037"
+        rpy="0 0 0" />
+      <mass
+        value="0.21268" />
+      <inertia
+        ixx="0.00017045"
+        ixy="5.2882E-06"
+        ixz="-7.2239E-07"
+        iyy="9.9587E-05"
+        iyz="-4.4711E-07"
+        izz="0.00016302" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/meshes/pulso_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.22353 0.22353 0.22353 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/meshes/pulso_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="pulso_joint"
+    type="revolute">
+    <origin
+      xyz="0.325 0 0.07557"
+      rpy="-3.1416 0 0" />
+    <parent
+      link="manip_link" />
+    <child
+      link="pulso_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.5708"
+      upper="1.5708"
+      effort="100"
+      velocity="1.5708" />
+  </joint>
+  <link
+    name="garra1_link">
+    <inertial>
+      <origin
+        xyz="-0.0011844 -0.041008 0.044682"
+        rpy="0 0 0" />
+      <mass
+        value="0.038406" />
+      <inertia
+        ixx="3.7119E-05"
+        ixy="1.1462E-06"
+        ixz="-2.0278E-06"
+        iyy="3.7808E-05"
+        iyz="1.4488E-06"
+        izz="8.151E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/meshes/garra1_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/meshes/garra1_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="garra1_joint"
+    type="prismatic">
+    <origin
+      xyz="0 0 0.0794"
+      rpy="0 0 0" />
+    <parent
+      link="pulso_link" />
+    <child
+      link="garra1_link" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-0.035"
+      upper="0"
+      effort="100"
+      velocity="0.035" />
+  </joint>
+  <link
+    name="garra2_link">
+    <inertial>
+      <origin
+        xyz="0.0011844 0.041111 0.044682"
+        rpy="0 0 0" />
+      <mass
+        value="0.038406" />
+      <inertia
+        ixx="3.7119E-05"
+        ixy="1.1462E-06"
+        ixz="2.0278E-06"
+        iyy="3.7808E-05"
+        iyz="-1.4488E-06"
+        izz="8.151E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/meshes/garra2_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/meshes/garra2_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="garra2_joint"
+    type="prismatic">
+    <origin
+      xyz="0 0 0.0794"
+      rpy="0 0 0" />
+    <parent
+      link="pulso_link" />
+    <child
+      link="garra2_link" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="0"
+      upper="0.035"
+      effort="100"
+      velocity="0.035" />
+  </joint>
+  <link
+    name="realsense_link">
+    <inertial>
+      <origin
+        xyz="-0.013512 0.0009328 6.2629E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.087339" />
+      <inertia
+        ixx="5.2376E-05"
+        ixy="5.8423E-07"
+        ixz="1.5739E-12"
+        iyy="7.6539E-06"
+        iyz="-8.6011E-11"
+        izz="5.2721E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/meshes/realsense_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.92157 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/meshes/realsense_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="realsense_joint"
+    type="fixed">
+    <origin
+      xyz="0.072916 0 -0.058189"
+      rpy="0 0.17453 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="realsense_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+  <gazebo>
+    <plugin name="object_controller" filename="libgazebo_ros_planar_move.so">
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <odometryRate>20.0</odometryRate>
+      <robotBaseFrame>base_footprint</robotBaseFrame>
+    </plugin>
+  </gazebo>
+
+
+  <link
+    name="lidar_link">
+    <inertial>
+      <origin
+        xyz="-0.00056545 1.4938E-05 0.011701"
+        rpy="0 0 0" />
+      <mass
+        value="0.16538" />
+      <inertia
+        ixx="7.8865E-05"
+        ixy="-4.8472E-08"
+        ixz="-2.1848E-06"
+        iyy="7.519E-05"
+        iyz="2.886E-08"
+        izz="0.00010995" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/meshes/lidar_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 0.4" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/meshes/lidar_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lidar_joint"
+    type="fixed">
+    <origin
+      xyz="0.036445 0 -0.124"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="lidar_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+  <gazebo reference="lidar_link">
+  <sensor type="ray" name="lidar_sensor">
+    <pose>0 0 0 0 0 0</pose>
+    <update_rate>10</update_rate>
+    <ray>
+      <scan>
+        <horizontal>
+          <samples>360</samples>
+          <resolution>1</resolution>
+          <min_angle>0.0</min_angle>
+          <max_angle>6.28319</max_angle>
+        </horizontal>
+      </scan>
+      <range>
+        <min>0.25</min>
+        <max>12.0</max>
+        <resolution>0.01</resolution>
+      </range>
+      <noise>
+        <type>gaussian</type>
+        <mean>0.0</mean>
+        <stddev>0.01</stddev>
+      </noise>
+    </ray>
+    <plugin name="lidar_plugin" filename="libgazebo_ros_laser.so">
+      <topicName>scan</topicName>
+      <frameName>lidar_link</frameName>
+    </plugin>
+  </sensor>
+</gazebo>
+</robot>
