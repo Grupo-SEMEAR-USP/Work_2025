@@ -8,17 +8,17 @@
     name="base_link">
     <inertial>
       <origin
-        xyz="-0.1868 -0.0077951 -0.075692"
+        xyz="-0.19682 -0.0081466 -0.074044"
         rpy="0 0 0" />
       <mass
-        value="3.8406" />
+        value="3.6752" />
       <inertia
-        ixx="0.0078769"
-        ixy="2.3459E-05"
-        ixz="-0.00067378"
-        iyy="0.018026"
-        iyz="-2.0085E-06"
-        izz="0.023431" />
+        ixx="0.007798"
+        ixy="2.3508E-05"
+        ixz="-0.00067159"
+        iyy="0.017951"
+        iyz="-2.0373E-06"
+        izz="0.023321" />
     </inertial>
     <visual>
       <origin
@@ -101,6 +101,12 @@
       upper="3.4034"
       effort="100"
       velocity="0.7854" />
+  </joint>
+  <link name="base_footprint"/>
+  <joint name="base_link_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 3.1416"/>
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
   </joint>
   <link
     name="manip_link">
@@ -388,7 +394,6 @@
       xyz="0 0 0" />
   </joint>
 
-  
   <gazebo>
     <plugin name="object_controller" filename="libgazebo_ros_planar_move.so">
       <commandTopic>cmd_vel</commandTopic>
@@ -398,6 +403,7 @@
       <robotBaseFrame>base_footprint</robotBaseFrame>
     </plugin>
   </gazebo>
+
 
   <link
     name="lidar_link">
@@ -452,4 +458,35 @@
     <axis
       xyz="0 0 0" />
   </joint>
+
+  <gazebo reference="lidar_link">
+  <sensor type="ray" name="lidar_sensor">
+    <pose>0 0 0 0 0 0</pose>
+    <update_rate>10</update_rate>
+    <ray>
+      <scan>
+        <horizontal>
+          <samples>360</samples>
+          <resolution>1</resolution>
+          <min_angle>0.0</min_angle>
+          <max_angle>6.28319</max_angle>
+        </horizontal>
+      </scan>
+      <range>
+        <min>0.25</min>
+        <max>12.0</max>
+        <resolution>0.01</resolution>
+      </range>
+      <noise>
+        <type>gaussian</type>
+        <mean>0.0</mean>
+        <stddev>0.01</stddev>
+      </noise>
+    </ray>
+    <plugin name="lidar_plugin" filename="libgazebo_ros_laser.so">
+      <topicName>scan</topicName>
+      <frameName>lidar_link</frameName>
+    </plugin>
+  </sensor>
+</gazebo>
 </robot>
