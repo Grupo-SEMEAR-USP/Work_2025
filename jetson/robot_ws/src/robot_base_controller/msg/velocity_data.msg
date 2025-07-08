@@ -1,0 +1,5 @@
+# velocity_data.msg
+float64 front_left_wheel
+float64 front_right_wheel
+float64 rear_left_wheel
+float64 rear_right_wheel

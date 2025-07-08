@@ -1,0 +1,5 @@
+robot_manipulation
+/home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_manipulation/share/robot_manipulation/cmake/robot_manipulationConfig.cmake /home/rmajetson/Work_2025/jetson/robot_ws/devel/share/robot_manipulation/cmake/robot_manipulationConfig.cmake
+/home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_manipulation/share/robot_manipulation/cmake/robot_manipulationConfig-version.cmake /home/rmajetson/Work_2025/jetson/robot_ws/devel/share/robot_manipulation/cmake/robot_manipulationConfig-version.cmake
+/home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_manipulation/lib/pkgconfig/robot_manipulation.pc /home/rmajetson/Work_2025/jetson/robot_ws/devel/lib/pkgconfig/robot_manipulation.pc
+/home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_manipulation/lib/robot_manipulation/i2c_master_arduino.py /home/rmajetson/Work_2025/jetson/robot_ws/devel/lib/robot_manipulation/i2c_master_arduino.py

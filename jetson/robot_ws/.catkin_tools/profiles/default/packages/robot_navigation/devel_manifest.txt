@@ -1,0 +1,4 @@
+robot_navigation
+/home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_navigation/share/robot_navigation/cmake/robot_navigationConfig-version.cmake /home/rmajetson/Work_2025/jetson/robot_ws/devel/share/robot_navigation/cmake/robot_navigationConfig-version.cmake
+/home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_navigation/share/robot_navigation/cmake/robot_navigationConfig.cmake /home/rmajetson/Work_2025/jetson/robot_ws/devel/share/robot_navigation/cmake/robot_navigationConfig.cmake
+/home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_navigation/lib/pkgconfig/robot_navigation.pc /home/rmajetson/Work_2025/jetson/robot_ws/devel/lib/pkgconfig/robot_navigation.pc
