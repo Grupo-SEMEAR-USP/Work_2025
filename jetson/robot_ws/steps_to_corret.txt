@@ -1,0 +1,11 @@
+sudo apt update
+sudo apt upgrade
+sudo apt install python3-pip python3-rosdep python3-catkin-tools python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
+sudo apt install python3-rosdep
+sudo ln -s /usr/bin/python3 /usr/bin/python
+sudo rosdep init
+rosdep update
+cd ~/Work_2025/jetson/robot_ws
+rosdep install --from-paths src --ignore-src -r -y
+
+

@@ -30,7 +30,6 @@ generate_messages(
 )
 
 catkin_package(
-  LIBRARIES rrt_planning
   CATKIN_DEPENDS std_msgs costmap_2d message_runtime nav_core pluginlib base_local_planner
 )
 
@@ -144,13 +143,7 @@ include_directories(
 
 add_executable(point_cloud_nav scripts/publish_PointClouds.cpp)
 target_link_libraries(point_cloud_nav ${catkin_LIBRARIES})
-add_library(rrt_planning_nav src/rrt_planner.cpp src/vertex.cpp)
-target_link_libraries(rrt_planning_nav ${catkin_LIBRARIES})
 
-add_library(${PROJECT_NAME} 
-  src/rrt_planner.cpp
-  src/vertex.cpp
-)
 
 
 ## Declare a C++ library
