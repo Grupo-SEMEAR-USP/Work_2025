@@ -38,7 +38,7 @@ void PWM_limit(float *PWM) {
   }
 }
 
-esp_err_t pid_calculate(pcnt_unit_handle_t upcnt_unit_L, pid_ctrl_block_handle_t pid_block_L, pcnt_unit_handle_t upcnt_unit_R, pid_ctrl_block_handle_t pid_block_R) {
+esp_err_t pid_calculate(pid_ctrl_block_handle_t pid_block_L, pid_ctrl_block_handle_t pid_block_R) {
   float controll_pid_LEFT = 0;
   float controll_pid_RIGHT = 0;
   
@@ -50,11 +50,8 @@ esp_err_t pid_calculate(pcnt_unit_handle_t upcnt_unit_L, pid_ctrl_block_handle_t
     // ESP_LOGI(TAG_PID, "Target RIGHT: %f", TARGET_VALUE_R);
 
     //Global variables
-    ENCODER_READ_L = pulse_count(upcnt_unit_L);
-    ENCODER_READ_R = pulse_count(upcnt_unit_R);
-
-    BUFFER_ENCODER_READ_L += ENCODER_READ_L;
-    BUFFER_ENCODER_READ_R += ENCODER_READ_R;
+    // ENCODER_READ_L = pulse_count(upcnt_unit_L);
+    // ENCODER_READ_R = pulse_count(upcnt_unit_R);
 
     // ESP_LOGI(TAG_PID, "Encoder LEFT: %d", ENCODER_READ_L);
     // ESP_LOGI(TAG_PID, "Encoder RIGHT: %d", ENCODER_READ_R);
@@ -65,9 +62,27 @@ esp_err_t pid_calculate(pcnt_unit_handle_t upcnt_unit_L, pid_ctrl_block_handle_t
     // ESP_LOGI(TAG_PID, "Initial speed LEFT: %f", RADS_L);
     // ESP_LOGI(TAG_PID, "Initial speed  RIGHT: %f", RADS_R);
 
-    if(TARGET_VALUE_L == 0 && TARGET_VALUE_R == 0 && BREAK_FLAG) {
-      LEFT_PWM_VALUE = 0;
-      RIGHT_PWM_VALUE = 0;
+    // Se precisa desacelerar
+    if (TARGET_VALUE_L == 0 && TARGET_VALUE_R == 0 && BREAK_FLAG) {
+        // LEFT PWM
+        if (LEFT_PWM_VALUE > 0) {
+            LEFT_PWM_VALUE -= DECAY_STEP;
+            if (LEFT_PWM_VALUE < 0) LEFT_PWM_VALUE = 0;
+        }
+        else if (LEFT_PWM_VALUE < 0) {
+            LEFT_PWM_VALUE += DECAY_STEP;
+            if (LEFT_PWM_VALUE > 0) LEFT_PWM_VALUE = 0;
+        }
+
+        // RIGHT PWM
+        if (RIGHT_PWM_VALUE > 0) {
+            RIGHT_PWM_VALUE -= DECAY_STEP;
+            if (RIGHT_PWM_VALUE < 0) RIGHT_PWM_VALUE = 0;
+        }
+        else if (RIGHT_PWM_VALUE < 0) {
+            RIGHT_PWM_VALUE += DECAY_STEP;
+            if (RIGHT_PWM_VALUE > 0) RIGHT_PWM_VALUE = 0;
+        }
     }
 
     else{
@@ -94,7 +109,7 @@ esp_err_t pid_calculate(pcnt_unit_handle_t upcnt_unit_L, pid_ctrl_block_handle_t
       PWM_limit(&LEFT_PWM_VALUE);
       PWM_limit(&RIGHT_PWM_VALUE);
       
-      //ESP_LOGI(TAG_PID, "PWM RIGHT: %f", RIGHT_PWM_VALUE);
+      // ESP_LOGI(TAG_PID, "PWM RIGHT: %f", RIGHT_PWM_VALUE);
       // ESP_LOGI(TAG_PID, "PWM LEFT: %f", LEFT_PWM_VALUE);
     }
 

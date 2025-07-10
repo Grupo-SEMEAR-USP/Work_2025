@@ -23,9 +23,11 @@
 #include "encoder.h"
 #include "pid.h"
 #include "driver/gpio.h"
+#include "esp_timer.h"
 #include "sincronization.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/queue.h"
+#include "mqtt_communication.h"
 
 // Definition of I2C bus parameters
 #define I2C_SLAVE_NUM I2C_NUM_0

@@ -5,6 +5,8 @@
 
 #include "driver/uart.h"
 #include "utils.h"
+#include "esp_timer.h"
+
 
 /**
  * @brief Lê dados da UART.

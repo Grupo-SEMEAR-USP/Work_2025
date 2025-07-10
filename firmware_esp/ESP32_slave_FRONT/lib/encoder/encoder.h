@@ -36,7 +36,6 @@
     #define PCNT_HIGH_LIMIT 1500
     #define PCNT_LOW_LIMIT  -1500
 
-    /* Right encoder defines */
     #define CHA_ENCODER_1R 15
     #define CHA_ENCODER_2R 14
 

@@ -8,6 +8,8 @@
         "esp_wifi.h": "c",
         "i2c_communication.h": "c",
         "uart_communication.h": "c",
-        "mqtt_communication.h": "c"
+        "mqtt_communication.h": "c",
+        "h_bridge.h": "c",
+        "pid.h": "c"
     }
 }

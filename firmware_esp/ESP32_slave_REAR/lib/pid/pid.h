@@ -27,9 +27,11 @@
 #define TICKS_TO_RADS_LEFT 0.01570  // Conversion factor from encoder ticks to RPM for the left motor
 
 #define KP_R 12.5    // Proportional gain for the right motor
-#define KI_R 0     // Integral gain for the right motor
-#define KD_R 0  // Derivative gain for the right motor
+#define KI_R 0.0     // Integral gain for the right motor
+#define KD_R 0.0  // Derivative gain for the right motor
 #define TICKS_TO_RADS_RIGHT 0.01570 // Conversion factor from encoder ticks to RPM for the right motor
+
+#define DECAY_STEP 40   // Quantos pontos reduzir por ciclo (ajuste conforme seu range)
 
 /* Output limits to prevent excessive control signals */
 #define Max_Output 1023
@@ -77,6 +79,6 @@ pid_ctrl_block_handle_t init_pid(pid_side_t side);
  * @param pid_block_R PID control block for the right motor.
  * @return esp_err_t Error code (ESP_OK on success).
  */
-esp_err_t pid_calculate(pcnt_unit_handle_t upcnt_unit_L, pid_ctrl_block_handle_t pid_block_L, pcnt_unit_handle_t upcnt_unit_R, pid_ctrl_block_handle_t pid_block_R);
+esp_err_t pid_calculate(pid_ctrl_block_handle_t pid_block_L, pid_ctrl_block_handle_t pid_block_R);
 
 #endif // PID_H

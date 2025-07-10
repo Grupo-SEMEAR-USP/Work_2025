@@ -1,5 +1,7 @@
 #include "task_manager.h"
 
+
+
 void mqtt_task(void *pv)
 {
     ESP_ERROR_CHECK(nvs_flash_init());
@@ -7,8 +9,11 @@ void mqtt_task(void *pv)
 
     mqtt_start(BROKER_URI);
 
+    pcnt_unit_handle_t encoder_unit_left = init_encoder(ENC_LEFT);
+    pcnt_unit_handle_t encoder_unit_right = init_encoder(ENC_RIGHT);
+
     while (1) {
-        mqtt_publish_encoders(ENCODER_READ_L, ENCODER_READ_R);
+        mqtt_publish_encoders(encoder_unit_right, encoder_unit_left);
         vTaskDelay(FREQ_COMMUNICATION / portTICK_PERIOD_MS);
     }
 }
@@ -42,11 +47,9 @@ void task_motor_control() {
 
     pid_ctrl_block_handle_t pid_block_left = init_pid(PID_LEFT);
     pid_ctrl_block_handle_t pid_block_right = init_pid(PID_RIGHT);
-    pcnt_unit_handle_t encoder_unit_left = init_encoder(ENC_LEFT);
-    pcnt_unit_handle_t encoder_unit_right = init_encoder(ENC_RIGHT);
 
     while(1) {
-        pid_calculate(encoder_unit_left, pid_block_left, encoder_unit_right, pid_block_right);
+        pid_calculate(pid_block_left, pid_block_right);
 
         vTaskDelay(FREQ_TASK_MOTOR / portTICK_PERIOD_MS);
     }

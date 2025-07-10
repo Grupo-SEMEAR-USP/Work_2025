@@ -1,5 +1,7 @@
 #include "h_bridge.h"
 
+const char *TAG_PWM = "PID";
+
 void init_gpio()
 {
     gpio_set_direction(INPUT_LEFT_1, GPIO_MODE_OUTPUT);
@@ -54,6 +56,9 @@ void init_pwm()
 
 esp_err_t update_motor(motor_side_t motor, int u)
 {
+
+    // ESP_LOGI(TAG_PWM, "PWM: %d", u);
+
     u > 0 ? _set_forward(motor) : _set_backward(motor);
     
     u = u > 0 ? u : -u;  // Abs of action control u

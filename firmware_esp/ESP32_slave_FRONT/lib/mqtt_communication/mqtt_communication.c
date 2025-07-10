@@ -68,31 +68,30 @@ void mqtt_start(const char *broker_uri)
     // ESP_LOGI(TAG, "MQTT iniciado.");
 }
 
-void mqtt_publish_encoders(int32_t left, int32_t right)
+void mqtt_publish_encoders(pcnt_unit_handle_t upcnt_unit_R, pcnt_unit_handle_t upcnt_unit_L)
 {
     static int64_t last_time_us = 0;
 
+    int64_t now_us = esp_timer_get_time();
+
+    float left_value = 0;
+    float right_value = 0;
+
+    int64_t delta_us = 0;
+    if (last_time_us != 0) {
+        delta_us = (now_us - last_time_us);
+    }
+    last_time_us = now_us;
+
+    ENCODER_READ_L = pulse_count(upcnt_unit_L);
+    ENCODER_READ_R = pulse_count(upcnt_unit_R);
+
+    RADS_L = (ENCODER_READ_L * 2 * PI / (ENCODER_RESOLUTION * delta_us)) * 1000000;
+    RADS_R = (ENCODER_READ_R * 2 * PI / (ENCODER_RESOLUTION * delta_us)) * 1000000;
+
     if (client) {
-
-        int64_t now_us = esp_timer_get_time();
-
-        float left_value = 0;
-        float right_value = 0;
-
-        int64_t delta_us = 0;
-        if (last_time_us != 0) {
-            delta_us = (now_us - last_time_us);
-        }
-        last_time_us = now_us;
-
-        left_value = (left * 2 * PI / (ENCODER_RESOLUTION * delta_us)) * 1000000;
-        right_value = (right * 2 * PI / (ENCODER_RESOLUTION * delta_us)) * 1000000;
-
-        left = left_value * 1000;
-        right = right_value * 1000;
-
-        // BUFFER_ENCODER_READ_L = 0;
-        // BUFFER_ENCODER_READ_R = 0;
+        int32_t left = RADS_L * 1000;
+        int32_t right = RADS_R * 1000;
 
         cJSON *root = cJSON_CreateObject();
         cJSON_AddNumberToObject(root, "left", left);
