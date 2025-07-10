@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "stdbool.h": "c",
-        "utils.h": "c",
-        "i2c_slave.h": "c",
-        "i2c.h": "c"
-    }
-}
