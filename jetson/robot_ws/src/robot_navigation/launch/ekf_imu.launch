@@ -13,8 +13,8 @@
         output="screen">
     <param name="use_mag"             value="false"/>
     <param name="publish_tf"          value="false"/>
-    <param name="gain"                value="0.01"/>
-    <param name="constant_dt"         value="0.01"/>
+    <param name="gain"                value="0.05"/>
+    <!-- <param name="constant_dt"         value="0.02"/> -->
     <param name="orientation_stddev"  value="0.1"/>
     <param name="time_jump_threshold" value="10.0"/>
     <remap from="imu/data_raw" to="camera/imu"/>
@@ -22,15 +22,18 @@
     <remap from="imu/data"     to="/imu/data_filtered"/>
   </node>
 
+  <node name="imu_stable" pkg="robot_navigation" type="imu_stable.py"/> 
+
   <!-- 3) EKF Localization Node -->
+<!-- 
   <node pkg="robot_localization"
         type="ekf_localization_node"
         name="ekf_localization"
         output="screen">
-    <!-- garante que odom0 escute em /wheel_odom -->
-    <param name="odom0" value="/wheel_odom"/>
-    <!-- carrega o restante dos parâmetros do seu YAML -->
+    <param name="odom0" value="/odom"/>
     <rosparam file="$(find robot_navigation)/config/ekf_odom_imu.yaml"
               command="load"/>
   </node>
+   -->
 </launch>
+

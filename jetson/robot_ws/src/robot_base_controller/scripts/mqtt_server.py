@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import rospy
 import json
+from math import pi
 from std_msgs.msg import Int32
 from sensor_msgs.msg import JointState
 from robot_base_controller.msg import encoder_data, velocity_data
@@ -15,6 +16,8 @@ TOPIC_ENCODER_REAR = "estado/encoders/rear"
 TOPIC_COMMAND_FRONT = "comandos/motores/front"
 TOPIC_COMMAND_REAR = "comandos/motores/rear"
 
+ENCODER_RESOLUTION = 8256
+
 encoder_msg = encoder_data()
 lock = threading.Lock()
 
@@ -28,6 +31,10 @@ class MQTTBridge:
         self.sub_cmd = rospy.Subscriber('/velocity_command', velocity_data, self.cmd_callback)
 
         self.client.connect(BROKER, PORT, 60)
+
+        self.current_time = rospy.Time.now().to_sec()
+        self.delta_time = 0.0
+        self.last_time = self.current_time
 
         self.thread = threading.Thread(target=self.loop)
         self.thread.start()
@@ -44,11 +51,14 @@ class MQTTBridge:
 
             with lock:
                 if msg.topic == TOPIC_ENCODER_FRONT:
-                    encoder_msg.front_left_encoder_data = (left/1000.0)*0.118*0.10472
-                    encoder_msg.front_right_encoder_data = (right/1000.0)*0.118*0.10472
+                    encoder_msg.front_left_encoder_data = (left / 1000.0)
+                    encoder_msg.front_right_encoder_data = (right / 1000.0)
                 elif msg.topic == TOPIC_ENCODER_REAR:
-                    encoder_msg.rear_left_encoder_data = (left / 1000.0)*0.118*0.10472
-                    encoder_msg.rear_right_encoder_data = (right/1000.0)*0.118*0.10472
+
+                    encoder_msg.rear_left_encoder_data = (left / 1000.0)
+                    encoder_msg.rear_right_encoder_data = (right / 1000.0)
+
+                    # print(encoder_msg.rear_left_encoder_data, encoder_msg.rear_right_encoder_data)
 
             self.pub_encoder.publish(encoder_msg)
 

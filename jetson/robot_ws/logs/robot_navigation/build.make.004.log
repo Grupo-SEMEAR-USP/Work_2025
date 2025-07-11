@@ -1,0 +1,12 @@
+[ 33%] Built target std_msgs_generate_messages_py
+[ 66%] Built target point_cloud_nav
+[ 66%] Built target std_msgs_generate_messages_nodejs
+[ 66%] Built target std_msgs_generate_messages_eus
+[ 66%] Built target std_msgs_generate_messages_cpp
+[ 66%] Built target std_msgs_generate_messages_lisp
+[100%] Built target robot_navigation_generate_messages_eus
+[100%] Built target robot_navigation_generate_messages_nodejs
+[100%] Built target robot_navigation_generate_messages_py
+[100%] Built target robot_navigation_generate_messages_cpp
+[100%] Built target robot_navigation_generate_messages_lisp
+[100%] Built target robot_navigation_generate_messages

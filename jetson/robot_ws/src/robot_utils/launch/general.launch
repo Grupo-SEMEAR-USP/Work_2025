@@ -38,6 +38,6 @@
   <include file="$(find robot_base_controller)/launch/hw_interface.launch"/>
 
   <!-- Inicializa o braço do robô -->
-  <include file="$(find robot_manipulation)/launch/robot_manipulation.launch"/>
+  <!-- <include file="$(find robot_manipulation)/launch/robot_manipulation.launch"/> -->
 
 </launch>

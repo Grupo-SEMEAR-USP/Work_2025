@@ -9,9 +9,11 @@
 #include <geometry_msgs/Point.h>
 #include "robot_base_controller/encoder_data.h" 
 #include <tf/transform_broadcaster.h>
+#include <sensor_msgs/Imu.h>
 #include <tf/tf.h>
 #include <cmath>
 #include <geometry_msgs/TransformStamped.h>
+#include <tf/transform_datatypes.h>
 
 #define HW_IF_UPDATE_FREQ 10
 #define HW_IF_TICK_PERIOD 1 / HW_IF_UPDATE_FREQ
@@ -20,6 +22,7 @@ class RobotHWInterface {
 public:
     RobotHWInterface(ros::NodeHandle& nh); // Ajustado para receber NodeHandle por referência
     void cmdVelCallback(const geometry_msgs::Twist::ConstPtr& msg);
+    void imuCallback(const sensor_msgs::Imu::ConstPtr& msg);
     void publishWheelSpeeds(); // Publicando velocidades do cmd_vel
     void commandTimeoutCallback(const ros::TimerEvent&); // Callback para o timeout
     void updateWheelSpeedForDeceleration(); // Desaceleração
@@ -35,6 +38,10 @@ private:
     // Hw Interface 
     ros::Publisher velocity_command_pub;
     ros::Subscriber cmd_vel_sub;
+
+    // IMU Data
+    ros::Subscriber imu_sub;
+    geometry_msgs::Quaternion imu_orientation;
 
     // Odometria
     ros::Subscriber encoder_sub;

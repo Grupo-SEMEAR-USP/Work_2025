@@ -1,4 +1,11 @@
 robot_navigation
+/home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_navigation/share/robot_navigation/cmake/robot_navigation-msg-paths.cmake /home/rmajetson/Work_2025/jetson/robot_ws/devel/share/robot_navigation/cmake/robot_navigation-msg-paths.cmake
+/home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_navigation/share/robot_navigation/cmake/robot_navigation-msg-extras.cmake /home/rmajetson/Work_2025/jetson/robot_ws/devel/share/robot_navigation/cmake/robot_navigation-msg-extras.cmake
 /home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_navigation/share/robot_navigation/cmake/robot_navigationConfig-version.cmake /home/rmajetson/Work_2025/jetson/robot_ws/devel/share/robot_navigation/cmake/robot_navigationConfig-version.cmake
 /home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_navigation/share/robot_navigation/cmake/robot_navigationConfig.cmake /home/rmajetson/Work_2025/jetson/robot_ws/devel/share/robot_navigation/cmake/robot_navigationConfig.cmake
+/home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_navigation/share/roseus/ros/robot_navigation/manifest.l /home/rmajetson/Work_2025/jetson/robot_ws/devel/share/roseus/ros/robot_navigation/manifest.l
+/home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_navigation/lib/robot_navigation/point_cloud_nav /home/rmajetson/Work_2025/jetson/robot_ws/devel/lib/robot_navigation/point_cloud_nav
+/home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_navigation/lib/robot_navigation/imu_stable.py /home/rmajetson/Work_2025/jetson/robot_ws/devel/lib/robot_navigation/imu_stable.py
+/home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_navigation/lib/robot_navigation/imu_correction.py /home/rmajetson/Work_2025/jetson/robot_ws/devel/lib/robot_navigation/imu_correction.py
+/home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_navigation/lib/python3/dist-packages/robot_navigation/__init__.py /home/rmajetson/Work_2025/jetson/robot_ws/devel/lib/python3/dist-packages/robot_navigation/__init__.py
 /home/rmajetson/Work_2025/jetson/robot_ws/devel/.private/robot_navigation/lib/pkgconfig/robot_navigation.pc /home/rmajetson/Work_2025/jetson/robot_ws/devel/lib/pkgconfig/robot_navigation.pc

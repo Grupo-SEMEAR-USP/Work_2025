@@ -121,6 +121,7 @@ include_directories(
 
 catkin_install_python(PROGRAMS
   scripts/xbox_control.py
+  scripts/print_yaw.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

@@ -1,6 +1,6 @@
 [  0%] Built target std_msgs_generate_messages_lisp
-[  0%] Built target _robot_base_controller_generate_messages_check_deps_encoder_data
 [  0%] Built target _robot_base_controller_generate_messages_check_deps_velocity_data
+[  0%] Built target _robot_base_controller_generate_messages_check_deps_encoder_data
 [  0%] Built target std_msgs_generate_messages_py
 [  0%] Built target std_msgs_generate_messages_nodejs
 [  0%] Built target std_msgs_generate_messages_eus

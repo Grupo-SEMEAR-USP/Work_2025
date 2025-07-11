@@ -1,9 +1,0 @@
-In file included from [01m[K/home/rmajetson/Work_2025/jetson/robot_ws/src/robot_base_controller/src/hw_interface.cpp:1[m[K:
-[01m[K/home/rmajetson/Work_2025/jetson/robot_ws/src/robot_base_controller/include/hw_interface.hpp:6:10:[m[K [01;31m[Kfatal error: [m[Krobot_base_controller/velocity_data.h: No such file or directory
-    6 | #include [01;31m[K"robot_base_controller/velocity_data.h"[m[K
-      |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
-compilation terminated.
-make[2]: *** [CMakeFiles/hw_interface.dir/build.make:63: CMakeFiles/hw_interface.dir/src/hw_interface.cpp.o] Error 1
-make[1]: *** [CMakeFiles/Makefile2:950: CMakeFiles/hw_interface.dir/all] Error 2
-make[1]: *** Waiting for unfinished jobs....
-make: *** [Makefile:141: all] Error 2
