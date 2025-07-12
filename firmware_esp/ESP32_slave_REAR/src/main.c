@@ -9,6 +9,6 @@
 
 void app_main(void) {
 
-    // sync_init();
+    sync_init();
     init_tasks();
 }

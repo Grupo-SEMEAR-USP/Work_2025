@@ -6,7 +6,7 @@
 #include "driver/uart.h"
 #include "utils.h"
 #include "esp_timer.h"
-
+#include "encoder.h"
 
 /**
  * @brief Lê dados da UART.
@@ -17,7 +17,7 @@
  * @return Número de bytes lidos.
  */
 void uart_comm_read();
-void uart_comm_write(int32_t value_r, int32_t value_l);
+void uart_comm_write(pcnt_unit_handle_t upcnt_unit_R, pcnt_unit_handle_t upcnt_unit_L);
 
 
 #endif

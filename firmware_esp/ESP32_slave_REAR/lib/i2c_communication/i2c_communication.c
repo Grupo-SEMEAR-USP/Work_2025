@@ -77,7 +77,7 @@ void i2c_read_task() {
                            (payload[7] << 8) |
                            (payload[8]);
 
-            //ESP_LOGI(TAG, "Read values: R=%ld, L=%ld", (long)read_value_r, (long)read_value_l);
+            // ESP_LOGI(TAG, "Read values: R=%ld, L=%ld", (long)read_value_r, (long)read_value_l);
 
             if (read_value_r > MAX_ACCEPTABLE_VALUE ||
                 read_value_l > MAX_ACCEPTABLE_VALUE) {
@@ -107,44 +107,43 @@ void i2c_read_task() {
     }
 }
 
-
-void i2c_write_task(int value_r, int value_l) {
+void i2c_write_task(pcnt_unit_handle_t upcnt_unit_R, pcnt_unit_handle_t upcnt_unit_L) {
 
     static int64_t last_time_us = 0;
 
     int64_t now_us = esp_timer_get_time();
-
-    float left_value = 0;
-    float right_value = 0;
-
-
+    
     int64_t delta_us = 0;
     if (last_time_us != 0) {
         delta_us = (now_us - last_time_us);
     }
     last_time_us = now_us;
 
-    left_value = (value_l * 2 * PI / (ENCODER_RESOLUTION * delta_us)) * 1000000;
-    right_value = (value_r * 2 * PI / (ENCODER_RESOLUTION * delta_us)) * 1000000;
+    ENCODER_READ_L = pulse_count(upcnt_unit_L);
+    ENCODER_READ_R = pulse_count(upcnt_unit_R);
 
-    value_r = right_value * 1000;
-    value_l = left_value * 1000;
+    RADS_L = (ENCODER_READ_L * 2 * PI / (ENCODER_RESOLUTION * delta_us)) * 1000000;
+    RADS_R = (ENCODER_READ_R * 2 * PI / (ENCODER_RESOLUTION * delta_us)) * 1000000;
+
+    int32_t left = RADS_L * 1000;
+    int32_t right = RADS_R * 1000;
+
 
     // Payload: 9 bytes (1 byte header + 4 bytes R + 4 bytes L)
     uint8_t tx_data[9];
     tx_data[0] = 0x01;
 
     // Empacota value_r (4 bytes)
-    tx_data[1] = (value_r >> 24) & 0xFF;
-    tx_data[2] = (value_r >> 16) & 0xFF;
-    tx_data[3] = (value_r >> 8) & 0xFF;
-    tx_data[4] = value_r & 0xFF;
+    tx_data[1] = (right >> 24) & 0xFF;
+    tx_data[2] = (right >> 16) & 0xFF;
+    tx_data[3] = (right >> 8) & 0xFF;
+    tx_data[4] = right & 0xFF;
 
     // Empacota value_l (4 bytes)
-    tx_data[5] = (value_l >> 24) & 0xFF;
-    tx_data[6] = (value_l >> 16) & 0xFF;
-    tx_data[7] = (value_l >> 8) & 0xFF;
-    tx_data[8] = value_l & 0xFF;
+    tx_data[5] = (left >> 24) & 0xFF;
+    tx_data[6] = (left >> 16) & 0xFF;
+    tx_data[7] = (left >> 8) & 0xFF;
+    tx_data[8] = left & 0xFF;
 
     if (sync_i2c_lock(pdMS_TO_TICKS(10))) {
 
@@ -168,7 +167,7 @@ void i2c_write_task(int value_r, int value_l) {
         }
         */
     } else {
-        ESP_LOGW(TAG, "I2C busy, skipping write.");
+        // ESP_LOGW(TAG, "I2C busy, skipping write.");
     }
 }
 

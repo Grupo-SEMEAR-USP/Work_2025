@@ -20,7 +20,7 @@
 
 #define WIFI_SSID "atenaopen2023"
 #define WIFI_PASS "rrrmmmaaa"
-#define BROKER_URI "mqtt://192.168.0.101"
+#define BROKER_URI "mqtt://192.168.0.105"
 
 void mqtt_start(const char *broker_uri);
 void mqtt_publish_encoders(pcnt_unit_handle_t upcnt_unit_R, pcnt_unit_handle_t upcnt_unit_L);

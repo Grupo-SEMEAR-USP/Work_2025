@@ -21,9 +21,13 @@ void mqtt_task(void *pv)
 
 void serial_task(void *pv)
 {
+
+    pcnt_unit_handle_t encoder_unit_left = init_encoder(ENC_LEFT);
+    pcnt_unit_handle_t encoder_unit_right = init_encoder(ENC_RIGHT);
+
     while (1) {
         uart_comm_read();
-        uart_comm_write(ENCODER_READ_L, ENCODER_READ_R);
+        uart_comm_write(encoder_unit_right, encoder_unit_left);
         vTaskDelay(FREQ_COMMUNICATION_SERIAL / portTICK_PERIOD_MS);
     }
 }
@@ -31,9 +35,12 @@ void serial_task(void *pv)
 void i2c_task_com() {
     i2c_init();
 
+    pcnt_unit_handle_t encoder_unit_left = init_encoder(ENC_LEFT);
+    pcnt_unit_handle_t encoder_unit_right = init_encoder(ENC_RIGHT);
+
     while(1) {
         i2c_read_task();
-        i2c_write_task(ENCODER_READ_L, ENCODER_READ_R);
+        i2c_write_task(encoder_unit_right, encoder_unit_left);
         vTaskDelay(FREQ_COMMUNICATION / portTICK_PERIOD_MS);
     }
     
@@ -59,7 +66,7 @@ void task_motor_control() {
 esp_err_t init_tasks() {
 
     // Task 1 (core 0): read + write data
-    xTaskCreatePinnedToCore(mqtt_task, "mqtt_task", 4096, NULL, 1, NULL, 0);
+    xTaskCreatePinnedToCore(i2c_task_com, "i2c_task_com", 4096, NULL, 1, NULL, 0);
 
     // Task 2 (core 1): control 
     xTaskCreatePinnedToCore(task_motor_control, "task_motor_control", 4096, NULL, 1, NULL, 1);

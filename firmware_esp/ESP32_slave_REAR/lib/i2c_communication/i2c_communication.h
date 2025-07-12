@@ -27,6 +27,7 @@
 #include "sincronization.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/queue.h"
+#include "encoder.h"
 #include "mqtt_communication.h"
 
 // Definition of I2C bus parameters
@@ -87,7 +88,7 @@ void i2c_read_task();
  * @param params Task parameters (not used).
  * @param value The value to be written to the I2C bus.
  */
-void i2c_write_task(int value_r, int value_l) ;
+void i2c_write_task(pcnt_unit_handle_t upcnt_unit_R, pcnt_unit_handle_t upcnt_unit_) ;
 
 /**
  * @brief Task for init communication and writing to the I2C bus
