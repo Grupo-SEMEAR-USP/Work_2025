@@ -72,11 +72,7 @@ void RobotHWInterface::encoderCallback(const robot_base_controller::encoder_data
         vel_lineary = 0;
     }
 
-    // ROS_INFO("Velocidades Calculadas -> Vy: %f", vel_lineary);
-    // ROS_INFO("Encoder Data -> FR: %f, FL: %f, RR: %f, RL: %f", msg->front_right_encoder_data, msg->front_left_encoder_data, msg->rear_right_encoder_data, msg->rear_left_encoder_data);
 }
-
-/* ——————————————— Rotinas auxiliares —————————————————— */
 
 float RobotHWInterface::mapSpeed(float v_input)
 {
@@ -119,34 +115,28 @@ void RobotHWInterface::updateWheelSpeedForDeceleration()
     }
 }
 
-/* ———————————————— Atualização de Odometria ——————————————— */
-
 void RobotHWInterface::updateOdometry()
 {
     current_time = ros::Time::now();
 
-    double yaw = tf2::getYaw(imu_orientation);
+    double yaw = tf2::getYaw(imu_orientation) + M_PI;
     th = yaw; 
 
-    /* deslocamento em mapa usando yaw da IMU */
+    // Normaliza o yaw entre -pi e pi
+    if (yaw > M_PI)
+    yaw -= 2 * M_PI;
+
     double delta_x = (vel_linearx * cos(yaw) - vel_lineary * sin(yaw)) * HW_IF_TICK_PERIOD;
     double delta_y = (vel_linearx * sin(yaw) + vel_lineary * cos(yaw)) * HW_IF_TICK_PERIOD;
 
     x += delta_x;
     y += delta_y;
 
-    if (x > 1) {
-        ROS_INFO("Deu erro aqui!");
-        ROS_INFO("Encoder Data -> FR: %f, FL: %f, RR: %f, RL: %f", msg->front_right_encoder_data, msg->front_left_encoder_data, msg->rear_right_encoder_data, msg->rear_left_encoder_data);
-    }
-
-    /* quaternion somente com yaw */
     tf2::Quaternion q;
     q.setRPY(0.0, 0.0, yaw);
     q.normalize();
     geometry_msgs::Quaternion odom_quat = tf2::toMsg(q);
 
-    /* TF odom → base_link */
     geometry_msgs::TransformStamped odom_trans;
     odom_trans.header.stamp    = current_time;
     odom_trans.header.frame_id = "odom";
@@ -170,8 +160,6 @@ void RobotHWInterface::updateOdometry()
     odom.twist.twist.angular.z = vel_angular_z; 
     odom_pub.publish(odom);
 }
-
-/* ———————————————————— main ———————————————————————— */
 
 int main(int argc, char** argv)
 {

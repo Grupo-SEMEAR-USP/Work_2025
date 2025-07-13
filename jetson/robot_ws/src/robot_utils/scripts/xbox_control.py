@@ -4,19 +4,19 @@ from sensor_msgs.msg import Joy
 from std_msgs.msg import Float32MultiArray
 from geometry_msgs.msg import Twist
 
-# -------------------- configurações --------------------
 AXIS_LX  = 0    # L-stick horizontal
 AXIS_LY  = 1    # L-stick vertical
 AXIS_LT  = 2    # Left Trigger
 AXIS_RT  = 5    # Right Trigger
-TRIGGER_DZ = 0.05   # zona-morta gatilhos
+
+TRIGGER_DZ = 0.05   
 
 DEADZONE    = rospy.get_param('~deadzone', 0.03)
 LIN_SCALE   = rospy.get_param('~lin_scale', 6.5)
 ANG_SCALE   = rospy.get_param('~ang_scale', 6.5)
 EXPO        = rospy.get_param('~expo', 1.5)
 PUB_RATE_HZ = rospy.get_param('~pub_rate', 30)
-DECEL_TIME  = rospy.get_param('~decel_time', 1.0)  # tempo sem input para começar desacelerar
+DECEL_TIME  = rospy.get_param('~decel_time', 1.0)
 
 class XboxTeleop:
     def __init__(self):
@@ -35,9 +35,7 @@ class XboxTeleop:
         rospy.Subscriber('/joy', Joy, self.joy_cb, queue_size=1)
         rospy.Timer(rospy.Duration(1.0 / PUB_RATE_HZ), self.publish_cmd)
 
-    # ----------------------------- JOYSTICK ----------------------------
     def joy_cb(self, msg):
-        # ----- braço / garra -------------------------------------------
         elev = self._expo(msg.axes[AXIS_LY])
         base = self._expo(msg.axes[AXIS_LX])
         if [elev, base] != self.last_arm:
@@ -58,7 +56,6 @@ class XboxTeleop:
             self.ee_pub.publish(Float32MultiArray(data=[self.grip_val, self.wrist_val]))
             self.last_ee = [self.grip_val, self.wrist_val]
 
-        # ----- base holonômica com modo exclusivo de rotação ----------
         lt_norm = self._trigger_norm(msg.axes[AXIS_LT])
         rt_norm = self._trigger_norm(msg.axes[AXIS_RT])
         trigger_active = (lt_norm > TRIGGER_DZ) or (rt_norm > TRIGGER_DZ)
@@ -72,30 +69,25 @@ class XboxTeleop:
             self.target_twist.linear.y = LIN_SCALE * self._expo(msg.axes[AXIS_LX])
             self.target_twist.angular.z = 0.0
 
-        # Atualiza hora do último input
         self.last_joy_time = time.time()
 
-    # ------------------------- PUBLICAÇÃO ------------------------------
     def publish_cmd(self, _):
         now = time.time()
         dt = now - self.last_time
         self.last_time = now
 
-        # Se passou muito tempo sem input, desacelera target para zero
         time_since_input = now - self.last_joy_time
         if time_since_input > DECEL_TIME:
-            target = Twist()  # tudo zero
+            target = Twist() 
         else:
             target = self.target_twist
 
-        # Suaviza movimento
         self._smooth_towards(target, 'linear.x', 1.0, dt)
         self._smooth_towards(target, 'linear.y', 1.0, dt)
         self._smooth_towards(target, 'angular.z', 3.0, dt)
 
         self.cmd_pub.publish(self.current_twist)
 
-    # --------------------------- UTIL ----------------------------------
     @staticmethod
     def _trigger_norm(v):
         return (1.0 - v) * 0.5
@@ -109,9 +101,7 @@ class XboxTeleop:
         return math.copysign(abs(v)**EXPO, v)
 
     def _smooth_towards(self, target, attr, rate, dt):
-        """
-        Move self.current_twist.<attr> em direção a target.<attr>
-        """
+
         parts = attr.split('.')
         cur_ref = self.current_twist
         tgt_ref = target
@@ -129,6 +119,6 @@ class XboxTeleop:
         setattr(cur_ref, field, cur_val)
 
 if __name__ == '__main__':
-    rospy.init_node('xbox_teleop_triggers_with_decel')
+    rospy.init_node('xbox_control')
     XboxTeleop()
     rospy.spin()

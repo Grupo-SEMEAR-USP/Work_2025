@@ -1,17 +1,40 @@
 [  0%] Built target std_msgs_generate_messages_lisp
-[  0%] Built target std_msgs_generate_messages_py
-[  0%] Built target _robot_base_controller_generate_messages_check_deps_velocity_data
 [  0%] Built target _robot_base_controller_generate_messages_check_deps_encoder_data
+[  0%] Built target _robot_base_controller_generate_messages_check_deps_velocity_data
+[  0%] Built target std_msgs_generate_messages_py
 [  0%] Built target std_msgs_generate_messages_nodejs
+[  0%] Built target std_msgs_generate_messages_cpp
 [  0%] Built target std_msgs_generate_messages_eus
 [35m[1mScanning dependencies of target hw_interface[0m
-[  0%] Built target std_msgs_generate_messages_cpp
-[ 14%] Built target robot_base_controller_generate_messages_lisp
-[ 35%] Built target robot_base_controller_generate_messages_py
+[  7%] [32mBuilding CXX object CMakeFiles/hw_interface.dir/src/hw_interface.cpp.o[0m
+[ 21%] Built target robot_base_controller_generate_messages_lisp
+[ 42%] Built target robot_base_controller_generate_messages_py
 [ 57%] Built target robot_base_controller_generate_messages_nodejs
-[ 57%] [32mBuilding CXX object CMakeFiles/hw_interface.dir/src/hw_interface.cpp.o[0m
 [ 78%] Built target robot_base_controller_generate_messages_eus
 [ 92%] Built target robot_base_controller_generate_messages_cpp
 [ 92%] Built target robot_base_controller_generate_messages
-[100%] [32m[1mLinking CXX executable /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/.private/robot_base_controller/lib/robot_base_controller/hw_interface[0m
-[100%] Built target hw_interface
+In file included from [01m[K/opt/ros/noetic/include/ros/ros.h:40[m[K,
+                 from [01m[K/home/jetsonorin/Documents/Work_2025/jetson/robot_ws/src/robot_base_controller/include/hw_interface.hpp:4[m[K,
+                 from [01m[K/home/jetsonorin/Documents/Work_2025/jetson/robot_ws/src/robot_base_controller/src/hw_interface.cpp:1[m[K:
+[01m[K/home/jetsonorin/Documents/Work_2025/jetson/robot_ws/src/robot_base_controller/src/hw_interface.cpp:[m[K In member function ‘[01m[Kvoid RobotHWInterface::updateOdometry()[m[K’:
+[01m[K/home/jetsonorin/Documents/Work_2025/jetson/robot_ws/src/robot_base_controller/src/hw_interface.cpp:140:68:[m[K [01;31m[Kerror: [m[K‘[01m[Kmsg[m[K’ was not declared in this scope
+  140 |         ROS_INFO("Encoder Data -> FR: %f, FL: %f, RR: %f, RL: %f", [01;31m[Kmsg[m[K->front_right_encoder_data, msg->front_left_encoder_data, msg->rear_right_encoder_data, msg->rear_left_encoder_data);
+      |                                                                    [01;31m[K^~~[m[K
+[01m[K/opt/ros/noetic/include/ros/console.h:351:165:[m[K [01;36m[Knote: [m[Kin definition of macro ‘[01m[KROSCONSOLE_PRINT_AT_LOCATION_WITH_FILTER[m[K’
+  351 |     ::ros::console::print(filter, __rosconsole_define_location__loc.logger_, __rosconsole_define_location__loc.level_, __FILE__, __LINE__, __ROSCONSOLE_FUNCTION__, [01;36m[K__VA_ARGS__[m[K)
+      |                                                                                                                                                                     [01;36m[K^~~~~~~~~~~[m[K
+[01m[K/opt/ros/noetic/include/ros/console.h:390:7:[m[K [01;36m[Knote: [m[Kin expansion of macro ‘[01m[KROSCONSOLE_PRINT_AT_LOCATION[m[K’
+  390 |       [01;36m[KROSCONSOLE_PRINT_AT_LOCATION[m[K(__VA_ARGS__); \
+      |       [01;36m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/opt/ros/noetic/include/ros/console.h:575:35:[m[K [01;36m[Knote: [m[Kin expansion of macro ‘[01m[KROS_LOG_COND[m[K’
+  575 | #define ROS_LOG(level, name, ...) [01;36m[KROS_LOG_COND[m[K(true, level, name, __VA_ARGS__)
+      |                                   [01;36m[K^~~~~~~~~~~~[m[K
+[01m[K/opt/ros/noetic/include/rosconsole/macros_generated.h:110:23:[m[K [01;36m[Knote: [m[Kin expansion of macro ‘[01m[KROS_LOG[m[K’
+  110 | #define ROS_INFO(...) [01;36m[KROS_LOG[m[K(::ros::console::levels::Info, ROSCONSOLE_DEFAULT_NAME, __VA_ARGS__)
+      |                       [01;36m[K^~~~~~~[m[K
+[01m[K/home/jetsonorin/Documents/Work_2025/jetson/robot_ws/src/robot_base_controller/src/hw_interface.cpp:140:9:[m[K [01;36m[Knote: [m[Kin expansion of macro ‘[01m[KROS_INFO[m[K’
+  140 |         [01;36m[KROS_INFO[m[K("Encoder Data -> FR: %f, FL: %f, RR: %f, RL: %f", msg->front_right_encoder_data, msg->front_left_encoder_data, msg->rear_right_encoder_data, msg->rear_left_encoder_data);
+      |         [01;36m[K^~~~~~~~[m[K
+make[2]: *** [CMakeFiles/hw_interface.dir/build.make:63: CMakeFiles/hw_interface.dir/src/hw_interface.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:950: CMakeFiles/hw_interface.dir/all] Error 2
+make: *** [Makefile:141: all] Error 2

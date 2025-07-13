@@ -19,7 +19,14 @@
 [36m--[0m robot_base_controller: 2 messages, 0 services
 [36m--[0m Installing devel-space wrapper /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/src/robot_base_controller/scripts/i2c_master.py to /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/.private/robot_base_controller/lib/robot_base_controller
 [36m--[0m Installing devel-space wrapper /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/src/robot_base_controller/scripts/mqtt_server.py to /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/.private/robot_base_controller/lib/robot_base_controller
-[36m--[0m Installing devel-space wrapper /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/src/robot_base_controller/scripts/uart_serial.py to /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/.private/robot_base_controller/lib/robot_base_controller
-[36m--[0m Configuring done
-[36m--[0m Generating done
-[36m--[0m Build files have been written to: /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/build/robot_base_controller
+[31m[1mCMake Error[0m at /opt/ros/noetic/share/catkin/cmake/catkin_install_python.cmake:86 (message):
+  catkin_install_python() called with non-existing file
+  '/home/jetsonorin/Documents/Work_2025/jetson/robot_ws/src/robot_base_controller/scripts/uart_serial.py'.
+[36mCall Stack (most recent call first):[0m
+  CMakeLists.txt:191 (catkin_install_python)
+
+
+[36m--[0m Configuring incomplete, errors occurred!
+See also "/home/jetsonorin/Documents/Work_2025/jetson/robot_ws/build/robot_base_controller/CMakeFiles/CMakeOutput.log".
+See also "/home/jetsonorin/Documents/Work_2025/jetson/robot_ws/build/robot_base_controller/CMakeFiles/CMakeError.log".
+make: *** [Makefile:1316: cmake_check_build_system] Error 1
