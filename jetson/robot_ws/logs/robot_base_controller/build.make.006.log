@@ -1,14 +1,17 @@
 [  0%] Built target std_msgs_generate_messages_lisp
-[  0%] Built target _robot_base_controller_generate_messages_check_deps_velocity_data
 [  0%] Built target _robot_base_controller_generate_messages_check_deps_encoder_data
+[  0%] Built target _robot_base_controller_generate_messages_check_deps_velocity_data
 [  0%] Built target std_msgs_generate_messages_py
 [  0%] Built target std_msgs_generate_messages_nodejs
 [  0%] Built target std_msgs_generate_messages_eus
+[35m[1mScanning dependencies of target hw_interface[0m
 [  0%] Built target std_msgs_generate_messages_cpp
-[ 14%] Built target hw_interface
-[ 28%] Built target robot_base_controller_generate_messages_lisp
-[ 50%] Built target robot_base_controller_generate_messages_py
-[ 64%] Built target robot_base_controller_generate_messages_nodejs
-[ 85%] Built target robot_base_controller_generate_messages_eus
-[100%] Built target robot_base_controller_generate_messages_cpp
-[100%] Built target robot_base_controller_generate_messages
+[  7%] [32mBuilding CXX object CMakeFiles/hw_interface.dir/src/hw_interface.cpp.o[0m
+[ 21%] Built target robot_base_controller_generate_messages_lisp
+[ 42%] Built target robot_base_controller_generate_messages_py
+[ 57%] Built target robot_base_controller_generate_messages_nodejs
+[ 78%] Built target robot_base_controller_generate_messages_eus
+[ 92%] Built target robot_base_controller_generate_messages_cpp
+[ 92%] Built target robot_base_controller_generate_messages
+[100%] [32m[1mLinking CXX executable /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/.private/robot_base_controller/lib/robot_base_controller/hw_interface[0m
+[100%] Built target hw_interface

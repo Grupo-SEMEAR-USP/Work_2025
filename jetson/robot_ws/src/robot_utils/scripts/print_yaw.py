@@ -11,7 +11,7 @@ def imu_callback(msg):
     roll, pitch, yaw = euler_from_quaternion(quaternion)
 
     yaw_deg = math.degrees(yaw)
-    rospy.loginfo("Yaw: {:.2f} degrees".format(yaw_deg))
+    rospy.loginfo("Yaw: {:.5f} degrees".format(yaw_deg))
 
 def main():
     rospy.init_node("print_yaw_node")

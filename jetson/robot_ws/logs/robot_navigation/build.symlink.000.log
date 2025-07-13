@@ -1,9 +1,0 @@
-Symlinking /home/rmajetson/Work_2025/jetson/robot_ws/devel/share/robot_navigation/cmake/robot_navigation-msg-paths.cmake
-Symlinking /home/rmajetson/Work_2025/jetson/robot_ws/devel/share/robot_navigation/cmake/robot_navigation-msg-extras.cmake
-Symlinking /home/rmajetson/Work_2025/jetson/robot_ws/devel/share/robot_navigation/cmake/robot_navigationConfig-version.cmake
-Symlinking /home/rmajetson/Work_2025/jetson/robot_ws/devel/share/robot_navigation/cmake/robot_navigationConfig.cmake
-Symlinking /home/rmajetson/Work_2025/jetson/robot_ws/devel/share/roseus/ros/robot_navigation/manifest.l
-Symlinking /home/rmajetson/Work_2025/jetson/robot_ws/devel/lib/robot_navigation/point_cloud_nav
-Symlinking /home/rmajetson/Work_2025/jetson/robot_ws/devel/lib/robot_navigation/imu_correction.py
-Symlinking /home/rmajetson/Work_2025/jetson/robot_ws/devel/lib/python3/dist-packages/robot_navigation/__init__.py
-Symlinking /home/rmajetson/Work_2025/jetson/robot_ws/devel/lib/pkgconfig/robot_navigation.pc

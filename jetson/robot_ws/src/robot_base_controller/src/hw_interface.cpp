@@ -1,14 +1,6 @@
-/********************************************************************
- *  hw_interface.cpp   (versão corrigida – orientação via IMU yaw)  *
- *  Mudanças mínimas:                                               *
- *    • yaw agora vem da IMU (tf2::getYaw(imu_orientation));        *
- *    • vel_angular_z também vem da IMU (angular_velocity.z);       *
- *    • remoção da integração de th a partir dos encoders.          *
- *******************************************************************/
-
 #include "hw_interface.hpp"
 #include <tf2/LinearMath/Quaternion.h>
-#include <tf2/utils.h>                               // ← getYaw()
+#include <tf2/utils.h>                         
 #include <tf2_geometry_msgs/tf2_geometry_msgs.h>
 
 RobotHWInterface::RobotHWInterface(ros::NodeHandle& nh)
@@ -62,7 +54,7 @@ void RobotHWInterface::cmdVelCallback(const geometry_msgs::Twist::ConstPtr& msg)
 void RobotHWInterface::imuCallback(const sensor_msgs::Imu::ConstPtr& msg)
 {
     imu_orientation = msg->orientation;
-    vel_angular_z   = msg->angular_velocity.z;   // ← usa gyro da IMU
+    vel_angular_z   = msg->angular_velocity.z; 
 }
 
 void RobotHWInterface::encoderCallback(const robot_base_controller::encoder_data::ConstPtr& msg)
@@ -75,7 +67,13 @@ void RobotHWInterface::encoderCallback(const robot_base_controller::encoder_data
     vel_lineary = (msg->front_right_encoder_data - msg->front_left_encoder_data -
                    msg->rear_right_encoder_data  + msg->rear_left_encoder_data) * (wheel_radius / 4.0);
 
-    /* vel_angular_z permanece o da IMU */
+    if (vel_linearx >= max_speed || vel_lineary >= max_speed || vel_linearx <= min_speed || vel_lineary <= min_speed) {
+        vel_linearx = 0;
+        vel_lineary = 0;
+    }
+
+    // ROS_INFO("Velocidades Calculadas -> Vy: %f", vel_lineary);
+    // ROS_INFO("Encoder Data -> FR: %f, FL: %f, RR: %f, RL: %f", msg->front_right_encoder_data, msg->front_left_encoder_data, msg->rear_right_encoder_data, msg->rear_left_encoder_data);
 }
 
 /* ——————————————— Rotinas auxiliares —————————————————— */
@@ -127,9 +125,8 @@ void RobotHWInterface::updateOdometry()
 {
     current_time = ros::Time::now();
 
-    /* yaw direto da IMU (quaternion → yaw) */
     double yaw = tf2::getYaw(imu_orientation);
-    th = yaw;   // guarda valor atual para uso eventual
+    th = yaw; 
 
     /* deslocamento em mapa usando yaw da IMU */
     double delta_x = (vel_linearx * cos(yaw) - vel_lineary * sin(yaw)) * HW_IF_TICK_PERIOD;
@@ -137,6 +134,11 @@ void RobotHWInterface::updateOdometry()
 
     x += delta_x;
     y += delta_y;
+
+    if (x > 1) {
+        ROS_INFO("Deu erro aqui!");
+        ROS_INFO("Encoder Data -> FR: %f, FL: %f, RR: %f, RL: %f", msg->front_right_encoder_data, msg->front_left_encoder_data, msg->rear_right_encoder_data, msg->rear_left_encoder_data);
+    }
 
     /* quaternion somente com yaw */
     tf2::Quaternion q;
@@ -155,7 +157,6 @@ void RobotHWInterface::updateOdometry()
     odom_trans.transform.rotation      = odom_quat;
     odom_broadcaster.sendTransform(odom_trans);
 
-    /* Mensagem nav_msgs/Odometry */
     nav_msgs::Odometry odom;
     odom.header.stamp    = current_time;
     odom.header.frame_id = "odom";
@@ -166,7 +167,7 @@ void RobotHWInterface::updateOdometry()
     odom.child_frame_id = "base_link";
     odom.twist.twist.linear.x  = vel_linearx;
     odom.twist.twist.linear.y  = vel_lineary;
-    odom.twist.twist.angular.z = vel_angular_z;   // já é da IMU
+    odom.twist.twist.angular.z = vel_angular_z; 
     odom_pub.publish(odom);
 }
 

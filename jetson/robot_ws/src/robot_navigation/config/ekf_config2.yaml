@@ -1,0 +1,60 @@
+# Arquivo de configuração para o EKF (robot_localization)
+# Para um robô com rodas Mecanum, odometria de roda e IMU.
+
+# --- Frequência e Timeouts ---
+frequency: 50.0  # Frequência de operação do filtro em Hz. 50Hz é um bom valor inicial.
+sensor_timeout: 0.1 # Tempo em segundos para esperar por dados de um sensor antes de parar de usá-lo.
+
+# --- Configurações Gerais ---
+two_d_mode: true # Essencial para o seu caso! Ignora movimentos em Z, roll e pitch, tornando o filtro mais estável para robôs terrestres.
+
+# --- Frames de Referência ---
+# Certifique-se que estes frames correspondem aos usados no seu sistema.
+# O EKF irá publicar a transformada de odom -> base_link
+map_frame: map
+odom_frame: odom
+base_link_frame: base_link
+world_frame: odom # Para uma única instância de EKF, o world_frame é o odom_frame.
+
+# --- Configuração dos Sensores ---
+
+#===============================================
+# Odometria das Rodas (/wheel_odom)
+#===============================================
+odom0: /wheel_odom
+odom0_config:
+#   [ X,    Y,    Z,    roll, pitch, yaw,   <- Posição
+#     Vx,   Vy,   Vz,   Vroll,Vpitch,Vyaw,  <- Velocidade
+#     Ax,   Ay,   Az ]                     <- Aceleração
+  - [true, true, false, false, false, true,
+     true, true, false, false, false, true,
+     false, false, false]
+odom0_queue_size: 10
+odom0_nodelay: false
+# Para odometria de pose, `relative` deve ser false.
+# O filtro irá integrar as velocidades para obter a posição.
+odom0_relative: false
+# `differential` é para robôs de acionamento diferencial. Mecanum não é.
+odom0_differential: false
+
+
+#===============================================
+# IMU (/imu/data_filtered)
+#===============================================
+imu0: /imu/data_filtered
+imu0_config:
+#   [ X,    Y,    Z,    roll, pitch, yaw,   <- Posição (Orientação Absoluta)
+#     Vx,   Vy,   Vz,   Vroll,Vpitch,Vyaw,  <- Velocidade (Velocidade Angular)
+#     Ax,   Ay,   Az ]                     <- Aceleração (Aceleração Linear)
+  - [false, false, false, false, false, true,
+     false, false, false, true,  true,  true,
+     true,  true,  false]
+imu0_queue_size: 10
+imu0_nodelay: false
+# `differential` aqui permitiria que a IMU fornecesse a *mudança* na pose.
+# Como estamos usando a odometria para a posição, definimos como false.
+imu0_differential: false
+# A IMU fornece uma orientação absoluta (em relação ao mundo), então `relative` é false.
+imu0_relative: false
+# Importante! Remove a aceleração da gravidade dos dados da IMU.
+imu0_remove_gravitational_acceleration: true

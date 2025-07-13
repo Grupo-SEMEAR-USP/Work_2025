@@ -11,6 +11,7 @@
 #include <tf/transform_broadcaster.h>
 #include <sensor_msgs/Imu.h>
 #include <tf/tf.h>
+#include <ros/console.h>
 #include <cmath>
 #include <geometry_msgs/TransformStamped.h>
 #include <tf/transform_datatypes.h>
