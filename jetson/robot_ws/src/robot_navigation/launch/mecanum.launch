@@ -23,9 +23,9 @@
   </node>
 
   <node
-    name="joint_state_publisher_gui"
-    pkg="joint_state_publisher_gui"
-    type="joint_state_publisher_gui" />
+    name="joint_state_publisher"
+    pkg="joint_state_publisher"
+    type="joint_state_publisher" />
 
   <!-- Spawna o modelo no Gazebo -->
   <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf"

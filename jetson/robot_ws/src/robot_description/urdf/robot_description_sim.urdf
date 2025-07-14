@@ -8,17 +8,17 @@
     name="base_link">
     <inertial>
       <origin
-        xyz="-0.1868 -0.0077951 -0.075692"
+        xyz="-0.19682 -0.0081466 0.074044"
         rpy="0 0 0" />
       <mass
-        value="3.8406" />
+        value="3.6752" />
       <inertia
-        ixx="0.0078769"
-        ixy="2.3459E-05"
-        ixz="-0.00067378"
-        iyy="0.018026"
-        iyz="-2.0085E-06"
-        izz="0.023431" />
+        ixx="0.007798"
+        ixy="2.3508E-05"
+        ixz="-0.00067159"
+        iyy="0.017951"
+        iyz="-2.0373E-06"
+        izz="0.023321" />
     </inertial>
     <visual>
       <origin
@@ -101,12 +101,6 @@
       upper="3.4034"
       effort="100"
       velocity="0.7854" />
-  </joint>
-  <link name="base_footprint"/>
-  <joint name="base_link_joint" type="fixed">
-    <origin xyz="0 0 0" rpy="0 0 3.1416"/>
-    <parent link="base_footprint"/>
-    <child link="base_link"/>
   </joint>
   <link
     name="manip_link">
@@ -211,7 +205,7 @@
     type="revolute">
     <origin
       xyz="0.325 0 0.07557"
-      rpy="-3.1416 0 0" />
+      rpy="-3.1416 0 3.14159" />
     <parent
       link="manip_link" />
     <child
@@ -341,7 +335,7 @@
       velocity="0.035" />
   </joint>
   <link
-    name="realsense_link">
+    name="camera_link">
     <inertial>
       <origin
         xyz="-0.013512 0.0009328 6.2629E-07"
@@ -381,7 +375,7 @@
     </collision>
   </link>
   <joint
-    name="realsense_joint"
+    name="camera_joint"
     type="fixed">
     <origin
       xyz="0.072916 0 -0.058189"
@@ -389,52 +383,77 @@
     <parent
       link="base_link" />
     <child
-      link="realsense_link" />
+      link="camera_link" />
     <axis
       xyz="0 0 0" />
   </joint>
 
+  <link
+    name="laser">
+    <inertial>
+      <origin
+        xyz="-0.00056545 1.4938E-05 0.011701"
+        rpy="0 0 1.57" />
+      <mass
+        value="0.16538" />
+      <inertia
+        ixx="7.8865E-05"
+        ixy="-4.8472E-08"
+        ixz="-2.1848E-06"
+        iyy="7.519E-05"
+        iyz="2.886E-08"
+        izz="0.00010995" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/meshes/lidar_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 0.4" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_description/meshes/lidar_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lidar_joint"
+    type="fixed">
+    <origin
+      xyz="0.036445 0 -0.124"
+      rpy="0 0 1.57" />
+    <parent
+      link="base_link" />
+    <child
+      link="laser" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+  <!-- Plugins -->
   <gazebo>
     <plugin name="object_controller" filename="libgazebo_ros_planar_move.so">
       <commandTopic>cmd_vel</commandTopic>
       <odometryTopic>odom</odometryTopic>
       <odometryFrame>odom</odometryFrame>
       <odometryRate>20.0</odometryRate>
-      <robotBaseFrame>base_footprint</robotBaseFrame>
+      <robotBaseFrame>base_link</robotBaseFrame>
     </plugin>
   </gazebo>
 
-
-  <link name="imu_link">
-    <inertial>
-        <origin xyz="0 0 0"/>
-        <mass value="0.001"/>
-        <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
-    </inertial>
-    <visual>
-        <origin xyz="0 0 0"/>
-        <geometry>
-        <box size="0.01 0.01 0.01"/>
-        </geometry>
-        <material name="red">
-        <color rgba="1 0 0 1"/>
-        </material>
-    </visual>
-    <collision>
-        <origin xyz="0 0 0"/>
-        <geometry>
-        <box size="0.01 0.01 0.01"/>
-        </geometry>
-    </collision>
-    </link>
-
-    <joint name="imu_joint" type="fixed">
-    <origin xyz="0 0 0.05" rpy="0 0 0"/>
-    <parent link="base_link"/>
-    <child link="imu_link"/>
-    </joint>
-
-<gazebo reference="imu_link">
+  <gazebo reference="camera_link">
   <sensor type="imu" name="imu_sensor">
     <pose>0 0 0 0 0 0</pose>
     <update_rate>100</update_rate>
@@ -456,42 +475,13 @@
     </imu>
     <plugin name="imu_plugin" filename="libgazebo_ros_imu_sensor.so">
       <topicName>imu/data</topicName>
-      <frameName>imu_link</frameName>
+      <frameName>camera_link</frameName>
       <gaussianNoise>0.0001</gaussianNoise>
     </plugin>
   </sensor>
 </gazebo>
 
-<link name="lidar_link">
-  <inertial>
-    <origin xyz="-0.00056545 1.4938E-05 0.011701" rpy="0 0 1.57"/>
-    <mass value="0.001"/>
-    <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
-  </inertial>
-  <visual>
-    <origin xyz="0 0 0"/>
-    <geometry>
-      <cylinder radius="0.02" length="0.02"/>
-    </geometry>
-    <material name="black">
-      <color rgba="0 0 0 1"/>
-    </material>
-  </visual>
-  <collision>
-    <origin xyz="0 0 0"/>
-    <geometry>
-      <cylinder radius="0.02" length="0.02"/>
-    </geometry>
-  </collision>
-</link>
-
-<joint name="lidar_joint" type="fixed">
-  <origin xyz="0.036445 0 -0.124" rpy="0 0 0"/>
-  <parent link="base_link"/>
-  <child link="lidar_link"/>
-</joint>
-
-<gazebo reference="lidar_link">
+<gazebo reference="laser">
   <sensor type="ray" name="lidar_sensor">
     <pose>0 0 0 0 0 0</pose>
     <update_rate>10</update_rate>
@@ -517,11 +507,8 @@
     </ray>
     <plugin name="lidar_plugin" filename="libgazebo_ros_laser.so">
       <topicName>scan</topicName>
-      <frameName>lidar_link</frameName>
+      <frameName>laser</frameName>
     </plugin>
   </sensor>
 </gazebo>
-
-
-
 </robot>

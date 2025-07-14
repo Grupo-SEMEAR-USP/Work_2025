@@ -1,0 +1,1 @@
+/home/gola/Documents/SEMEAR/Work_2025/jetson/robot_ws/devel/./cmake.lock 8
