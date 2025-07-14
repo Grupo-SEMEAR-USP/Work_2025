@@ -1,46 +1,84 @@
-frequency:                50           # Hz de atualização do filtro
-sensor_timeout:           0.1          # Timeout para sensores (s)
-two_d_mode:               true
+# ekf.yaml
 
-# --- ODOMETRIA (encoders) como fonte 0 ---
-odom0:                    /wheel_odom
-odom0_config:             [true,  true,  false,   # x, y, z
-                           false, false, true,    # roll, pitch, yaw
-                           true, true, false,   # vx, vy, vz
-                           false, false, false,   # vroll, vpitch, vyaw
-                           false, false, false]   # ax, ay, az (não usa accel aqui)
-odom0_queue_size:         10
-odom0_pose_covariance:    [0.05,0,0, 
-                           0,0.05,0, 
-                           0,0,0.05]
+# General filter parameters
+frequency: 30.0
+sensor_timeout: 0.1
+two_d_mode: true
+transform_time_offset: 0.0
+transform_timeout: 0.0
+print_diagnostics: true
 
-odom0_twist_covariance:   [0.5,0,0, 
-                           0,0.5,0,  
-                           0,0,0.5]  
+# Frame and TF parameters
+map_frame: map
+odom_frame: odom
+base_link_frame: base_link
+world_frame: odom
 
-# --- IMU (Madgwick) como fonte 1 ---
-imu0:                     /imu/data_filtered
-imu0_config:              [false, false, false,  # não corrige posição diretamente
-                           true,  true,  true,   # corrige roll, pitch, yaw
-                           false, false, false,  # não corrige linear velocities
-                           true,  true,  true,   # corrige angular velocities
-                           false, false, false]  # não corrige linear accel (já removeu gravidade)
-imu0_queue_size:          50
+publish_tf: true
+
+# Wheel odometry configuration
+odom0: /wheel_odom
+odom0_queue_size: 5
+odom0_nodelay: false
+
+odom0_config: [true, true, false,
+               false, false, false,
+               false,  false,  false,
+               false, false, true,
+               false, false, false]
+
+odom0_differential: false
+odom0_relative: false
+
+# IMU configuration
+imu0: /imu/data_filtered
+imu0_queue_size: 5
+imu0_nodelay: false
+
+imu0_config: [false, false, false,
+              false, false, true,
+              false, false, false,
+              false, false, true,
+              false, false, false]
+
+imu0_differential: false
+imu0_relative: false
 imu0_remove_gravitational_acceleration: true
-imu0_pose_covariance:     [0.01,0,0, 
-                           0,0.01,0, 
-                           0,0,0.01]
 
-imu0_twist_covariance:    [0.01,0,0, 
-                           0,0.01,0, 
-                           0,0,0.01]
-imu0_linear_acceleration_covariance: [0.1,0,0, 
-                                      0,0.1,0, 
-                                      0,0,0.1]
+# Covariance matrices
+# process_noise_covariance: Represents uncertainty in the process model.
+# The diagonal models the variance for each state variable.
+# Tune these values based on observed performance.
+process_noise_covariance: [0.05, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+                           0.0,  0.05, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+                           0.0,  0.0,  0.06, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+                           0.0,  0.0,  0.0,  0.03, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+                           0.0,  0.0,  0.0,  0.0,  0.03, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+                           0.0,  0.0,  0.0,  0.0,  0.0,  0.06, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+                           0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.25, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+                           0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.25, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+                           0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.04, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+                           0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.01, 0.0,  0.0,  0.0,  0.0,  0.0,
+                           0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.01, 0.0,  0.0,  0.0,  0.0,
+                           0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.02, 0.0,  0.0,  0.0,
+                           0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.01, 0.0,  0.0,
+                           0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.01, 0.0,
+                           0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.015]
 
-# --- Publicação de TF ---
-publish_tf:             true
-# o filtro irá publicar um transform odom → base_link
-map_frame:             map
-odom_frame:            odom
-base_link_frame:       base_link
+# initial_estimate_covariance: Uncertainty of the initial state.
+# Small values if starting at a known pose (0,0,0).
+initial_estimate_covariance: [1e-9, 0.0, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+                              0.0, 1e-9, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+                              0.0, 0.0, 1e-9, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+                              0.0, 0.0, 0.0,  1e-9, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+                              0.0, 0.0, 0.0,  0.0,  1e-9, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+                              0.0, 0.0, 0.0,  0.0,  0.0,  1e-9, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+                              0.0, 0.0, 0.0,  0.0,  0.0,  0.0,  1e-9, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+                              0.0, 0.0, 0.0,  0.0,  0.0,  0.0,  0.0,  1e-9, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+                              0.0, 0.0, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1e-9, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+                              0.0, 0.0, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1e-9, 0.0,  0.0,  0.0,  0.0,  0.0,
+                              0.0, 0.0, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1e-9, 0.0,  0.0,  0.0,  0.0,
+                              0.0, 0.0, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1e-9, 0.0,  0.0,  0.0,
+                              0.0, 0.0, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1e-9, 0.0,  0.0,
+                              0.0, 0.0, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1e-9, 0.0,
+                              0.0, 0.0, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1e-9]

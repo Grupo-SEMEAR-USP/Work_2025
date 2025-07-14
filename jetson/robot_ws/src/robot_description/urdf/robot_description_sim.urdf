@@ -464,7 +464,7 @@
 
 <link name="lidar_link">
   <inertial>
-    <origin xyz="0 0 0"/>
+    <origin xyz="-0.00056545 1.4938E-05 0.011701" rpy="0 0 1.57"/>
     <mass value="0.001"/>
     <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
   </inertial>
@@ -486,7 +486,7 @@
 </link>
 
 <joint name="lidar_joint" type="fixed">
-  <origin xyz="0 0 0.1" rpy="0 0 0"/>
+  <origin xyz="0.036445 0 -0.124" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="lidar_link"/>
 </joint>
@@ -505,8 +505,8 @@
         </horizontal>
       </scan>
       <range>
-        <min>0.12</min>
-        <max>3.5</max>
+        <min>0.6</min>
+        <max>12.0</max>
         <resolution>0.01</resolution>
       </range>
       <noise>

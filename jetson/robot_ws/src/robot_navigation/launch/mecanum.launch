@@ -1,11 +1,11 @@
 <launch>
   <!-- Define a posição de início -->
-  <arg name="x_pos" default="1.0"/>
+  <arg name="x_pos" default="1.2"/>
   <arg name="y_pos" default="0.0"/>
-  <arg name="z_pos" default="0.08"/>
+  <arg name="z_pos" default="0.0"/>
 
   <!-- Carrega o URDF do seu modelo de teste -->
-  <param name="robot_description" textfile="$(find robot_description)/urdf/robot_description.urdf" />
+  <param name="robot_description" textfile="$(find robot_description)/urdf/robot_description_sim.urdf" />
 
   <!-- Load the Gazebo simulator with a specific world -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">

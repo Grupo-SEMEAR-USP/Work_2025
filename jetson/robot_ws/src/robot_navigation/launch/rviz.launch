@@ -1,0 +1,4 @@
+<launch>
+    <!-- Lança o RViz com configuração pré-salva -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot_navigation)/rviz/rviz.rviz" />
+</launch>

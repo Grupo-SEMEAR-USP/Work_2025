@@ -1,25 +1,11 @@
+<!-- mapping_real.launch -->
 <launch>
 
-  <!--Publicar a transformação do /scan para pointcloud-->
-  <!-- <node name="point_cloud" pkg="robot_navigation" type="point_cloud" output="screen"/> -->
-
-  <!-- Define o modelo do robô, o mundo do gazebo e a visualização no RViz -->
-  <!-- Set the TurtleBot3 model -->
   <arg name="model" default="burger" doc="model type [burger, waffle, waffle_pi]"/>
   <!-- Define a posição de início -->
   <arg name="x_pos" default="2.0"/>
   <arg name="y_pos" default="-0.5"/>
   <arg name="z_pos" default="0.0"/>
-
-  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro" />
-
-  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
-    <param name="publish_frequency" type="double" value="50.0" />
-    <param name="tf_prefix" value=""/>
-  </node>
-
-  <!-- Spawna o modelo do robô -->
-  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" args="-urdf -model turtlebot3_$(arg model) -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description" />
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="world_name" value="$(find turtlebot3_gazebo)/worlds/turtlebot3_stage_4.world"/>
@@ -30,20 +16,69 @@
     <arg name="debug" value="false"/>
   </include>  
 
-  <!-- Load the RViz configuration -->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot_navigation)/rviz/rviz.rviz"/>
+  <!-- 1. Descrição e TF do robô -->
+  <param name="robot_description" textfile="$(find robot_navigation)/urdf/base/summit_base1.urdf" />
+  
+  <!-- Spawna o robô no Gazebo -->
+  <!-- CORREÇÃO: Trocado 'ax_pos' por 'x_pos' para corresponder ao argumento definido acima. -->
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf"
+        args="-urdf -model mecanum_robot1 -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description" />
 
-  <!-- Inclua o node do gmapping para realizar o SLAM -->
-  <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
-    <!-- Parâmetros básicos para o gmapping -->
-    <param name="base_frame" value="base_footprint" />
-    <param name="odom_frame" value="odom" />
-    <param name="map_update_interval" value="5.0" />
-    <!-- Outros parâmetros podem ser ajustados conforme necessário,
-         como maxUrange, maxRange, minimumScore, etc. -->
+  <!-- 2. Publicadores de Estado do Robô -->
+  <node pkg="robot_state_publisher" type="robot_state_publisher"
+        name="robot_state_publisher">
+    <param name="publish_frequency" value="50"/>
   </node>
 
-  <!-- Caso queira manter a navegação com move_base, pode incluir também -->
-  <include file="$(find robot_navigation)/launch/move_base.launch" />
+  <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher"/>
+
+  <!-- 3. Inicia o Filtro de Kalman Estendido (EKF) -->
+  <!-- O EKF irá fundir a odometria das rodas e a IMU para publicar em /odom -->
+  <!-- <include file="$(find robot_navigation)/launch/ekf_imu.launch"/> -->
+
+  <!-- 4. Gmapping: constrói o mapa -->
+  <arg name="scan_topic"  default="/scan" />
+  <!-- CORREÇÃO: Trocado 'base_footprint' por 'base_link' para corresponder ao seu URDF. -->
+  <arg name="base_frame"  default="base_link"/>
+  <arg name="odom_frame"  default="odom"/>
+
+  <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+    <param name="base_frame" value="$(arg base_frame)"/>
+    <param name="odom_frame" value="$(arg odom_frame)"/>
+    <param name="map_update_interval" value="5.0"/>
+    <param name="maxUrange" value="12.0"/>
+    <param name="maxRange" value="12.0"/>
+    <param name="sigma" value="0.05"/>
+    <param name="kernelSize" value="1"/>
+    <param name="lstep" value="0.05"/>
+    <param name="astep" value="0.05"/>
+    <param name="iterations" value="5"/>
+    <param name="lsigma" value="0.075"/> 
+    <param name="ogain" value="3.0"/>
+    <param name="lskip" value="0"/>
+    <param name="minimumScore" value="200"/>
+    <param name="srr" value="0.01"/>
+    <param name="srt" value="0.02"/>
+    <param name="str" value="0.01"/>
+    <param name="stt" value="0.02"/>
+    <param name="linearUpdate" value="0.5"/>
+    <param name="angularUpdate" value="0.436"/>
+    <param name="temporalUpdate" value="-1.0"/>
+    <param name="resampleThreshold" value="0.5"/>
+    <param name="particles" value="80"/>
+    <param name="xmin" value="-1.0"/>
+    <param name="ymin" value="-1.0"/>
+    <param name="xmax" value="1.0"/>
+    <param name="ymax" value="1.0"/>
+    <param name="delta" value="0.05"/>
+    <param name="llsamplerange" value="0.01"/>
+    <param name="llsamplestep" value="0.01"/>
+    <param name="lasamplerange" value="0.005"/>
+    <param name="lasamplestep" value="0.005"/>
+    <remap from="scan" to="$(arg scan_topic)"/>
+  </node>
+
+  <!-- Carrega a configuração do RViz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot_navigation)/rviz/rviz.rviz"/>
 
 </launch>

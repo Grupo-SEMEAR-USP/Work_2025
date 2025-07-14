@@ -89,14 +89,14 @@ class SymEncoder:
         self.pub_odom.publish(odom)
 
         # ---- TF odom → base_link ----
-        t = TransformStamped()
-        t.header.stamp    = now
-        t.header.frame_id = 'odom'
-        t.child_frame_id  = 'base_link'
-        t.transform.translation.x = self.x
-        t.transform.translation.y = self.y
-        t.transform.rotation      = odom.pose.pose.orientation
-        self.br.sendTransform(t)
+        # t = TransformStamped()
+        # t.header.stamp    = now
+        # t.header.frame_id = 'odom'
+        # t.child_frame_id  = 'base_link'
+        # t.transform.translation.x = self.x
+        # t.transform.translation.y = self.y
+        # t.transform.rotation      = odom.pose.pose.orientation
+        # self.br.sendTransform(t)
 
 if __name__ == '__main__':
     rospy.init_node('sym_encoder')
