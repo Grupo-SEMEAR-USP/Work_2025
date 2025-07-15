@@ -4,7 +4,7 @@
   <!-- 1. Descrição e TF do robô -->
   <param name="robot_description" textfile="$(find robot_description)/urdf/robot_description.urdf" />
 
-  <include file="$(find robot_navigation)/launch/ekf_imu.launch"/>
+  <include file="$(find robot_navigation)/launch/imu_filter.launch"/>
 
   <node pkg="robot_state_publisher" type="robot_state_publisher"
         name="robot_state_publisher">

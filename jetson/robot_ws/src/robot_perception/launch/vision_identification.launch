@@ -1,0 +1,16 @@
+<!-- vision_identification.launch -->
+<launch>
+  <!-- Nó de detecção -->
+  <node pkg="robot_perception"
+        type="vision_identification.py"
+        name="vision_identification"
+        output="screen">
+
+    <!-- Parâmetros -->
+    <param name="root_dir"    value="$(find robot_perception)"/>
+    <param name="model"       value="models/main_model.pt"/>
+    <param name="camera_device" value="/dev/video7"/>
+    <param name="display"     value="true"/>
+    <param name="conf_thresh" value="0.50"/>
+  </node>
+</launch>

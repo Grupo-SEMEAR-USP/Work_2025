@@ -1,13 +1,60 @@
+-- Using CATKIN_DEVEL_PREFIX: /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/.private/robot_scheduler
+-- Using CMAKE_PREFIX_PATH: /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel;/home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/.private/catkin_tools_prebuild;/home/jetsonorin/catkin_ws/devel;/opt/ros/noetic
+-- This workspace overlays: /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel;/home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/.private/catkin_tools_prebuild;/home/jetsonorin/catkin_ws/devel;/opt/ros/noetic
+-- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+-- Using PYTHON_EXECUTABLE: /usr/bin/python3
+-- Using Debian Python package layout
+-- Using empy: /usr/lib/python3/dist-packages/em.py
+-- Using CATKIN_ENABLE_TESTING: ON
+-- Call enable_testing()
+-- Using CATKIN_TEST_RESULTS_DIR: /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/build/robot_scheduler/test_results
+-- Forcing gtest/gmock from source, though one was otherwise available.
+-- Found gtest sources under '/usr/src/googletest': gtests will be built
+-- Found gmock sources under '/usr/src/googletest': gmock will be built
+-- Found PythonInterp: /usr/bin/python3 (found version "3.8.10") 
+-- Using Python nosetests: /usr/bin/nosetests3
+-- catkin 0.8.12
+-- BUILD_SHARED_LIBS is on
+-- Using these message generators: gencpp;geneus;genlisp;gennodejs;genpy
+-- robot_scheduler: 2 messages, 0 services
+-- Installing devel-space wrapper /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/src/robot_scheduler/scripts/scheduler.py to /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/.private/robot_scheduler/lib/robot_scheduler
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/build/robot_scheduler
 [  0%] Built target std_msgs_generate_messages_nodejs
-[  0%] Built target std_msgs_generate_messages_cpp
 [  0%] Built target _robot_scheduler_generate_messages_check_deps_SchedulerCommand
-[  0%] Built target std_msgs_generate_messages_py
+[  0%] Built target std_msgs_generate_messages_cpp
 [  0%] Built target _robot_scheduler_generate_messages_check_deps_SchedulerResponse
+[  0%] Built target std_msgs_generate_messages_py
 [  0%] Built target std_msgs_generate_messages_eus
 [  0%] Built target std_msgs_generate_messages_lisp
-[ 16%] Built target robot_scheduler_generate_messages_cpp
+make[2]: Warning: File '/opt/ros/noetic/lib/gennodejs/gen_nodejs.py' has modification time 1745629200 s in the future
+[  8%] [34m[1mGenerating Javascript code from robot_scheduler/SchedulerCommand.msg[0m
+make[2]: Warning: File '/opt/ros/noetic/share/gencpp/msg.h.template' has modification time 1745623058 s in the future
+[ 16%] [34m[1mGenerating C++ code from robot_scheduler/SchedulerCommand.msg[0m
+[ 25%] [34m[1mGenerating Javascript code from robot_scheduler/SchedulerResponse.msg[0m
+make[2]: Warning: File '/opt/ros/noetic/lib/genpy/genmsg_py.py' has modification time 1745629236 s in the future
+make[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[ 33%] [34m[1mGenerating Python from MSG robot_scheduler/SchedulerCommand[0m
 [ 33%] Built target robot_scheduler_generate_messages_nodejs
-[ 58%] Built target robot_scheduler_generate_messages_py
-[ 83%] Built target robot_scheduler_generate_messages_lisp
+make[2]: Warning: File '/opt/ros/noetic/lib/geneus/gen_eus.py' has modification time 1745629134 s in the future
+[ 41%] [34m[1mGenerating C++ code from robot_scheduler/SchedulerResponse.msg[0m
+[ 50%] [34m[1mGenerating EusLisp code from robot_scheduler/SchedulerCommand.msg[0m
+make[2]: Warning: File '/opt/ros/noetic/lib/genlisp/gen_lisp.py' has modification time 1745629161 s in the future
+[ 58%] [34m[1mGenerating Lisp code from robot_scheduler/SchedulerCommand.msg[0m
+[ 66%] [34m[1mGenerating EusLisp code from robot_scheduler/SchedulerResponse.msg[0m
+make[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[ 75%] [34m[1mGenerating Lisp code from robot_scheduler/SchedulerResponse.msg[0m
+[ 75%] Built target robot_scheduler_generate_messages_cpp
+[ 83%] [34m[1mGenerating Python from MSG robot_scheduler/SchedulerResponse[0m
+make[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[ 91%] [34m[1mGenerating EusLisp manifest code for robot_scheduler[0m
+[ 91%] Built target robot_scheduler_generate_messages_lisp
+[100%] [34m[1mGenerating Python msg __init__.py for robot_scheduler[0m
+WARNING: Package name "optic_flow_px4_NRA_bridge" does not follow the naming conventions. It should start with a lower case letter and only contain lower case letters, digits, underscores, and dashes.
+make[2]: warning:  Clock skew detected.  Your build may be incomplete.
+[100%] Built target robot_scheduler_generate_messages_py
+WARNING: Package name "optic_flow_px4_NRA_bridge" does not follow the naming conventions. It should start with a lower case letter and only contain lower case letters, digits, underscores, and dashes.
+make[2]: warning:  Clock skew detected.  Your build may be incomplete.
 [100%] Built target robot_scheduler_generate_messages_eus
 [100%] Built target robot_scheduler_generate_messages

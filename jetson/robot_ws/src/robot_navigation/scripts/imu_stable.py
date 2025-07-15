@@ -36,7 +36,7 @@ class StableYawPublisher:
         delta = deg_norm(yaw_deg - self.last_yaw_deg)
 
         if abs(delta) > self.threshold_deg:
-            self.stable_yaw_deg -= delta
+            self.stable_yaw_deg += delta
             #self.stable_yaw_deg = yaw_deg
 
         self.last_yaw_deg = yaw_deg

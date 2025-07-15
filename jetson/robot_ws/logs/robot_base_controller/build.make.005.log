@@ -1,17 +1,42 @@
+-- Using CATKIN_DEVEL_PREFIX: /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/.private/robot_base_controller
+-- Using CMAKE_PREFIX_PATH: /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel;/home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/.private/catkin_tools_prebuild;/home/jetsonorin/catkin_ws/devel;/opt/ros/noetic
+-- This workspace overlays: /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel;/home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/.private/catkin_tools_prebuild;/home/jetsonorin/catkin_ws/devel;/opt/ros/noetic
+-- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+-- Using PYTHON_EXECUTABLE: /usr/bin/python3
+-- Using Debian Python package layout
+-- Using empy: /usr/lib/python3/dist-packages/em.py
+-- Using CATKIN_ENABLE_TESTING: ON
+-- Call enable_testing()
+-- Using CATKIN_TEST_RESULTS_DIR: /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/build/robot_base_controller/test_results
+-- Forcing gtest/gmock from source, though one was otherwise available.
+-- Found gtest sources under '/usr/src/googletest': gtests will be built
+-- Found gmock sources under '/usr/src/googletest': gmock will be built
+-- Found PythonInterp: /usr/bin/python3 (found version "3.8.10") 
+-- Using Python nosetests: /usr/bin/nosetests3
+-- catkin 0.8.12
+-- BUILD_SHARED_LIBS is on
+-- Using these message generators: gencpp;geneus;genlisp;gennodejs;genpy
+-- robot_base_controller: 2 messages, 0 services
+-- Installing devel-space wrapper /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/src/robot_base_controller/scripts/i2c_master.py to /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/.private/robot_base_controller/lib/robot_base_controller
+-- Installing devel-space wrapper /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/src/robot_base_controller/scripts/mqtt_server.py to /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/.private/robot_base_controller/lib/robot_base_controller
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/build/robot_base_controller
 [  0%] Built target std_msgs_generate_messages_lisp
 [  0%] Built target _robot_base_controller_generate_messages_check_deps_encoder_data
 [  0%] Built target _robot_base_controller_generate_messages_check_deps_velocity_data
 [  0%] Built target std_msgs_generate_messages_py
 [  0%] Built target std_msgs_generate_messages_nodejs
 [  0%] Built target std_msgs_generate_messages_eus
-[35m[1mScanning dependencies of target hw_interface[0m
 [  0%] Built target std_msgs_generate_messages_cpp
-[ 14%] Built target robot_base_controller_generate_messages_lisp
-[ 21%] [32mBuilding CXX object CMakeFiles/hw_interface.dir/src/hw_interface.cpp.o[0m
-[ 42%] Built target robot_base_controller_generate_messages_py
-[ 57%] Built target robot_base_controller_generate_messages_nodejs
-[ 78%] Built target robot_base_controller_generate_messages_eus
-[ 92%] Built target robot_base_controller_generate_messages_cpp
-[ 92%] Built target robot_base_controller_generate_messages
-[100%] [32m[1mLinking CXX executable /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/.private/robot_base_controller/lib/robot_base_controller/hw_interface[0m
-[100%] Built target hw_interface
+[35m[1mScanning dependencies of target hw_interface[0m
+make[2]: Warning: File '/opt/ros/noetic/include/geometry_msgs/Point.h' has modification time 1745634579 s in the future
+[  7%] [32mBuilding CXX object CMakeFiles/hw_interface.dir/src/hw_interface.cpp.o[0m
+In file included from [01m[K/home/jetsonorin/Documents/Work_2025/jetson/robot_ws/src/robot_base_controller/src/hw_interface.cpp:1[m[K:
+[01m[K/home/jetsonorin/Documents/Work_2025/jetson/robot_ws/src/robot_base_controller/include/hw_interface.hpp:6:10:[m[K [01;31m[Kfatal error: [m[Krobot_base_controller/velocity_data.h: No such file or directory
+    6 | #include [01;31m[K"robot_base_controller/velocity_data.h"[m[K
+      |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+compilation terminated.
+make[2]: *** [CMakeFiles/hw_interface.dir/build.make:63: CMakeFiles/hw_interface.dir/src/hw_interface.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:950: CMakeFiles/hw_interface.dir/all] Error 2
+make: *** [Makefile:141: all] Error 2

@@ -169,6 +169,7 @@ include_directories(
 
 catkin_install_python(PROGRAMS
   scripts/i2c_master_arduino.py
+  src/manipulation_interface.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

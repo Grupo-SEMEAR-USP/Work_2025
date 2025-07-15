@@ -1,0 +1,5 @@
+<launch>
+
+  <node name="scheduler_node" pkg="robot_scheduler" type="scheduler.py" output="screen"/> 
+
+</launch>

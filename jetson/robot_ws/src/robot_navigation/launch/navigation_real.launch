@@ -18,14 +18,14 @@
   <node pkg="map_server" type="map_server" name="map_server"
         args="$(find robot_navigation)/maps/map.yaml"/>
 
-  <node pkg="tf2_ros" type="static_transform_publisher"
+  <!-- <node pkg="tf2_ros" type="static_transform_publisher"
       name="static_tf_map_to_odom"
       args="-0.1446667718887329 -0.607901829719543457 0
             0 0 0.03539070758130582 0.9993735526903313
-            map odom"/>
+            map odom"/> -->
 
   <!-- 5. Localização probabilística (AMCL)  -->
-  <!-- <node pkg="amcl" type="amcl" name="amcl">
+  <node pkg="amcl" type="amcl" name="amcl">
       <param name="odom_model_type" value="omni"/>
       <param name="odom_alpha5" value="0.1"/>
       
@@ -56,7 +56,7 @@
       <param name="resample_interval" value="1"/>
       <param name="recovery_alpha_slow" value="0.0"/>
       <param name="recovery_alpha_fast" value="0.0"/> 
-  </node> -->
+  </node>
 
   <!-- 6. Navegação (move_base + costmaps) -->
   <include file="$(find robot_navigation)/launch/move_base_real.launch"/>

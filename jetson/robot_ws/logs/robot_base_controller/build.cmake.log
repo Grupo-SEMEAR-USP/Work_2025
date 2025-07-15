@@ -36,7 +36,6 @@ Not searching for unused variables given on the command line.
 [36m--[0m robot_base_controller: 2 messages, 0 services
 [36m--[0m Installing devel-space wrapper /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/src/robot_base_controller/scripts/i2c_master.py to /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/.private/robot_base_controller/lib/robot_base_controller
 [36m--[0m Installing devel-space wrapper /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/src/robot_base_controller/scripts/mqtt_server.py to /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/.private/robot_base_controller/lib/robot_base_controller
-[36m--[0m Installing devel-space wrapper /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/src/robot_base_controller/scripts/uart_serial.py to /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/.private/robot_base_controller/lib/robot_base_controller
 [36m--[0m Configuring done
 [36m--[0m Generating done
 [36m--[0m Build files have been written to: /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/build/robot_base_controller

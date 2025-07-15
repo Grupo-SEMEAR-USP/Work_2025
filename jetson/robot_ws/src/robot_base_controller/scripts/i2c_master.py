@@ -95,8 +95,8 @@ class I2CCommunication:
                 self.wheel_velocities[0] = int(msg.front_left_wheel * 1000)
                 self.wheel_velocities[1] = int(msg.front_right_wheel * 1000)
             else:
-                self.wheel_velocities[0] = int(msg.rear_left_wheel * 1000)
-                self.wheel_velocities[1] = int(msg.rear_right_wheel * 1000)
+                self.wheel_velocities[1] = int(msg.rear_left_wheel * 1000)
+                self.wheel_velocities[0] = int(msg.rear_right_wheel * 1000)
 
     def update(self):
         rate = rospy.Rate(30)  # 10Hz

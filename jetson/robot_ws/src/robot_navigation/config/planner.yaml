@@ -8,13 +8,13 @@ NavfnROS:
 
 DWAPlannerROS:
   # Robot configuration parameters  
-  acc_lim_x: 2.5
-  acc_lim_y: 2.5 #Omni-directional robot
-  acc_lim_th: 2.5
+  acc_lim_x: 3.5
+  acc_lim_y: 3.5 #Omni-directional robot
+  acc_lim_th: 3.5
 
-  max_vel_x: 0.6
+  max_vel_x: 2.7
   min_vel_x: 0
-  max_vel_y: -0.4 #Omni-directional robot
+  max_vel_y: -2.4 #Omni-directional robot
   min_vel_y: 0 #Omni-directional robot
 
   max_trans_vel: 0.6
@@ -22,9 +22,9 @@ DWAPlannerROS:
   max_rot_vel: 0.6
   min_rot_vel: 0.05
 
-  decel_lim_y : -2.5 #Omni-directional robot
-  decel_lim_x : -2.5
-  decel_lim_th : -3.2
+  decel_lim_y : -4.5 #Omni-directional robot
+  decel_lim_x : -4.5
+  decel_lim_th : -4.2
 
   # Goal Tolerance Parameters
   yaw_goal_tolerance: 0.1

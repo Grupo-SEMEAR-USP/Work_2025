@@ -1,6 +1,5 @@
 robot_navigation
 /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/.private/robot_navigation/lib/pkgconfig/robot_navigation.pc /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/lib/pkgconfig/robot_navigation.pc
-/home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/.private/robot_navigation/lib/robot_navigation/point_cloud_nav /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/lib/robot_navigation/point_cloud_nav
 /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/.private/robot_navigation/lib/robot_navigation/imu_stable.py /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/lib/robot_navigation/imu_stable.py
 /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/.private/robot_navigation/lib/python3/dist-packages/robot_navigation/__init__.py /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/lib/python3/dist-packages/robot_navigation/__init__.py
 /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/.private/robot_navigation/share/roseus/ros/robot_navigation/manifest.l /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/share/roseus/ros/robot_navigation/manifest.l

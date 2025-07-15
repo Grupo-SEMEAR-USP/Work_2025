@@ -5,7 +5,7 @@
 
   <node pkg="robot_utils"
         type="xbox_control.py"
-        name="xbox_teleop"
+        name="xbox_control"
         output="screen">
     <param name="scale" value="1.0"/>
   </node>

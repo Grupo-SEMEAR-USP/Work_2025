@@ -34,7 +34,7 @@ Not searching for unused variables given on the command line.
 [36m--[0m BUILD_SHARED_LIBS is on
 [36m--[0m Using these message generators: gencpp;geneus;genlisp;gennodejs;genpy
 [36m--[0m Installing devel-space wrapper /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/src/robot_manipulation/scripts/i2c_master_arduino.py to /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/.private/robot_manipulation/lib/robot_manipulation
-[36m--[0m Installing devel-space wrapper /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/src/robot_manipulation/scripts/uart_arduino.py to /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/.private/robot_manipulation/lib/robot_manipulation
+[36m--[0m Installing devel-space wrapper /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/src/robot_manipulation/src/manipulation_interface.py to /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/devel/.private/robot_manipulation/lib/robot_manipulation
 [36m--[0m Configuring done
 [36m--[0m Generating done
 [36m--[0m Build files have been written to: /home/jetsonorin/Documents/Work_2025/jetson/robot_ws/build/robot_manipulation
