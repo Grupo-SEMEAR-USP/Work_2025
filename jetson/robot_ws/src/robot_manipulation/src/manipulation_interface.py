@@ -39,6 +39,10 @@ ACTION_MAP = {
     },
     "arm": {
         "top": 1.0,
+
+        "deposit1_to_top": 1.0,
+        "deposit2_to_top": 1.0,
+        "deposit3_to_top": 1.0,
         
         "deposit": -1.0,
 
@@ -46,6 +50,8 @@ ACTION_MAP = {
         "bottom5": -1.0,
         "bottom10": -1.0,
         "bottom15": -1.0,
+
+        "bottom10_to_deposit": -1.0,
     }
 }
 

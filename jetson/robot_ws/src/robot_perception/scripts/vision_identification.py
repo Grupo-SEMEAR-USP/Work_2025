@@ -9,6 +9,7 @@ import numpy as np
 import rospy
 import supervision as sv
 from ultralytics import YOLO
+from sensor_msgs.msg import CompressedImage
 
 from robot_perception.msg import Identify, Point
 from robot_scheduler.msg import SchedulerCommand  
@@ -93,7 +94,7 @@ class VisionIdentificationNode:
         rospy.init_node("vision_identification")
 
         root_dir   = rospy.get_param("~root_dir", os.path.dirname(__file__))
-        self.model = rospy.get_param("~model", "models/main_model.pt")
+        self.model = rospy.get_param("~model", "models/modelo2.pt")
         self.cam_device = rospy.get_param("~camera_device", "0")
         self.conf   = float(rospy.get_param("~conf_thresh", 0.5))
         self.gui    = bool(rospy.get_param("~display", True))
@@ -105,29 +106,37 @@ class VisionIdentificationNode:
         self.detector = VisionDetector(model_path, self.conf)
 
         self.pub_id = rospy.Publisher("/identificacao",
-                                      identificacao, queue_size=10)
+                                      Identify, queue_size=10)
 
         rospy.Subscriber("/scheduler/commands",
                          SchedulerCommand, self._sched_cb, queue_size=30)
 
         self._active = True
 
-        self.cap = cv2.VideoCapture(self.cam_device)
-        if not self.cap.isOpened():
-            rospy.logfatal(f"Camera '{self.cam_device}' não abriu.")
-            raise RuntimeError("Camera error")
+        self._last_frame = None
+        self.sub_img = rospy.Subscriber(
+            "/usb_cam/image_raw/compressed",
+            CompressedImage,
+            self._img_cb,
+            queue_size=1,
+            buff_size=2**24
+        )
 
         rospy.loginfo("[vision_identification] pronto. (Q para sair, S para snapshot)")
+
+    def _img_cb(self, msg: CompressedImage):
+        np_arr = np.frombuffer(msg.data, np.uint8)
+        frame = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
+        self._last_frame = frame
 
     def spin(self):
         rate = rospy.Rate(30)
         while not rospy.is_shutdown():
-            ret, frame = self.cap.read()
-            if not ret:
-                rospy.logwarn("Frame perdido!")
+            frame = self._last_frame
+            if frame is None:
                 rate.sleep()
                 continue
-
+            
             if self._active:
                 ann, classes, cents, angs = self.detector.infer(frame)
                 self._publish(classes, cents, angs)
@@ -153,7 +162,7 @@ class VisionIdentificationNode:
                  classes: List[str],
                  cents  : List[Tuple[float, float]],
                  angs   : List[Optional[float]]):
-        msg = identificacao()
+        msg = Identify()
         msg.classes = classes
         msg.centroids = [Point(x=float(cx), y=float(cy)) for cx, cy in cents]
         msg.angles = [a if a is not None else np.nan for a in angs]

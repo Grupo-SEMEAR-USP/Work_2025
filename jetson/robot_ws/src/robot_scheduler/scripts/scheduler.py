@@ -20,7 +20,34 @@ class Scheduler:
         self.plan = [
             # target, payload, expect_ack, timeout_or_delay
             ("manipulation",     "gripper,open",   False,  1),
+
+            ("navigation",       "<nome_workspace>",      True,  50),
+            ("table_aproach",    "start,10",        False, 5),
+
+            # --- loop de pegar itens ----
+
+            ("manipulation",     "arm,deposit1_to_top",   False,  1),
+            ("manipulation",     "rotatory_base,deposit1_to_front_right",   False,  1),
+            
+            ("search_item",      "<nome_item>", False, 10),
+            ("align_item",       "<nome_item>", False, 10),
+            ("align_gripper",    "<nome_item>", False, 10),
+
+            ("manipulation",     "arm,bottom10",   False,  1),
             ("manipulation",     "gripper,close",   False,  1),
+            ("manipulation",     "arm,bottom10_to_deposit",   False,  1),
+            ("manipulation",     "rotatory_base,front_to_deposit1_right",   False,  1),
+
+            # ----- após iterações -----
+            ("move_time",     "tras,2",   False,  1), # da uam ré
+            ("navigation",       "<nome_workspace>",      True,  50),
+
+            # --- rotina de deposito ----
+
+            # ----- após iterações -----
+            ("move_time",     "tras,2",   False,  1), # da uam ré
+            ("navigation",       "<nome_workspace>",      True,  50),
+
         ]
 
     @staticmethod

@@ -1,5 +1,7 @@
 <!-- vision_identification.launch -->
 <launch>
+  <include file="$(find usb_cam_launch)/launch/usb_cam.launch"/>
+
   <!-- Nó de detecção -->
   <node pkg="robot_perception"
         type="vision_identification.py"
@@ -8,9 +10,9 @@
 
     <!-- Parâmetros -->
     <param name="root_dir"    value="$(find robot_perception)"/>
-    <param name="model"       value="models/main_model.pt"/>
-    <param name="camera_device" value="/dev/video7"/>
-    <param name="display"     value="true"/>
-    <param name="conf_thresh" value="0.50"/>
+    <param name="model"       value="models/modelo2.pt"/>
+    <param name="camera_device" value="/dev/cameraGarra"/>
+    <param name="display"     value="false"/>
+    <param name="conf_thresh" value="0.60"/>
   </node>
 </launch>

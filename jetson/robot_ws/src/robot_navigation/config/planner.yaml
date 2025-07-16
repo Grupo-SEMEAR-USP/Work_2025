@@ -1,4 +1,4 @@
-controller_frequency: 5.0
+controller_frequency: 12.0
 recovery_behavior_enabled: true
 conservative_reset_dist: 1.2 # The distance the robot must travel before the costmap is reset, in meters
 
@@ -12,14 +12,14 @@ DWAPlannerROS:
   acc_lim_y: 3.5 #Omni-directional robot
   acc_lim_th: 3.5
 
-  max_vel_x: 2.7
+  max_vel_x: 0.5
   min_vel_x: 0
-  max_vel_y: -2.4 #Omni-directional robot
+  max_vel_y: -0.5 #Omni-directional robot
   min_vel_y: 0 #Omni-directional robot
 
-  max_trans_vel: 0.6
+  max_trans_vel: 1.0
   min_trans_vel: 0.05
-  max_rot_vel: 0.6
+  max_rot_vel: 1.0
   min_rot_vel: 0.05
 
   decel_lim_y : -4.5 #Omni-directional robot

@@ -1,4 +1,4 @@
-controller_frequency: 5.0
+controller_frequency: 50.0
 recovery_behavior_enabled: true
 conservative_reset_dist: 1.2 # The distance the robot must travel before the costmap is reset, in meters
 

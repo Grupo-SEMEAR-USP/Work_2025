@@ -1,0 +1,5 @@
+<!-- ultrasonic.launch -->
+<launch>
+  <!-- Nó dos ultrasonicos -->
+  <node pkg="robot_perception" type="i2c_ultrasonic.py" name="i2c_ultrasonic"/>
+</launch>

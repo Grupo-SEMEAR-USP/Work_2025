@@ -74,7 +74,7 @@ class I2C_ROS_Bridge:
         rospy.loginfo(f"[i2c_bridge] Enviando via I2C: {self.arm + self.ee}")
 
     def run(self):
-        r = rospy.Rate(200)
+        r = rospy.Rate(30)
         while not rospy.is_shutdown():
             if self.repeats and time.monotonic() - self.last_tx >= INTERVAL:
                 self.send_once()

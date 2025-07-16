@@ -120,8 +120,9 @@ include_directories(
 )
 
 catkin_install_python(PROGRAMS
-  scripts/xbox_control.py
+  scripts/image_save_logitech.py
   scripts/print_yaw.py
+  scripts/image_save_realsense.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

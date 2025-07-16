@@ -5,7 +5,7 @@
 
 RobotHWInterface::RobotHWInterface(ros::NodeHandle& nh)
 : nh(nh),
-  command_timeout_(nh.createTimer(ros::Duration(0.1),
+  command_timeout_(nh.createTimer(ros::Duration(0.2),
                                   &RobotHWInterface::commandTimeoutCallback,
                                   this, true, false))
 {
@@ -30,6 +30,11 @@ RobotHWInterface::RobotHWInterface(ros::NodeHandle& nh)
     x = y = th = 0.0;
     vel_linearx = vel_lineary = vel_angular_z = 0.0;
 
+    vel_command.front_left_wheel  = 0.0;
+    vel_command.front_right_wheel = 0.0;
+    vel_command.rear_left_wheel   = 0.0;
+    vel_command.rear_right_wheel  = 0.0;
+
     current_time = ros::Time::now();
 }
 
@@ -47,7 +52,7 @@ void RobotHWInterface::cmdVelCallback(const geometry_msgs::Twist::ConstPtr& msg)
     rear_right_wheel_speed  = mapSpeed((vx - vy + (omega * base_geometry)) / wheel_radius);
 
     command_timeout_.stop();
-    command_timeout_.setPeriod(ros::Duration(0.1), true);
+    command_timeout_.setPeriod(ros::Duration(0.2), true);
     command_timeout_.start();
 }
 
@@ -81,12 +86,11 @@ float RobotHWInterface::mapSpeed(float v_input)
 
 void RobotHWInterface::publishWheelSpeeds()
 {
-    robot_base_controller::velocity_data msg;
-    msg.front_left_wheel  = front_left_wheel_speed;
-    msg.front_right_wheel = front_right_wheel_speed;
-    msg.rear_left_wheel   = rear_left_wheel_speed;
-    msg.rear_right_wheel  = rear_right_wheel_speed;
-    velocity_command_pub.publish(msg);
+    vel_command.front_left_wheel  = front_left_wheel_speed;
+    vel_command.front_right_wheel = front_right_wheel_speed;
+    vel_command.rear_left_wheel   = rear_left_wheel_speed;
+    vel_command.rear_right_wheel  = rear_right_wheel_speed;
+    velocity_command_pub.publish(vel_command);
 }
 
 void RobotHWInterface::commandTimeoutCallback(const ros::TimerEvent&)

@@ -39,6 +39,7 @@ private:
     // Hw Interface 
     ros::Publisher velocity_command_pub;
     ros::Subscriber cmd_vel_sub;
+    robot_base_controller::velocity_data vel_command;
 
     // IMU Data
     ros::Subscriber imu_sub;
