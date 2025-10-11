@@ -1,0 +1,2 @@
+set(robot_scheduler_MESSAGE_FILES "/home/rmajetson/Work_2025/a/robot_ws/src/robot_scheduler/msg/SchedulerCommand.msg;/home/rmajetson/Work_2025/a/robot_ws/src/robot_scheduler/msg/SchedulerResponse.msg;/home/rmajetson/Work_2025/a/robot_ws/src/robot_scheduler/msg/Object.msg;/home/rmajetson/Work_2025/a/robot_ws/src/robot_scheduler/msg/Subtask.msg;/home/rmajetson/Work_2025/a/robot_ws/src/robot_scheduler/msg/TaskRequest.msg")
+set(robot_scheduler_SERVICE_FILES "")

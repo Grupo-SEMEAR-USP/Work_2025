@@ -1,0 +1,1 @@
+/home/rmajetson/Work_2025/a/robot_ws/devel/.private/robot_base_controller/lib/python3/dist-packages/robot_base_controller/msg/__init__.py

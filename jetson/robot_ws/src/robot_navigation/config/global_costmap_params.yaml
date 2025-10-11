@@ -4,5 +4,5 @@ track_unknown_space: true
 
 plugins:
   - {name: static,                  type: "costmap_2d::StaticLayer"}
-  - {name: obstacles_laser,           type: "costmap_2d::VoxelLayer"} #Considera já os obstáculos durante a construção do caminho
+  - {name: obstacles_laser,           type: "costmap_2d::VoxelLayer"}
   - {name: inflation_g,               type: "costmap_2d::InflationLayer"}

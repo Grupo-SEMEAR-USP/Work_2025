@@ -95,3 +95,14 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+'''
+Pontos importantes:
+    O atributo plan possui todas as etapas (comandos) de uma rodada. 
+    A função run() é responsável por gerenciar o fluxo dos comandos: envia-os e espera resposta, quando necessário.
+    Cada comando pode ou não requerer uma resposta de feedback (tarefa realizada) e isso é definido pelo expect_ack. 
+    Caso seja True, o programa fica esperando até receber o retorno ou dar timeout antes de prosseguir com os próximos comandos. 
+    Essa verificação é feita monitoração de um Evento (linha 77): o feedback é recebido pelo tópico scheduler/feedback 
+    e então a função de callback é acionada, setando o evento (linha 72) e finalizando a espera (na função wait_ack).
+
+'''

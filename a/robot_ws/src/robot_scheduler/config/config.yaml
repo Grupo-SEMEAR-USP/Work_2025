@@ -1,0 +1,41 @@
+# Ordem em que o robô visita as mesas
+tables_order:
+  - mesa_1
+  - mesa_2
+
+# Mapeia mesas e depósitos para seus respectivos "workspaces" de navegação
+workspaces:
+  mesa_1: ws_mesa_1
+  mesa_2: ws_mesa_2
+  deposito: ws_deposito
+
+# Parâmetros globais do scheduler
+globals:
+  burst_repeats: 8
+  burst_rate_hz: 10
+  # tempos padrão (segundos) e timeouts (s) para etapas que não precisam de ACK
+  defaults:
+    approach_sleep: 5
+    search_timeout: 10
+    align_block_timeout: 10
+    align_gripper_timeout: 10
+    manip_sleep: 10
+    backoff_sleep: 10
+    nav_timeout: 10
+
+# Lista na ORDEM em que os blocos devem ser manipulados.
+# Cada item indica o nome do bloco e em qual mesa ele está.
+blocks:
+  - name: bloco_A
+    table: mesa_1
+  - name: bloco_B
+    table: mesa_1
+  - name: bloco_C
+    table: mesa_2
+
+
+# lado para o depósito interno: "right" ou "left"
+deposit_side: right
+
+# capacidade interna por mesa
+max_carry_per_table: 3

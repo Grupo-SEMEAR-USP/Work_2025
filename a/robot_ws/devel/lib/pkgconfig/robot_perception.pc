@@ -1,0 +1,1 @@
+/home/rmajetson/Work_2025/a/robot_ws/devel/.private/robot_perception/lib/pkgconfig/robot_perception.pc

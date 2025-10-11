@@ -1,0 +1,1 @@
+/home/rmajetson/Work_2025/a/robot_ws/devel/.private/rplidar_ros/share/rplidar_ros/cmake/rplidar_rosConfig-version.cmake

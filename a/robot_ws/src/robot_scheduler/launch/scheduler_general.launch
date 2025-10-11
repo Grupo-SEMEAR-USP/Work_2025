@@ -1,0 +1,12 @@
+<launch>
+  <!-- Caminho do YAML (pode trocar via arg) -->
+  <arg name="config_file" default="$(find robot_scheduler)/config/config.yaml"/>
+
+  <!-- Carrega o YAML no namespace /scheduler_cfg -->
+  <rosparam command="load" file="$(arg config_file)" ns="scheduler_cfg"/>
+
+  <!-- Roda o nó do Scheduler e informa qual namespace contém a config -->
+  <node pkg="robot_scheduler" type="scheduler.py" name="scheduler" output="screen">
+    <param name="config_ns" value="/scheduler_cfg"/>
+  </node>
+</launch>

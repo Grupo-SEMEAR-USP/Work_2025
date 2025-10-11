@@ -1,0 +1,8 @@
+prefix=/home/rmajetson/Work_2025/a/robot_ws/devel/.private/robot_description
+
+Name: robot_description
+Description: Description of robot_description
+Version: 1.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

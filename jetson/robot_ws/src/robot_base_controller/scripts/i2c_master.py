@@ -31,7 +31,6 @@ ULTRA_TOPIC_DEF = '/ultrasonic_distances'
 NUM_ULTRA_SENSORS = 5
 ULTRA_PKT_LEN = NUM_ULTRA_SENSORS * 4  # 5 floats (little-endian)
 
-
 class CombinedI2CMaster:
     """Nó agregador de todos os dispositivos I2C."""
 

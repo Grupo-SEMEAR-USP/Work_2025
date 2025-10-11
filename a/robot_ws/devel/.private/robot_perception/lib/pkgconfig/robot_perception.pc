@@ -1,0 +1,8 @@
+prefix=/home/rmajetson/Work_2025/a/robot_ws/devel/.private/robot_perception
+
+Name: robot_perception
+Description: Description of robot_perception
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

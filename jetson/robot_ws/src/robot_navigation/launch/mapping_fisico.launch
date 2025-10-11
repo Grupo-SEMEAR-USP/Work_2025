@@ -14,23 +14,4 @@
   <!-- (opcional) joint_state_publisher caso o driver ainda não publique -->
   <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher"/>
 
-  <!-- 4. Gmapping: constrói o mapa -->
-  <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping"
-        output="screen">
-    <remap from="scan"           to="/scan"/>
-    <param name="base_frame"     value="base_link"/>
-    <param name="odom_frame"     value="odom"/>
-    <param name="map_update_interval" value="0.3"/>
-    <!-- parâmetros recomendados para robô indoor pequeno -->
-    <param name="linearUpdate"   value="0.2"/>   <!-- [m] -->
-    <param name="angularUpdate"  value="0.17"/>   <!-- [rad] ~10° -->
-    <param name="particles"      value="50"/>
-    <param name="srr"            value="0.01"/>   <!-- noise lin → lin -->
-    <param name="srt"            value="0.02"/>   <!-- noise rot → lin -->
-    <param name="str"            value="0.02"/>   <!-- noise lin → rot -->
-    <param name="ttr"            value="0.04"/>   <!-- noise rot → rot -->
-    <param name="minimumScore"   value="200"/>
-    <!-- ajuste maxUrange ao alcance útil do seu LiDAR -->
-    <param name="maxUrange"      value="12.0"/>
-  </node>
 </launch>

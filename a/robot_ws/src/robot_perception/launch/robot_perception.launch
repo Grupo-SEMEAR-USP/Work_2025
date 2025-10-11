@@ -1,0 +1,8 @@
+<launch>
+  <!-- Lança o nó de detecção de blocos -->
+  <include file="$(find apriltag_ros)/launch/continuous_detection.launch" />
+
+  <!-- Lança o o launch para ligar a câmera -->
+  <include file="$(find robot_perception)/launch/usb_cam.launch" />
+
+</launch>

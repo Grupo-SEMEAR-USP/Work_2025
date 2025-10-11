@@ -1,0 +1,1 @@
+/home/rmajetson/Work_2025/a/robot_ws/devel/.private/apriltag_ros/share/roseus/ros/apriltag_ros/srv/AnalyzeSingleImage.l

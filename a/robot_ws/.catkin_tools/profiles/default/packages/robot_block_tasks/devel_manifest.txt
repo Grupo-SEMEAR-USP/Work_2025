@@ -1,0 +1,10 @@
+robot_block_tasks
+/home/rmajetson/Work_2025/a/robot_ws/devel/.private/robot_block_tasks/share/robot_block_tasks/cmake/robot_block_tasks-msg-paths.cmake /home/rmajetson/Work_2025/a/robot_ws/devel/share/robot_block_tasks/cmake/robot_block_tasks-msg-paths.cmake
+/home/rmajetson/Work_2025/a/robot_ws/devel/.private/robot_block_tasks/share/robot_block_tasks/cmake/robot_block_tasksConfig.cmake /home/rmajetson/Work_2025/a/robot_ws/devel/share/robot_block_tasks/cmake/robot_block_tasksConfig.cmake
+/home/rmajetson/Work_2025/a/robot_ws/devel/.private/robot_block_tasks/share/robot_block_tasks/cmake/robot_block_tasksConfig-version.cmake /home/rmajetson/Work_2025/a/robot_ws/devel/share/robot_block_tasks/cmake/robot_block_tasksConfig-version.cmake
+/home/rmajetson/Work_2025/a/robot_ws/devel/.private/robot_block_tasks/lib/python3/dist-packages/robot_block_tasks/__init__.py /home/rmajetson/Work_2025/a/robot_ws/devel/lib/python3/dist-packages/robot_block_tasks/__init__.py
+/home/rmajetson/Work_2025/a/robot_ws/devel/.private/robot_block_tasks/lib/pkgconfig/robot_block_tasks.pc /home/rmajetson/Work_2025/a/robot_ws/devel/lib/pkgconfig/robot_block_tasks.pc
+/home/rmajetson/Work_2025/a/robot_ws/devel/.private/robot_block_tasks/lib/robot_block_tasks/align_block.py /home/rmajetson/Work_2025/a/robot_ws/devel/lib/robot_block_tasks/align_block.py
+/home/rmajetson/Work_2025/a/robot_ws/devel/.private/robot_block_tasks/lib/robot_block_tasks/search_line.py /home/rmajetson/Work_2025/a/robot_ws/devel/lib/robot_block_tasks/search_line.py
+/home/rmajetson/Work_2025/a/robot_ws/devel/.private/robot_block_tasks/lib/robot_block_tasks/table_orientation.py /home/rmajetson/Work_2025/a/robot_ws/devel/lib/robot_block_tasks/table_orientation.py
+/home/rmajetson/Work_2025/a/robot_ws/devel/.private/robot_block_tasks/lib/robot_block_tasks/mapping_ids.py /home/rmajetson/Work_2025/a/robot_ws/devel/lib/robot_block_tasks/mapping_ids.py

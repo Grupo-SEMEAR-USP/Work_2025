@@ -193,3 +193,14 @@ class SchedulerPatrol:
 if __name__ == "__main__":
     rospy.init_node("scheduler_patrol")
     SchedulerPatrol().spin()
+
+'''
+Pontos importantes:
+    O nó SchedulerPatrol funciona como um cliente (SimpleActionClient) do servidor move_base, responsável 
+    por executar metas de navegação.
+    As mensagens chegam pelo tópico /scheduler/command e são processadas pela callback request_cb, que valida 
+    node_name, id e payload. Cada requisição válida é enfileirada para execução.
+    O ciclo principal (spin) verifica se há trechos pendentes e, quando livre, chama process_trecho.
+    Nessa função, cada waypoint é enviado ao servidor (send_goal), aguardado (wait_for_result) e checando (get_state).
+    Se todos os pontos forem concluídos com sucesso, o nó publica uma confirmação (Bool) em /scheduler/feedback.    
+'''
