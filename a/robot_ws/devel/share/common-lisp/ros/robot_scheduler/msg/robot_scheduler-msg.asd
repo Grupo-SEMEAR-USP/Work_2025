@@ -1,1 +1,0 @@
-/home/rmajetson/Work_2025/a/robot_ws/devel/.private/robot_scheduler/share/common-lisp/ros/robot_scheduler/msg/robot_scheduler-msg.asd

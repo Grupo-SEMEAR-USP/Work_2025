@@ -1,1 +1,0 @@
-/home/rmajetson/Work_2025/a/robot_ws/devel/.private/robot_base_controller/share/gennodejs/ros/robot_base_controller/msg/_index.js

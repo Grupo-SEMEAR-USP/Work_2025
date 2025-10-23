@@ -1,8 +1,0 @@
-prefix=/home/rmajetson/Work_2025/a/robot_ws/devel/.private/robot_base_controller
-
-Name: robot_base_controller
-Description: Description of robot_base_controller
-Version: 0.0.0
-Cflags: -I/home/rmajetson/Work_2025/a/robot_ws/devel/.private/robot_base_controller/include
-Libs: -L${prefix}/lib 
-Requires: 

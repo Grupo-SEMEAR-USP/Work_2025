@@ -1,4 +1,0 @@
-[01m[K/home/rmajetson/Work_2025/a/robot_ws/src/rplidar_ros/sdk/src/arch/linux/net_serial.cpp:[m[K In member function ‘[01m[Kvirtual void rp::arch::net::raw_serial::cancelOperation()[m[K’:
-[01m[K/home/rmajetson/Work_2025/a/robot_ws/src/rplidar_ros/sdk/src/arch/linux/net_serial.cpp:427:17:[m[K [01;35m[Kwarning: [m[Kignoring return value of ‘[01m[Kssize_t write(int, const void*, size_t)[m[K’, declared with attribute warn_unused_result [[01;35m[K-Wunused-result[m[K]
-  427 |     (int)[01;35m[K::write(_selfpipe[1], "x", 1)[m[K;
-      |          [01;35m[K~~~~~~~^~~~~~~~~~~~~~~~~~~~~~[m[K

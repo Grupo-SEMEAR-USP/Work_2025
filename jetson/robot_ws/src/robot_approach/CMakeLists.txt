@@ -11,6 +11,9 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  geometry_msgs
+  robot_scheduler
+  robot_base_controller
 )
 
 ## System dependencies are found with CMake's conventions

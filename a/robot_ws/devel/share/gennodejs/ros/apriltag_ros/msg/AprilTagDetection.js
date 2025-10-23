@@ -1,1 +1,0 @@
-/home/rmajetson/Work_2025/a/robot_ws/devel/.private/apriltag_ros/share/gennodejs/ros/apriltag_ros/msg/AprilTagDetection.js

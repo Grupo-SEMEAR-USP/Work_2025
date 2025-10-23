@@ -1,1 +1,0 @@
-/usr/bin/ld: warning: libopencv_calib3d.so.4.2, needed by /home/rmajetson/Work_2025/a/robot_ws/devel/.private/apriltag_ros/lib/libapriltag_ros_single_image_detector.so, may conflict with libopencv_calib3d.so.4.5

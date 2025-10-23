@@ -31,35 +31,84 @@ from robot_scheduler.msg import SchedulerCommand        # <-- mensagem custom
 
 # ─────────────────── CONFIGURAÇÃO DE WAYPOINTS ────────────────────
 TRECHOS = {
+
+    #WS1':
+#     pose: 
+#   position: 
+#     x: -0.25124454498291016
+#     y: 0.5749087333679199
+#     z: 0.0
+#   orientation: 
+#     x: 0.0
+#     y: 0.0
+#     z: 0.0
+#     w: 1.0
+
+    
+
+    # "Start": [
+    #     ((-2.4145, 0.742, 0.0), (0, 0, 0, 1)),
+    # ],
+    # "WS1": [
+    #     ((7.802, -2.836, 0.0), (0, 0, 0, 1)),
+    # ],
+    # "A": [
+    #     ((7.802, -2.836, 0.0), (0, 0, 1, 0)),
+    # ],
+    # "B": [
+    #     ((6.802, -2.836, 0.0), (0, 0, 1, 0)),
+    # ],
+    # "C": [
+    #     ((6.802, -2.836, 0.0), (0, 0, 0.689, 0.724)),
+    # ],
+    # "D": [
+    #     ((6.802, 4.758, 0.0), (0, 0, 0.689, 0.724)),
+    # ],
+    # "E": [
+    #     ((6.802, 4.758, 0.0), (0, 0, 0, 1)),
+    # ],
+    # "WS8": [
+    #     ((7.802, 4.758, 0.0), (0, 0, 0, 1)),
+    # ],
+    # "F": [
+    #     ((7.802, 4.758, 0.0), (0, 0, 1, 0)),
+    # ],
+    # "FINISH": [
+    #     ((5.802, 4.758, 0.0), (0, 0, 1, 0)),
+    # ],
+
+
+
     "Start": [
-        ((0.0, 0.0, 0.0), (0, 0, 0, 1)),
+        ((-2.4145, 0.742, 0.0), (0, 0, 0, 1)),
     ],
-    "SH01": [
-        ((1.0, 1.0, 0.0), (0, 0, 0, 1)),
+
+    "WS1": [
+        ((-0.249, 0.575, 0.0), (0, 0, 0, 1)),
     ],
-    "SH02": [
-        ((2.0, 2.0, 0.0), (0, 0, 0, 1)),
+    "A": [
+        ((-0.249, 0.575, 0.0), (0, 0, 1, 0)),
     ],
-    "RT01": [
-        ((3.0, 3.0, 0.0), (0, 0, 0, 1)),
+    "B": [
+        ((-1.249, 0.575, 0.0), (0, 0, 1, 0)),
     ],
-    "PP01": [
-        ((4.0, 4.0, 0.0), (0, 0, 0, 1)),
+    "C": [
+        ((-1.249, 0.575, 0.0), (0, 0, 0.689, 0.724)),
     ],
-    "WS01": [
-        ((5.0, 5.0, 0.0), (0, 0, 0, 1)),
+    "D": [
+        ((-1.249, 8.169, 0.0), (0, 0, 0.689, 0.724)),
     ],
-    "WS02": [
-        ((6.0, 6.0, 0.0), (0, 0, 0, 1)),
+    "E": [
+        ((-1.249, 8.169, 0.0), (0, 0, 0, 1)),
     ],
-    "WS03": [
-        ((7.0, 7.0, 0.0), (0, 0, 0, 1)),
+    "WS8": [
+        ((-0.249, 8.169, 0.0), (0, 0, 0, 1)),
     ],
-    "WS04": [
-        ((8.0, 8.0, 0.0), (0, 0, 0, 1)),
+    "F": [
+        ((-0.249, 8.169, 0.0), (0, 0, 1, 0)),
     ],
-    "WS05": [
-        ((9.0, 9.0, 0.0), (0, 0, 0, 1)),
+    "FINISH": [
+        ((-2.249, 8.169, 0.0), (0, 0, 1, 0)),
     ],
     "WS06": [
         ((10.0, 10.0, 0.0), (0, 0, 0, 1)),
@@ -91,7 +140,7 @@ TRECHOS = {
 }
 
 
-REQUEST_TOPIC = "/scheduler/command"
+REQUEST_TOPIC = "/scheduler/commands"
 END_TOPIC     = "/scheduler/feedback"
 
 class SchedulerPatrol:
@@ -127,11 +176,11 @@ class SchedulerPatrol:
           • payload fora do formato "paraeleN"
           • trecho N não existe em TRECHOS
         """
-        if msg.node_name != self.node_name:
+        if msg.target != self.node_name:
             return
 
-        if msg.id in self.seen_ids:
-            rospy.logdebug(f"ID {msg.id} já recebido – ignorando.")
+        if msg.uid in self.seen_ids:
+            rospy.logdebug(f"ID {msg.uid} já recebido – ignorando.")
             return
 
         trecho_name = (msg.payload or "").strip()
@@ -143,9 +192,9 @@ class SchedulerPatrol:
             rospy.logwarn(f"Trecho '{trecho_name}' não está configurado.")
             return
 
-        self.seen_ids.add(msg.id)
-        self.queue.append((msg.id, trecho_name))
-        rospy.loginfo(f"Trecho '{trecho_name}' agendado (msg id={msg.id}).")
+        self.seen_ids.add(msg.uid)
+        self.queue.append((msg.uid, trecho_name))
+        rospy.loginfo(f"Trecho '{trecho_name}' agendado (msg id={msg.uid}).")
 
     @staticmethod
     def build_goal(pose):

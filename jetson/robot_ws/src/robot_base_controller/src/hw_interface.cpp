@@ -14,9 +14,12 @@ RobotHWInterface::RobotHWInterface(ros::NodeHandle& nh)
 
     imu_orientation = tf::createQuaternionMsgFromYaw(0.0);
 
-    encoder_sub = nh.subscribe("/encoder_data", 10, &RobotHWInterface::encoderCallback, this);
-    imu_sub     = nh.subscribe("/imu/data_stable", 10, &RobotHWInterface::imuCallback, this);
-    odom_pub    = nh.advertise<nav_msgs::Odometry>("odom", 50);
+    encoder_sub    = nh.subscribe("/encoder_data", 10, &RobotHWInterface::encoderCallback, this);
+    imu_sub        = nh.subscribe("/imu/data_stable", 10, &RobotHWInterface::imuCallback, this);
+    odom_pub       = nh.advertise<nav_msgs::Odometry>("odom", 50);
+    // move_time_pub  = nh.advertise<std_msgs::String>("move_time", 50);
+    // diagonal_feedback_sub = nh.subscribe("/diagonal_move/feedback", 10, &RobotHWInterface::diagonalFeedbackCallback, this);
+
 
     nh.getParam("wheel_control/wheel_radius",               wheel_radius);
     nh.getParam("wheel_control/wheel_separation_width",     wheel_separation_width);
@@ -35,16 +38,89 @@ RobotHWInterface::RobotHWInterface(ros::NodeHandle& nh)
     vel_command.rear_left_wheel   = 0.0;
     vel_command.rear_right_wheel  = 0.0;
 
+    // lock = false;
+
     current_time = ros::Time::now();
 }
 
 /* ——————————————————— Callbacks ———————————————————————— */
+
+void RobotHWInterface::diagonalFeedbackCallback(const std_msgs::Int32::ConstPtr& msg)
+{
+    if (msg->data == 1) { // 1 significa 'movimento diagonal completo'
+        lock = false;
+    }
+}
 
 void RobotHWInterface::cmdVelCallback(const geometry_msgs::Twist::ConstPtr& msg)
 {
     float vx    = msg->linear.x;
     float vy    = msg->linear.y;
     float omega = msg->angular.z;
+
+    // // Detecta o caso de movimento diagonal (Linear.x e Angular.z)
+    // if(std::abs(vx) > 0.001 && std::abs(omega) > 0.001){ // Usar epsilon para comparação com float
+        
+    //     lock = true; // Impede que publishWheelSpeeds() publique o comando intermediário
+
+    //     // Converte os valores vx e omega para uma string
+    //     std_msgs::String diagonal_msg;
+    //     // Formato: "vx,omega"
+    //     std::stringstream ss;
+    //     ss << vx << "," << omega;
+    //     diagonal_msg.data = ss.str();
+
+    //     // Publica a mensagem para o nó Python
+    //     move_time_pub.publish(diagonal_msg);
+
+    //     // O nó Python enviará o feedback/sinal de destravamento,
+    //     // mas você não tem umSubscriber de feedback neste código C++.
+    //     // Por enquanto, mantenha o lock até que o script Python lide com o desbloqueio.
+
+    //     // Se o robô precisa de um comando de parada imediata:
+    //     front_left_wheel_speed  = 0.0;
+    //     front_right_wheel_speed = 0.0;
+    //     rear_left_wheel_speed   = 0.0;
+    //     rear_right_wheel_speed  = 0.0;
+    //     // Não publique aqui, deixe o publishWheelSpeeds() fazer isso se lock for falso.
+
+    //     return; // Sai da função, o comando das rodas será definido pelo script Python
+    // }
+
+    // // Se a trava (lock) estiver ativa, significa que o comando diagonal ainda está sendo processado
+    // if (lock) return;
+
+
+
+        // // omega zerado
+        // front_left_wheel_speed  = mapSpeed((vx - vy) / wheel_radius);
+        // front_right_wheel_speed = mapSpeed((vx + vy) / wheel_radius);
+        // rear_left_wheel_speed   = mapSpeed((vx + vy) / wheel_radius);
+        // rear_right_wheel_speed  = mapSpeed((vx - vy) / wheel_radius);
+
+        // vel_command.front_left_wheel  = front_left_wheel_speed;
+        // vel_command.front_right_wheel = front_right_wheel_speed;
+        // vel_command.rear_left_wheel   = rear_left_wheel_speed;
+        // vel_command.rear_right_wheel  = rear_right_wheel_speed;
+        // velocity_command_pub.publish(vel_command);
+
+        // vel_command.front_left_wheel  = 0.0;
+        // vel_command.front_right_wheel = 0.0;
+        // vel_command.rear_left_wheel   = 0.0;
+        // vel_command.rear_right_wheel  = 0.0;
+        // velocity_command_pub.publish(vel_command);
+        
+        // // x zerado
+        // front_left_wheel_speed  = mapSpeed((vy - (omega * base_geometry)) / wheel_radius);
+        // front_right_wheel_speed = mapSpeed((vy + (omega * base_geometry)) / wheel_radius);
+        // rear_left_wheel_speed   = mapSpeed((vy - (omega * base_geometry)) / wheel_radius);
+        // rear_right_wheel_speed  = mapSpeed((vy + (omega * base_geometry)) / wheel_radius);
+
+        // vel_command.front_left_wheel  = front_left_wheel_speed;
+        // vel_command.front_right_wheel = front_right_wheel_speed;
+        // vel_command.rear_left_wheel   = rear_left_wheel_speed;
+        // vel_command.rear_right_wheel  = rear_right_wheel_speed;
+        // velocity_command_pub.publish(vel_command);
 
     front_left_wheel_speed  = mapSpeed((vx - vy - (omega * base_geometry)) / wheel_radius);
     front_right_wheel_speed = mapSpeed((vx + vy + (omega * base_geometry)) / wheel_radius);
@@ -86,6 +162,8 @@ float RobotHWInterface::mapSpeed(float v_input)
 
 void RobotHWInterface::publishWheelSpeeds()
 {
+    // if(lock) return;
+
     vel_command.front_left_wheel  = front_left_wheel_speed;
     vel_command.front_right_wheel = front_right_wheel_speed;
     vel_command.rear_left_wheel   = rear_left_wheel_speed;

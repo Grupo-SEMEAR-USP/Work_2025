@@ -1,0 +1,7 @@
+image: Work_2025/testeSala2.pgm
+resolution: 0.050000
+origin: [-12.700000, -14.300000, 0.000000]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
+

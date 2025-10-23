@@ -1,6 +1,0 @@
-devel_space: /home/rmajetson/Work_2025/a/robot_ws/devel
-install: false
-install_space: /home/rmajetson/Work_2025/a/robot_ws/install
-profile: default
-source_space: /home/rmajetson/Work_2025/a/robot_ws/src
-workspace: /home/rmajetson/Work_2025/a/robot_ws

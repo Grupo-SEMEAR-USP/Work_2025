@@ -1,8 +1,0 @@
-prefix=/home/rmajetson/Work_2025/a/robot_ws/devel/.private/robot_navigation
-
-Name: robot_navigation
-Description: Description of robot_navigation
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

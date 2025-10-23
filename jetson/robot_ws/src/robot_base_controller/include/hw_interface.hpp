@@ -15,6 +15,8 @@
 #include <cmath>
 #include <geometry_msgs/TransformStamped.h>
 #include <tf/transform_datatypes.h>
+#include <std_msgs/String.h>
+#include <std_msgs/Int32.h>
 
 #define HW_IF_UPDATE_FREQ 10
 #define HW_IF_TICK_PERIOD 1 / HW_IF_UPDATE_FREQ
@@ -30,6 +32,7 @@ public:
     float mapSpeed(float v_input); // Normalização da velocidade
     void encoderCallback(const robot_base_controller::encoder_data::ConstPtr& msg); // Callback para os dados do encoder
     void updateOdometry();
+    void diagonalFeedbackCallback(const std_msgs::Int32::ConstPtr& msg);
 
     int teste = 0;
 
@@ -48,6 +51,9 @@ private:
     // Odometria
     ros::Subscriber encoder_sub;
     ros::Publisher odom_pub;
+    ros::Publisher move_time_pub;
+    ros::Subscriber diagonal_feedback_sub;
+    ros::Publisher diagonal_command_pub;
 
     // Última orientação do robô (quaternion)
     geometry_msgs::Quaternion last_orientation;
@@ -82,6 +88,8 @@ private:
     double vel_linearx;
     double vel_lineary;
     double vel_angular_z;
+
+    bool lock;
 
     ros::Time current_time;
     tf::TransformBroadcaster odom_broadcaster;

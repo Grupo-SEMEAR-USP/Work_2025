@@ -3,6 +3,10 @@
   <!-- Inicia a comunicação I2C com o baixo nível -->
   <!-- <node name="i2c_master" pkg="robot_base_controller" type="i2c_master.py"/>  -->
   <node name="mqtt_bridge" pkg="robot_base_controller" type="mqtt_server.py" output="screen"/> 
+  <node name="move_time_listener" pkg="robot_base_controller" type="move_time.py" output="screen"/>
+  <node name="align_block" pkg="robot_base_controller" type="align_block.py" output="screen"/>
+  <node name="search_block" pkg="robot_base_controller" type="search_block.py" output="screen"/>
+  <node name="table_edge_detector" pkg="robot_base_controller" type="border_detect.py" output="screen"/> 
   <!-- <node name="uart_serial" pkg="robot_base_controller" type="uart_serial.py" output="screen"/>  -->
 
   <!-- Carregar parâmetros do arquivo config.yaml -->

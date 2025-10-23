@@ -34,10 +34,16 @@
   <!-- Inicializa pacote do RPLidar -->
   <include file="$(find rplidar_ros)/launch/rplidar_a2m12.launch"/>
 
+  <!-- Inicializa a percepção do robô -->
+  <include file="$(find robot_perception)/launch/robot_perception.launch"/>
+
   <!-- Inicializa o controle do robô (Hardware interface)-->
   <include file="$(find robot_base_controller)/launch/hw_interface.launch"/>
 
   <!-- Inicializa o braço do robô -->
   <include file="$(find robot_manipulation)/launch/robot_manipulation.launch"/>
+
+  <!-- Inicializa o approach -->
+  <include file="$(find robot_approach)/launch/approach.launch"/>
 
 </launch>

@@ -1,1 +1,0 @@
-/home/rmajetson/Work_2025/a/robot_ws/devel/.private/robot_navigation/share/roseus/ros/robot_navigation/manifest.l

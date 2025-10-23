@@ -1,6 +1,8 @@
 global_frame: odom
 rolling_window: true
+# track_unknown_space: true
 
+#TLVZ TENHA QUE DIMINUIR
 width: 3.5
 height: 3.5
 

@@ -1,0 +1,5 @@
+<launch>
+  
+  <node name="align_table" pkg="robot_approach" type="align_table.py" output="screen"/> 
+
+</launch>

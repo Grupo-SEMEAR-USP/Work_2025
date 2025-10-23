@@ -4,7 +4,7 @@ conservative_reset_dist: 1.2 # The distance the robot must travel before the cos
 
 NavfnROS:
   allow_unknown: true # Specifies whether or not to allow navfn to create plans that traverse unknown space.
-  default_tolerance: 0.1 # A tolerance on the goal point for the planner.
+  default_tolerance: 0.2 # A tolerance on the goal point for the planner.
 
 DWAPlannerROS:
   # Robot configuration parameters  
@@ -14,17 +14,19 @@ DWAPlannerROS:
 
   max_vel_x: 0.5
   min_vel_x: 0
-  max_vel_y: -0.5 #Omni-directional robot
+  max_vel_y: 0 #Omni-directional robot
   min_vel_y: 0 #Omni-directional robot
+  min_vel_theta: 0.4 #Omni-directional robot
+  min_in_place_vel_theta: 0.4
 
   max_trans_vel: 1.0
   min_trans_vel: 0.05
   max_rot_vel: 1.0
-  min_rot_vel: 0.05
+  min_rot_vel: 0.4
 
-  decel_lim_y : -4.5 #Omni-directional robot
-  decel_lim_x : -4.5
-  decel_lim_th : -4.2
+  # decel_lim_y : -4.5 #Omni-directional robot
+  # decel_lim_x : -4.5
+  # decel_lim_th : -4.2
 
   # Goal Tolerance Parameters
   yaw_goal_tolerance: 0.1
@@ -33,10 +35,15 @@ DWAPlannerROS:
 
   # # Forward Simulation Parameters
   vx_samples: 10
-  vy_samples: 3 #Omni-directional robot
-  vtheta_samples: 10
+  vy_samples: 0 #Omni-directional robot
+  vtheta_samples: 24 # MUDEI AAA ANTES ERA 10 
 
-  # # # Trajectory scoring parameters
+#FOI ADD DPS MEU NOME É BIA
+  rot_stopped_vel: 0.3
+  trans_stopped_vel: 0.3
+
+
+  # # # Trajectory scoring parameters EU DESCOMENTEI TUDO ABAIXO AAAAA
   # path_distance_bias: 16.0 # The weighting for how much the controller should stay close to the path it was given
   # goal_distance_bias: 48.0 # The weighting for how much the controller should attempt to reach its local goal, also controls speed
   # occdist_scale: 10 # The weighting for how much the controller should attempt to avoid obstacles
@@ -44,6 +51,7 @@ DWAPlannerROS:
   # stop_time_buffer: 0.2  # The amount of time that the robot must stop before a collision in order for a trajectory to be considered valid in seconds
   # scaling_speed: 0.25 # The absolute value of the velocity at which to start scaling the robot's footprint, in m/s
   # max_scaling_factor: 0.2 # The maximum factor to scale the robot's footprint by
+
 
   # # Trajectory scoring parameters
   path_distance_bias: 64.0 # The weighting for how much the controller should stay close to the path it was given
@@ -57,6 +65,6 @@ DWAPlannerROS:
   # # Oscillation Prevention Parameters
   # oscillation_reset_dist: 0.25 #How far the robot must travel in meters before oscillation flags are reset (double, default: 0.05)
   
-  penalize_negative_x: true 
-  holonomic_robot: true
+  penalize_negative_x: false # EU MUDEI AAAAAAAH
+  holonomic_robot: false
   oscillation_reset_dist: 0.1

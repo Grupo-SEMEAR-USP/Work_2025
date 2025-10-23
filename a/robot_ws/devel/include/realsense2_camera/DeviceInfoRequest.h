@@ -1,1 +1,0 @@
-/home/rmajetson/Work_2025/a/robot_ws/devel/.private/realsense2_camera/include/realsense2_camera/DeviceInfoRequest.h

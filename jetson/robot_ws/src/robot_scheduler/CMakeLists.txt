@@ -4,7 +4,7 @@ project(robot_scheduler)
 find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
-  geometry_msgs           # <---- AQUI você não tinha colocado
+  geometry_msgs           
   message_generation
 )
 

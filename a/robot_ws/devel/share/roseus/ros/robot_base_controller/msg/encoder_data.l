@@ -1,1 +1,0 @@
-/home/rmajetson/Work_2025/a/robot_ws/devel/.private/robot_base_controller/share/roseus/ros/robot_base_controller/msg/encoder_data.l

@@ -5,53 +5,67 @@ from robot_scheduler.msg import SchedulerCommand
 
 TARGET_NAME = "manipulation"
 
-arm_vals = [0.0, 0.0]
-ee_vals = [0.0, 0.0]
+arm_vals = [0.0, 0.0] #[base, arm]
+ee_vals = [0.0, 0.0] #[wrist, gripper]
 
 ACTION_MAP = {
     "gripper": {
-        "open": 170.0,
-        "close": 0.0
+        "open": 15.0, #270 é o max da garra (tava 160.0)
+        "close": 1.0 #0 é o min da garra (tava 10.0 - valor com o bloco)
     },
     "wrist": {
-        "up": 170.0,
-        "down": 0.0
+        "center": 80.0,
     },
     "rotatory_base": {
         "front": -1.0,
         "back": -1.0,
         
-        "front_to_deposit1_left": -1000.0,
-        "front_to_deposit2_left": 1000.0,
-        "front_to_deposit3_left": -900.0,
+        "front_to_deposit1_left": 3700.0,
+        "front_to_deposit2_left": 4000.0,
+        "front_to_deposit3_left": 4300.0,
 
-        "front_to_deposit1_right": 1.0,
-        "front_to_deposit2_right": 2.0,
-        "front_to_deposit3_right": 3.0,
+        "front_to_deposit1_right": -3700.0,
+        "front_to_deposit2_right": -4000.0,
+        "front_to_deposit3_right": -4300.0,
 
-        "deposit1_to_front_right": 3.0,
-        "deposit2_to_front_right": 3.0,
-        "deposit3_to_front_right": 3.0,
+        "deposit1_to_front_right": 3700.0,
+        "deposit2_to_front_right": 4000.0,
+        "deposit3_to_front_right": 4300.0,
 
-        "deposit1_to_front_left": 3.0,
-        "deposit2_to_front_left": 3.0,
-        "deposit3_to_front_left": 3.0
+        "deposit1_to_front_left": -3700.0,
+        "deposit2_to_front_left": -4000.0,
+        "deposit3_to_front_left": -4300.0,
+
+        "deposit2_to_deposit1": -300.0,
+        "deposit1_to_deposit2": 300.0,
+        "deposit1_to_deposit3": 600.0,
+        "deposit3_to_deposit1": -600.0,
+        "deposit2_to_deposit3": 300.0,
+        "deposit3_to_deposit2": -300.0,
+
+        "deposit2_to_left": -2000.0,
     },
     "arm": {
         "top": 1.0,
 
-        "deposit1_to_top": 1.0,
-        "deposit2_to_top": 1.0,
-        "deposit3_to_top": 1.0,
+        "deposit_to_top": 10100.0,
+        "top_to_deposit": -10100.0,
         
-        "deposit": -1.0,
+        "top_to_deposit_put": -9600.0,
+        "top_to_deposit_pick": -9900.0,
 
-        "bottom0": -1.0,
-        "bottom5": -1.0,
-        "bottom10": -1.0,
-        "bottom15": -1.0,
+        "top_to_bottom0": -14400.0,
+        "bottom0_to_top": 14400.0,
+        "top_to_bottom5": -12100.0,
+        "bottom5_to_top": 12100.0,
+        "top_to_bottom10": -10200.0,
+        "bottom10_to_top": 10200.0,
+        "top_to_bottom15": -8000.0,
+        "bottom15_to_top": 8000.0, #botton15 = altura da mesa de 15
 
-        "bottom10_to_deposit": -1.0,
+        "bottom15_to_deposit": -2900.0, #medidas intermediarias
+
+        "deposit_to_bottom10": -1.0,
     }
 }
 

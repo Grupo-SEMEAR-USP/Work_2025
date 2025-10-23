@@ -49,8 +49,8 @@
       <param name="laser_lambda_short" value="0.1"/>
       <param name="laser_model_type" value="likelihood_field"/>
       <param name="laser_likelihood_max_dist" value="12.0"/>
-      <param name="update_min_d" value="0.2"/>
-      <param name="update_min_a" value="0.2"/>
+      <param name="update_min_d" value="0.1"/>
+      <param name="update_min_a" value="0.1"/>
       <param name="odom_frame_id" value="odom"/>
       <param name="base_frame_id" value="base_link"/>
       <param name="global_frame_id" value="map"/>
@@ -59,7 +59,12 @@
       <param name="recovery_alpha_fast" value="0.0"/> 
   </node>
 
+   <node 
+        name="navigation" pkg="robot_navigation" type="navegacao_trechos.py" output="screen" > <param name="~node_name" value="navigation"/> 
+    </node> 
+
   <!-- 6. Navegação (move_base + costmaps) -->
   <include file="$(find robot_navigation)/launch/move_base_real.launch"/>
+
 
 </launch>
