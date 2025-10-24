@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "stdbool.h": "c",
+        "utils.h": "c",
+        "i2c_slave.h": "c",
+        "i2c.h": "c",
+        "freertos.h": "c",
+        "esp_wifi.h": "c",
+        "i2c_communication.h": "c",
+        "uart_communication.h": "c",
+        "mqtt_communication.h": "c"
+    }
+}

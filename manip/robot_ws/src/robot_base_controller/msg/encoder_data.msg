@@ -1,5 +1,0 @@
-# encoder_data.msg
-float32 front_right_encoder_data
-float32 front_left_encoder_data
-float32 rear_right_encoder_data
-float32 rear_left_encoder_data

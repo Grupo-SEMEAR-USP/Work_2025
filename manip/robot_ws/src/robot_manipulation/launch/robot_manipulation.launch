@@ -1,6 +1,0 @@
-<launch>
-
-  <!-- Inicia a interface do manipulador -->
-  <node name="manipulation_interface" pkg="robot_manipulation" type="manipulation_interface.py"/> 
-
-</launch>
