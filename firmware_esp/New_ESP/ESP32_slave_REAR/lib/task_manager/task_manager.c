@@ -53,7 +53,7 @@ void task_motor_control() {
 
         vTaskDelay(FREQ_TASK_MOTOR / portTICK_PERIOD_MS);
 
-        //update_motor(LEFT, 1000.0);
+        // update_motor(LEFT, 1000.0);
         // update_motor(RIGHT, 1000.0);
     }
    
