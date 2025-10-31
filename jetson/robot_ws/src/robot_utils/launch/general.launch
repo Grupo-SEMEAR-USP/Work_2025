@@ -3,11 +3,11 @@
   <arg name="enable_gyro"   default="true"/>
   <arg name="enable_color"  default="true"/>
   <arg name="enable_depth"  default="true"/>
-  <arg name="color_width"   default="640"/>
-  <arg name="color_height"  default="480"/>
+  <arg name="color_width"   default="1920"/>
+  <arg name="color_height"  default="1080"/>
   <arg name="color_fps"     default="30"/>
-  <arg name="depth_width"   default="640"/>
-  <arg name="depth_height"  default="480"/>
+  <arg name="depth_width"   default="1920"/>
+  <arg name="depth_height"  default="1080"/>
   <arg name="depth_fps"     default="30"/>
   <arg name="color_format"             default="YUYV"/>
   <arg name="hold_back_imu_for_frames" default="false"/>
@@ -34,10 +34,16 @@
   <!-- Inicializa pacote do RPLidar -->
   <include file="$(find rplidar_ros)/launch/rplidar_a2m12.launch"/>
 
+  <!-- Inicializa a percepção do robô -->
+  <include file="$(find robot_perception)/launch/robot_perception.launch"/>
+
   <!-- Inicializa o controle do robô (Hardware interface)-->
   <include file="$(find robot_base_controller)/launch/hw_interface.launch"/>
 
   <!-- Inicializa o braço do robô -->
   <include file="$(find robot_manipulation)/launch/robot_manipulation.launch"/>
+
+  <!-- Inicializa o approach -->
+  <include file="$(find robot_approach)/launch/approach.launch"/>
 
 </launch>

@@ -1,29 +1,31 @@
-frequency:                50           # Hz de atualização do filtro
-sensor_timeout:           0.1          # Timeout para sensores (s)
+frequency:                70           # Hz de atualização do filtro
+sensor_timeout:           0.1         # Timeout para sensores (s)
 two_d_mode:               true
 
 # --- ODOMETRIA (encoders) como fonte 0 ---
-odom0:                    /wheel_odom
+odom0:                    /odom
 odom0_config:             [true,  true,  false,   # x, y, z
                            false, false, true,    # roll, pitch, yaw
-                           true, true, false,   # vx, vy, vz
-                           false, false, false,   # vroll, vpitch, vyaw
+                           true, false, false,   # vx, vy, vz
+                           false, false, true,   # vroll, vpitch, vyaw
                            false, false, false]   # ax, ay, az (não usa accel aqui)
-odom0_queue_size:         10
-odom0_pose_covariance:    [0.05,0,0, 
-                           0,0.05,0, 
-                           0,0,0.05]
+odom0_queue_size:         50
+odom0_pose_covariance:    [0.01,0,0, 
+                           0,0.01,0, 
+                           0,0,0.01]
 
-odom0_twist_covariance:   [0.5,0,0, 
-                           0,0.5,0,  
-                           0,0,0.5]  
+odom0_twist_covariance:   [0.1,0,0, 
+                           0,0.1,0,  
+                           0,0,0.1]  
+
+odom0_differential: true
 
 # --- IMU (Madgwick) como fonte 1 ---
-imu0:                     /imu/data_filtered
+imu0:                     /imu/data_stable
 imu0_config:              [false, false, false,  # não corrige posição diretamente
-                           true,  true,  true,   # corrige roll, pitch, yaw
+                           false,  false,  true,   # corrige roll, pitch, yaw
                            false, false, false,  # não corrige linear velocities
-                           true,  true,  true,   # corrige angular velocities
+                           false,  false,  true,   # corrige angular velocities
                            false, false, false]  # não corrige linear accel (já removeu gravidade)
 imu0_queue_size:          50
 imu0_remove_gravitational_acceleration: true
@@ -37,6 +39,7 @@ imu0_twist_covariance:    [0.01,0,0,
 imu0_linear_acceleration_covariance: [0.1,0,0, 
                                       0,0.1,0, 
                                       0,0,0.1]
+
 
 # --- Publicação de TF ---
 publish_tf:             true

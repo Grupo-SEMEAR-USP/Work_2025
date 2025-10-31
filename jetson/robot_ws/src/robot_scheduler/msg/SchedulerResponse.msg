@@ -1,3 +1,3 @@
-string key
-string status
-string payload
+uint64 uid
+string target
+string status      

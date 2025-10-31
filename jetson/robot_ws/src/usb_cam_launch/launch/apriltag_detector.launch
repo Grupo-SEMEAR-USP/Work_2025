@@ -1,0 +1,12 @@
+<launch>
+  <!-- Apriltag ROS node -->
+  <node name="apriltag_ros_continuous_node" pkg="apriltag_ros" type="apriltag_ros_continuous_node" output="screen">
+    <!-- Camera topic remappings -->
+    <remap from="/camera/image_rect" to="/usb_cam/image_raw"/>
+    <remap from="/camera/camera_info" to="/usb_cam/camera_info"/>
+    <!-- Specify the tag family and parameters -->
+    <param name="tag_family" value="tagStandard41h12"/>
+    <param name="tag_border" value="1"/>
+    <param name="publish_tag_detections_image" value="true"/>
+  </node>
+</launch>

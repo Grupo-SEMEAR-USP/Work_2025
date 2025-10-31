@@ -1,3 +1,5 @@
 /.vscode
 /jetson/robot_ws/build
 /jetson/robot_ws/devel
+/jetson/robot_ws/logs
+/jetson/robot_ws/.catkin_tools

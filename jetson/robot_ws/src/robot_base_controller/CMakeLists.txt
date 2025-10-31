@@ -17,6 +17,8 @@ find_package(catkin REQUIRED COMPONENTS
   message_generation
   tf
   nav_msgs
+  apriltag_ros
+  robot_scheduler
 )
 
 ## System dependencies are found with CMake's conventions
@@ -70,6 +72,7 @@ add_message_files(
   FILES
   encoder_data.msg
   velocity_data.msg
+  UltrasonicDistances.msg
 )
 
 generate_messages(
@@ -191,6 +194,10 @@ target_link_libraries(hw_interface
 catkin_install_python(PROGRAMS
   scripts/i2c_master.py
   scripts/mqtt_server.py
+  scripts/move_time.py
+  scripts/align_block.py
+  scripts/border_detect.py
+  scripts/search_block.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

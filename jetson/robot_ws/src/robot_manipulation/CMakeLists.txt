@@ -168,8 +168,8 @@ include_directories(
 # )
 
 catkin_install_python(PROGRAMS
-  scripts/i2c_master_arduino.py
-  scripts/uart_arduino.py
+  scripts/gripper_adjust.py
+  scripts/mqtt_communication.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
