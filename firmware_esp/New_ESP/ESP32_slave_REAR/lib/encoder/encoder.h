@@ -37,22 +37,14 @@
     #define PCNT_LOW_LIMIT  -1500
 
     /* Right encoder defines */
-    // FRONT
-    // #define CHA_ENCODER_1R 18
-    // #define CHA_ENCODER_2R 19
-
-    // BACK
-    #define CHA_ENCODER_1R 15
-    #define CHA_ENCODER_2R 14
+    #define CHA_ENCODER_1R 18   // channel A
+    #define CHA_ENCODER_2R 19
 
     /* Left encoder defines */
-    // FRONT
-    // #define CHA_ENCODER_1L 14
-    // #define CHA_ENCODER_2L 15
+    #define CHA_ENCODER_1L 15   // channel A
+    #define CHA_ENCODER_2L 14
 
-    // BACK
-    #define CHA_ENCODER_1L 19
-    #define CHA_ENCODER_2L 18
+    // TEORICAMENTE ARRUMADO
 
     /* Macro functions */
 

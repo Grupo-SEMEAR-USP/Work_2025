@@ -90,7 +90,7 @@ esp_err_t pid_calculate(pid_ctrl_block_handle_t pid_block_L, pid_ctrl_block_hand
       float error_motor_RIGHT = (TARGET_VALUE_R - RADS_R);
     
       // ESP_LOGI(TAG_PID, "Error LEFT: %f", error_motor_LEFT);
-      //  ESP_LOGI(TAG_PID, "Error RIGHT: %f", error_motor_RIGHT);
+      // ESP_LOGI(TAG_PID, "Error RIGHT: %f", error_motor_RIGHT);
 
       // Calculate a new PWM Value
       if(pid_compute(pid_block_L, error_motor_LEFT, &controll_pid_LEFT) != ESP_OK) {
@@ -101,7 +101,7 @@ esp_err_t pid_calculate(pid_ctrl_block_handle_t pid_block_L, pid_ctrl_block_hand
       }
 
       // ESP_LOGI(TAG_PID, "PWM command LEFT: %f", controll_pid_LEFT);
-      //  ESP_LOGI(TAG_PID, "PWM command RIGHT: %f", controll_pid_RIGHT);
+      // ESP_LOGI(TAG_PID, "PWM command RIGHT: %f", controll_pid_RIGHT);
 
       LEFT_PWM_VALUE += controll_pid_LEFT;
       RIGHT_PWM_VALUE += controll_pid_RIGHT;

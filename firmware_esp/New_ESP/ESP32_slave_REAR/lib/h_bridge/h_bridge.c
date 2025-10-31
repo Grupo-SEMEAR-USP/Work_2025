@@ -4,15 +4,12 @@ void init_gpio()
 {
     gpio_set_direction(INPUT_LEFT_1, GPIO_MODE_OUTPUT);
     gpio_set_direction(INPUT_LEFT_2, GPIO_MODE_OUTPUT);
-    gpio_set_direction(GPIO_NUM_33, GPIO_MODE_OUTPUT);
 
     gpio_set_direction(INPUT_RIGHT_1, GPIO_MODE_OUTPUT);
     gpio_set_direction(INPUT_RIGHT_2, GPIO_MODE_OUTPUT);
 
     gpio_set_direction(LEDC_OUTPUT_RIGHT, GPIO_MODE_OUTPUT);
     gpio_set_direction(LEDC_OUTPUT_LEFT, GPIO_MODE_OUTPUT);
-
-    gpio_set_level(GPIO_NUM_33, HIGH);
 }
 
 void init_pwm()
