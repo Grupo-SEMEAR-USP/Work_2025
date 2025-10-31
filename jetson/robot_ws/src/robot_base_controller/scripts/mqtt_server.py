@@ -77,8 +77,8 @@ class MQTTBridge:
 
                     encoder_msg.front_left_encoder_data = (left_front / 1000.0)
                     encoder_msg.front_right_encoder_data = (right_front / 1000.0)
-                    encoder_msg.rear_left_encoder_data = -(right_rear / 1000.0)
-                    encoder_msg.rear_right_encoder_data = -(left_rear / 1000.0)
+                    encoder_msg.rear_left_encoder_data = (left_rear / 1000.0)
+                    encoder_msg.rear_right_encoder_data = (right_rear / 1000.0)
 
                 self.pub_encoder.publish(encoder_msg)
 
@@ -115,8 +115,8 @@ class MQTTBridge:
     def cmd_callback(self, msg):
         try:
             data = {
-                "left_rear":  int(msg.rear_right_wheel * 1000),
-                "right_rear": int(msg.rear_left_wheel  * 1000),
+                "left_rear":  int(msg.rear_left_wheel * 1000),
+                "right_rear": int(msg.rear_right_wheel  * 1000),
                 "left_front":  int(msg.front_left_wheel  * 1000),
                 "right_front": int(msg.front_right_wheel * 1000)
             }

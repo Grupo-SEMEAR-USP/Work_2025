@@ -14,7 +14,7 @@ DWAPlannerROS:
 
   max_vel_x: 0.5
   min_vel_x: 0
-  max_vel_y: 0 #Omni-directional robot
+  max_vel_y: 0.5 #Omni-directional robot
   min_vel_y: 0 #Omni-directional robot
   min_vel_theta: 0.4 #Omni-directional robot
   min_in_place_vel_theta: 0.4
@@ -35,8 +35,8 @@ DWAPlannerROS:
 
   # # Forward Simulation Parameters
   vx_samples: 10
-  vy_samples: 0 #Omni-directional robot
-  vtheta_samples: 24 # MUDEI AAA ANTES ERA 10 
+  vy_samples: 10 #Omni-directional robot
+  vtheta_samples: 10 # MUDEI AAA ANTES ERA 10 
 
 #FOI ADD DPS MEU NOME É BIA
   rot_stopped_vel: 0.3
@@ -66,5 +66,5 @@ DWAPlannerROS:
   # oscillation_reset_dist: 0.25 #How far the robot must travel in meters before oscillation flags are reset (double, default: 0.05)
   
   penalize_negative_x: false # EU MUDEI AAAAAAAH
-  holonomic_robot: false
+  holonomic_robot: true
   oscillation_reset_dist: 0.1
